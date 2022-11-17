@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CalculApp.View.StartPage"
+             Title="StartPage"
+            BarTextColor="LightSalmon"
+            SelectedTabColor="DarkRed"
+            UnselectedTabColor="DarkKhaki">
+    <ContentPage Title="UE" IconImageSource="dotnet_bot.svg" >
+        <Grid x:Name="Container1" BackgroundColor="Black">
+            <Frame Margin="10,0,10,0" VerticalOptions="Center">
+                <VerticalStackLayout Spacing="15" VerticalOptions="Center">
+                    <Label  
+                    Text="UE1"    
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    HorizontalTextAlignment="Center"
+                    />
+
+                    <Label Text="INSEREZ LE NOM DE LA MATIERE"/>
+
+                    <Entry   FontAttributes="Bold"
+                                 
+                                 HorizontalTextAlignment="Center"
+                                 BackgroundColor="AliceBlue"
+                                  Placeholder="nom de la matiére"
+                                 HorizontalOptions="Center" 
+                                 WidthRequest="100"
+                                 VerticalOptions="Center"/>
+                    <Label Text="INSEREZ LE COEF DE LA MATIERE"/>
+                    <Slider
+                     x:Name="Matier1"
+                     Maximum="10"
+                     Minimum="0"
+                     />
+                    <Button Text="OKey"  Clicked="ok"></Button>
+                    <Label Text="Liste " HorizontalOptions="Center" VerticalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+            <!--<CollectionView ItemsSource="{Binding People}" SelectionMode="Multiple">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+                        Margin="20"
+                        BorderColor="DarkGray"
+                        CornerRadius="5"
+                        HasShadow="True"
+                        HeightRequest="100"
+                        HorizontalOptions="Center"
+                        VerticalOptions="CenterAndExpand">
+                            <Label Text="{Binding Age}" />
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
+        </Grid>
+    </ContentPage>
+
+    <ContentPage Title="Matiere" IconImageSource="dotnet_bot.svg" >
+        <Grid x:Name="rgchuii" BackgroundColor="White">
+            <VerticalStackLayout Spacing="25" VerticalOptions="Center" >
+                <Grid >
+
+
+                    <Entry Placeholder="note"  HorizontalTextAlignment="Center"
+                                 BackgroundColor="Beige"
+                                 HorizontalOptions="Start" 
+                                 WidthRequest="100"
+                                 VerticalOptions="Center"
+                                />
+
+
+                    <Entry   FontAttributes="Bold"
+                                 Margin="10"
+                                 HorizontalTextAlignment="Center"
+                                 BackgroundColor="Beige"
+                                 HorizontalOptions="Start" 
+                                 WidthRequest="100"
+                                 VerticalOptions="Center"
+                                 Placeholder=" note"/>
+
+                    <Label   FontAttributes="Bold"
+                                 Margin="100"
+                                 Grid.Column="1"
+                                 HorizontalTextAlignment="Center"
+                                 BackgroundColor="AliceBlue"
+                                Text="/"
+                                 HorizontalOptions="Center" 
+                                 WidthRequest="100"
+                                 VerticalOptions="Center"/>
+                    <Entry Placeholder="sur"  HorizontalTextAlignment="Center"
+                                 BackgroundColor="AliceBlue"
+                                 HorizontalOptions="End" 
+                                 WidthRequest="100"
+                                 VerticalOptions="Center"/>
+                </Grid>
+                <Grid>
+                    <Label Text=" Matiere"/>
+                    <Entry Placeholder="nom de la matiére"  HorizontalTextAlignment="Center"
+                                 BackgroundColor="AliceBlue"
+                                 HorizontalOptions="Center" 
+                                 WidthRequest="160"
+                                 VerticalOptions="Center"/>
+                </Grid>
+                <Grid>
+                    <Label Text=" coef"/>
+                    <Entry Placeholder="coef"  HorizontalTextAlignment="Center"
+                                 BackgroundColor="AliceBlue"
+                                 HorizontalOptions="Center" 
+                                 WidthRequest="160"
+                                 VerticalOptions="Center"/>
+                </Grid>
+                <Grid>
+                    <Button Text="Annuler" HorizontalOptions="Start" VerticalOptions="Center"></Button>
+                    <Button Text="Ajouter" HorizontalOptions="End" VerticalOptions="Center"></Button>
+                </Grid>
+
+
+            </VerticalStackLayout>
+        </Grid>
+    </ContentPage>
+
+
+    <ContentPage Title="Moyenne"  IconImageSource="dotnet_bot.svg">
+        <Grid x:Name="ContainerMA" BackgroundColor="Black">
+            <Frame Margin="10,0,10,0" VerticalOptions="Center">
+                <VerticalStackLayout Spacing="15" VerticalOptions="Center">
+                    <Label FontAttributes="Bold"
+                    FontSize="Large"
+                    HorizontalTextAlignment="Center"
+                    Text="Votre Moyenne est :"/>
+                    <Label Text="xxx"></Label>
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage>
+</TabbedPage>

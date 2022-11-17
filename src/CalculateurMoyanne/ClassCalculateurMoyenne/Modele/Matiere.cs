@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ClassCalculateurMoyenne
+{
+    public class Matiere
+    {
+        public string Nommatiere { get; set; }
+        public int Note { get; set; }
+        public int Coef { get; set; }
+        
+        //public Matiere( int note, string nommatiere, int coef) 
+        //{
+        //    Coef = coef;
+        //    Nommatiere = nommatiere;
+        //    Note = note;
+
+        //}
+        public Matiere(string nommatiere)
+        {
+            Nommatiere = nommatiere;
+        }
+        public override string ToString()
+        {
+            return $"{Nommatiere},{Note},{Coef}";
+        }
+    }
+}
