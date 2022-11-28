@@ -1,6 +1,8 @@
 ﻿using CalculApp.View;
 using CalculApp.View;
 
+
+
 namespace CalculApp
 {
     public partial class App : Application
@@ -9,7 +11,8 @@ namespace CalculApp
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new HomePage ());
+            //MainPage = new NavigationPage(new StartPage ());
+            MainPage = new AppShell();
         }
     }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModel="clr-namespace:proo.ViewModel"
+             x:DataType="ViewModel:DetailViewModel"
+             x:Class="proo.DetailPage"
+             Title="DetailPage">
+    <StackLayout  Padding="20">
+        <Label 
+            Text="{Binding Text}"
+            VerticalOptions="Center"
+            FontSize="25"
+            HorizontalOptions="Center" />
+        <Button Text="GO TO BACK" Command="{Binding GoBackCommand}"> </Button>
+    </StackLayout>
+</ContentPage>

@@ -1,5 +1,6 @@
 ﻿using ClassCalculateurMoyenne;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,11 +22,11 @@ namespace StubCalculateur.Stub
             return false;
         }
 
-        public async Task<bool> Delete(Matiere data)
+        public bool delete(Matiere data)
         {
             if (data != null)
             {
-                listMatieres.Remove(data);
+             listMatieres .Remove(data);
                 return true;
             }
             return false;
@@ -34,7 +35,8 @@ namespace StubCalculateur.Stub
         {
             return listMatieres;
         }
-        public async Task<bool> Update(Matiere data)
+
+        public bool update(Matiere data)
         {
             if (data != null)
             {
@@ -44,6 +46,6 @@ namespace StubCalculateur.Stub
             }
             return false;
         }
-        
+
     }
 }

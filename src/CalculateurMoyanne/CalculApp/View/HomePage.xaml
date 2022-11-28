@@ -9,14 +9,14 @@
             UnselectedTabColor="DarkKhaki" 
 >
 
-    <ContentPage Title="CalculApp" IconImageSource="dotnet_bot.svg">
+    <ContentPage Title="CalculApp" IconImageSource="mamoyenne.png">
         <Grid RowDefinitions=".9*, .1*"  >
             <Button Text=" + " Clicked="Button_Clicked" HorizontalOptions="End" VerticalOptions="Start" />
             <Label  Text="Clique sur le Boutton + pour commencers "
                 HorizontalOptions="CenterAndExpand"  VerticalOptions="CenterAndExpand" />
         </Grid>
     </ContentPage>
-    <ContentPage Title="parametre"  IconImageSource="dotnet_bot.svg">
+    <ContentPage Title="parametre"  IconImageSource="png.png">
         <Label Text="Demo"></Label>
     </ContentPage>
         

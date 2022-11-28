@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:viewmodel="clr-namespace:CalculateurApp.ViewModel"
+            x:DataType="viewmodel:UeViewModel"
+            
+            xmlns:model="clr-namespace:ClassCalculateurMoyenne;assembly=ClassCalculateurMoyenne"           
+             x:Class="CalculateurApp.View.Start"
+            Title="StartPage"
+            BarTextColor="LightSalmon"
+            SelectedTabColor="DarkRed"
+            UnselectedTabColor="DarkKhaki">
+
+
+
+
+    <ContentPage Title=" Blocs " IconImageSource="mamoyenne.png" x:DataType="viewmodel:BlocViewModel">
+        
+        <Grid RowDefinitions="100 ,Auto,*"
+         ColumnDefinitions=".75*,.25*"
+         Padding="10"
+         RowSpacing="10"
+         ColumnSpacing="10">
+            <Image
+            Grid.ColumnSpan="2"
+            Source=""
+           BackgroundColor="Transparent" 
+            />
+            <Entry Placeholder="Entrer les UES"
+                  Grid.Row="1"
+               Text="{Binding  ue.Intitulé}"
+                   TextColor="Black"
+            />
+            <!--<Label Text="{Binding Nom}"></Label>
+            <Button Text="go" Command="{Binding GoBackCommand}"></Button>-->
+            <Button
+            Command="{Binding AddCommand}"
+            Text="Add"
+            Grid.Row="1"
+            Grid.Column="1">
+            </Button>
+            <CollectionView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding Items}" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type  model:UE   }">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete" 
+                                    BackgroundColor="Red"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BlocViewModel}}, Path=DeleteCommand}"
+                                    CommandParameter="{Binding .}"
+                                    />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Grid Padding="0">
+                                <Frame>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BlocViewModel}}, Path=TapCommand}"
+                                           CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Label Text="{Binding Intitulé}"
+                                       FontSize="10" TextColor="Black"  />
+                                </Frame>
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+
+        </Grid>
+        
+    </ContentPage>
+    <ContentPage Title="UE" IconImageSource="mamoyenne.png" >
+        <Frame Margin="10,0,10,0" VerticalOptions="Center">
+            <Grid RowDefinitions="100 ,Auto,*"
+         ColumnDefinitions=".75*,.25*"
+         Padding="10"
+         RowSpacing="6"
+         ColumnSpacing="6">
+                
+                <Entry 
+                Placeholder="Entrer MATIERE"
+                Grid.Row="1"
+                Text="{Binding  ue.Intitulé}"
+                TextColor="Black"
+                BackgroundColor="AliceBlue"
+                WidthRequest="250"
+            />
+                <!--<Label Text="{Binding Nom}"></Label>
+            <Button Text="go" Command="{Binding GoBackCommand}"></Button>-->
+                <Entry
+                Placeholder="Coef"
+                VerticalOptions="Start"
+                HorizontalOptions="Start"
+                WidthRequest="100"
+                Grid.Row="1"
+                Grid.Column="1"
+                BackgroundColor="AliceBlue">
+                </Entry>
+                <Button Grid.Column="10" Grid.Row="1" VerticalOptions="End" HorizontalOptions="End" Text="OK" WidthRequest="50"></Button>
+                <CollectionView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding Items}" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="{x:Type  model:UE   }">
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Delete" 
+                                    BackgroundColor="Red"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BlocViewModel}}, Path=DeleteCommand}"
+                                    CommandParameter="{Binding .}"
+                                    />
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <Grid Padding="0">
+                                    <Frame>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BlocViewModel}}, Path=TapCommand}"
+                                           CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Label Text="{Binding Intitulé}"
+                                       FontSize="10" TextColor="Black"  />
+                                    </Frame>
+                                </Grid>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+
+
+
+
+
+
+            </Grid>
+        </Frame>
+    </ContentPage>
+
+
+    <ContentPage Title="Matiere" IconImageSource="img.png" >
+        <Frame Margin="10,0,10,0" VerticalOptions="Center">
+            <Grid  BackgroundColor="White"  Padding="30,30,0,39"
+         RowSpacing="-400"
+         ColumnSpacing="10">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition  />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+
+                <Entry           
+                            
+             BackgroundColor="AliceBlue"
+            HorizontalOptions="Start"
+             VerticalOptions="Start"
+             WidthRequest="100"
+             Placeholder=" note"
+                          />
+                <Label     
+             Grid.Column="1"
+             Text="/"
+             HorizontalOptions="Center"
+             />
+                <Entry          
+             Grid.Column="2"
+             Placeholder="SUR"  
+             BackgroundColor="AliceBlue"
+             VerticalOptions="Start"
+            />
+
+
+
+                <Label Text=" MATIERE" Grid.Row="1"  HorizontalOptions="Center" />
+                <Entry   
+              WidthRequest="130"
+             Grid.Row="2"
+             HorizontalOptions="Center"                        
+             Placeholder="nom de la matiére"  
+             BackgroundColor="AliceBlue"
+             VerticalOptions="Start"
+            />
+
+                <Label Text=" coef" Grid.Row="1" Grid.Column="2" HorizontalOptions="Center"/>
+
+                <Entry   
+             WidthRequest="150"
+             Grid.Row="2"
+             Grid.Column="2"
+             Placeholder="COEFFICIENT"
+             BackgroundColor="AliceBlue"
+             VerticalOptions="Start"
+             />
+                <Button Text="Annuler" HorizontalOptions="Start" VerticalOptions="Center"  WidthRequest="110" Grid.Column="0" ></Button>
+                <Button Text="Ajouter" HorizontalOptions="Start" VerticalOptions="Center"  Grid.Column="2" WidthRequest="110"></Button>
+
+
+
+
+
+
+
+            </Grid>
+
+        </Frame>
+    </ContentPage>
+
+
+    <ContentPage Title="Moyenne"  IconImageSource="iconn.png">
+        <Grid x:Name="ContainerMA" BackgroundColor="White" RowDefinitions="100 ,Auto,*"
+         ColumnDefinitions=".75*,.25*"  Padding="10"
+         RowSpacing="10"
+         ColumnSpacing="10">
+           
+                
+        <Label 
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    FontFamily="50"
+                    HorizontalTextAlignment="Center"
+                    Text="Moyenne" Grid.Row="1" />
+        <Label      HorizontalOptions="Center"  
+                    Text="d" Grid.Row="2">
+           
+        </Label>
+                
+        </Grid>
+    </ContentPage>
+</TabbedPage>

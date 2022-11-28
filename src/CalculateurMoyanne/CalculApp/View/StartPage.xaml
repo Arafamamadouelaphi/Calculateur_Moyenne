@@ -1,12 +1,69 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:viewmodel="clr-namespace:CalculApp.ViewModel"
+          x:DataType="viewmodel:BlocViewModel"  
              x:Class="CalculApp.View.StartPage"
              Title="StartPage"
             BarTextColor="LightSalmon"
             SelectedTabColor="DarkRed"
             UnselectedTabColor="DarkKhaki">
-    <ContentPage Title="UE" IconImageSource="dotnet_bot.svg" >
+    
+    <ContentPage Title=" Blocs " IconImageSource="mamoyenne.png">
+        <Grid RowDefinitions="100 ,Auto,*"
+       ColumnDefinitions=".75*,.25*"
+         Padding="10"
+         RowSpacing="10"
+         ColumnSpacing="10">
+            <Image
+            Grid.ColumnSpan="2"
+            Source=""
+           BackgroundColor="Transparent" 
+            />
+            <Entry Placeholder="Entrer Task"
+                  Grid.Row="1"
+               Text="{Binding Nomdubloc}"
+            />
+            <Button
+            Command="{Binding AddCommand}"
+            Text="Add"
+            Grid.Row="1"
+            Grid.Column="1">
+            </Button>
+            <CollectionView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding Items}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type x:String}">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete" 
+                                    BackgroundColor="Red"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BlocViewModel}}, Path=DeleteCommand}"
+                                    CommandParameter="{Binding .}"
+                                    />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Grid Padding="0,5">
+                                <Frame>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BlocViewModel}}, Path=TapCommand}"
+                                           CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Label Text="{Binding .}"
+                                       FontSize="24"/>
+                                </Frame>
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+
+        </Grid>
+    </ContentPage>
+    <ContentPage Title="UE" IconImageSource="mamoyenne.png" >
         <Grid x:Name="Container1" BackgroundColor="Black">
             <Frame Margin="10,0,10,0" VerticalOptions="Center">
                 <VerticalStackLayout Spacing="15" VerticalOptions="Center">
@@ -56,7 +113,7 @@
         </Grid>
     </ContentPage>
 
-    <ContentPage Title="Matiere" IconImageSource="dotnet_bot.svg" >
+    <ContentPage Title="Matiere" IconImageSource="img.png" >
         <Grid x:Name="rgchuii" BackgroundColor="White">
             <VerticalStackLayout Spacing="25" VerticalOptions="Center" >
                 <Grid >
@@ -121,7 +178,7 @@
     </ContentPage>
 
 
-    <ContentPage Title="Moyenne"  IconImageSource="dotnet_bot.svg">
+    <ContentPage Title="Moyenne"  IconImageSource="iconn.png">
         <Grid x:Name="ContainerMA" BackgroundColor="Black">
             <Frame Margin="10,0,10,0" VerticalOptions="Center">
                 <VerticalStackLayout Spacing="15" VerticalOptions="Center">

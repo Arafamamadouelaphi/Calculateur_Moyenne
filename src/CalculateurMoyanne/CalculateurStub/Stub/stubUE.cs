@@ -34,6 +34,14 @@ namespace StubCalculateur.Stub
             }
             return false;
         }
+        public async Task<IEnumerable<UE>>GetAllUE(int n = 10)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                Add(new UE("UE " + i + 1));
+            }
+            return listUE;
+        }
         public async Task<IEnumerable<UE>> GetAll()
         {
 
@@ -50,7 +58,7 @@ namespace StubCalculateur.Stub
             return false;
         }
 
-       
+
         public IEnumerable<UE> GetAllMatiere(int n = 10)
         {
             for (int i = 0; i < n; i++)
@@ -59,7 +67,7 @@ namespace StubCalculateur.Stub
                 {
                     mat.Add(new Matiere(""));
                 }
-                listUE.Add(new UE("f"));
+                listUE.Add(new UE("mat"));
                 mat.Clear();
             }
             return listUE;

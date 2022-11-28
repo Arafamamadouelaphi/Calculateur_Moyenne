@@ -1,5 +1,5 @@
 ﻿using ClassCalculateurMoyenne;
-using ClassCalculateurMoyenne.Modele;
+//using ClassCalculateurMoyenne.Modele;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,10 +11,10 @@ namespace StubCalculateur.Stub
 {
     public class StubBloc
     {
-        private List<Bloc> listb = new List<Bloc>();
+        private List<BlocModel> listb = new List<BlocModel>();
         public List<UE> ue = new List<UE>();
 
-        public async Task<bool> Add(Bloc data)
+        public async Task<bool> Add(BlocModel data)
         {
             if (data != null)
             {
@@ -23,7 +23,7 @@ namespace StubCalculateur.Stub
             }
             return false;
         }
-        public  bool Delete(Bloc data)
+        public  bool Delete(BlocModel data)
         {
             if (data != null)
             {
@@ -32,11 +32,11 @@ namespace StubCalculateur.Stub
             }
             return false;
         }
-        public async Task<IEnumerable<Bloc>> GetAll()
+        public async Task<IEnumerable<BlocModel>> GetAll()
         {
             return listb;
         }
-        public async Task<bool> Update(Bloc data)
+        public async Task<bool> Update(BlocModel data)
         {
             if (data != null)
             {
@@ -46,15 +46,15 @@ namespace StubCalculateur.Stub
             }
             return false;
         }
-        public IEnumerable<Bloc> GetAllUE(int n = 10)
+        public IEnumerable<BlocModel> GetAllUE(int n = 10)
         {
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    ue.Add(new UE(""));
+                    ue.Add(new UE("h"));
                 }
-                listb.Add(new Bloc(ue));
+                listb.Add(new BlocModel("ue"));
                 ue.Clear();
             }
             return listb;

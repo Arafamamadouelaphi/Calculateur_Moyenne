@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CalculateurApp.View.UE"
+             Title="UE">
+    
+        <Frame Margin="10,0,10,0" VerticalOptions="Center">
+        
+            <Grid  BackgroundColor="White"  Padding="30,30,0,39"
+         RowSpacing="-400"
+         ColumnSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition  />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+
+                <Label  Text="MATIERE" Grid.Column="1" WidthRequest="150"></Label>
+                <Entry  
+             Grid.Column="2"
+             BackgroundColor="White"
+             HorizontalOptions="Start"
+             VerticalOptions="Start"
+             WidthRequest="150"
+             Placeholder=" Nom de la matiere ">
+                </Entry>
+                <Label  Text="COEFFICENT" Grid.Row="1" WidthRequest="150" Grid.Column="1"></Label>
+                <Entry  
+            Grid.Row="1"
+            Grid.Column="2"
+             BackgroundColor="White"
+             HorizontalOptions="Start"
+             VerticalOptions="Start"
+         WidthRequest="150"
+             Placeholder=" Nom de la matiere ">
+                </Entry>
+
+                <Button Text="Annuler" HorizontalOptions="Start" VerticalOptions="Center"  WidthRequest="110" Grid.Column="0" ></Button>
+                <Button Text="Ajouter" HorizontalOptions="Start" VerticalOptions="Center"  Grid.Column="2" WidthRequest="110"></Button>
+
+
+
+
+
+
+
+
+            </Grid>
+        </Frame>
+</ContentPage>

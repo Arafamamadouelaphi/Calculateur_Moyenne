@@ -8,17 +8,19 @@ namespace ClassCalculateurMoyenne
 {
     public class Matiere
     {
+        public long Id { get; set; }
         public string Nommatiere { get; set; }
         public int Note { get; set; }
         public int Coef { get; set; }
-        
-        //public Matiere( int note, string nommatiere, int coef) 
-        //{
-        //    Coef = coef;
-        //    Nommatiere = nommatiere;
-        //    Note = note;
 
-        //}
+        public Matiere(long id ,int note, string nommatiere, int coef)
+        {
+            Id = id;
+            Coef = coef;
+            Nommatiere = nommatiere;
+            Note = note;
+
+        }
         public Matiere(string nommatiere)
         {
             Nommatiere = nommatiere;

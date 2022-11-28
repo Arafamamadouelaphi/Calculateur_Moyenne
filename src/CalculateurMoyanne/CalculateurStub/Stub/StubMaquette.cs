@@ -10,7 +10,7 @@ namespace StubCalculateur.Stub
 {
     public class StubMaquette
     {
-        private List<Bloc> listb = new List<Bloc>();
+        private List<BlocModel> listb = new List<BlocModel>();
         public List<UE> ues = new List<UE>();
         private List<Maquette> lstmqt = new List<Maquette>();
 
@@ -47,9 +47,9 @@ namespace StubCalculateur.Stub
                 }
                 for(int v = 0; v < 10; v++)
                 {
-                    listb.Add(new Bloc(2));
+                    listb.Add(new BlocModel(""));
                 }
-                lstmqt.Add(new Maquette(ues,listb));
+             //   lstmqt.Add(new Maquette(ues,listb));
                 ues.Clear();
             }
             return lstmqt;

@@ -1,27 +1,48 @@
-﻿using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace ClassCalculateurMoyenne
 {
-    public class UE : IEquatable<UE>
-    {
+    public partial class UE : ObservableObject, IEquatable<UE>
+    {   public long Id { get; set; }
         public ReadOnlyCollection<Matiere> Matieres { get; private set; }
-
         private readonly List<Matiere> matieres = new List<Matiere>();
         public int Coefficient { get; set; }
-        public string Intitulé { get; set; }
-        //public UE(List<Matiere> _matieres, int coefficient ,string intitulé)
-        //{
-        //    Matieres = new ReadOnlyCollection<Matiere>(_matieres);
-        //    Coefficient = coefficient;
-        //   Intitulé = intitulé;
-        //}
+        [ObservableProperty]
+        private string intitulé;
+
+
+        public UE (   long id,List<Matiere> _matieres, int coefficient, string intitulé)
+        {
+            Id = id;
+            Matieres = new ReadOnlyCollection<Matiere>(_matieres);
+            Coefficient = coefficient;
+            Intitulé = intitulé;
+        }
+        public void setIntitulé(string intitulé)
+        {
+            Intitulé = intitulé;
+        }
+        public UE( List<Matiere> _matieres, int coefficient)
+        {
+            
+            Matieres = new ReadOnlyCollection<Matiere>(_matieres);
+            Coefficient = coefficient;
+            
+        }
         public UE(string intitulé)
         {
-            intitulé = intitulé;
+            this.intitulé = intitulé;
         }
+        public UE() { }
+
+        public UE(string intitulé, int coefficient) : this(intitulé)
+        {
+        }
+
         public override string ToString()
         {
-            return $"{matieres},{Coefficient},{Intitulé}";
+            return $"{Id},{matieres},{Coefficient},{Intitulé}";
 
         }
 
