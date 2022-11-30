@@ -18,13 +18,13 @@ steps:
       - dotnet build  CalculateurMoyanne/CalculateurMoyanne_sansMaui.sln -c Release --no-restore
       - dotnet publish CalculateurMoyanne/CalculateurMoyanne_sansMaui.sln -c Release --no-restore -o $CI_PROJECT_DIR/build/release
 
-  - name: tests
-    image: mcr.microsoft.com/dotnet/sdk:6.0
-    commands:
-      - cd src
-      - dotnet restore  CalculateurMoyanne/CalculateurMoyanne_sansMaui.sln
-      - dotnet test  CalculateurMoyanne/CalculateurMoyanne_sansMaui.sln --no-restore
-    depends_on: [build]
+#  - name: tests
+#    image: mcr.microsoft.com/dotnet/sdk:6.0
+#    commands:
+#      - cd src
+#      - dotnet restore  CalculateurMoyanne/CalculateurMoyanne_sansMaui.sln
+#      - dotnet test  CalculateurMoyanne/CalculateurMoyanne_sansMaui.sln --no-restore
+#    depends_on: [build]
 
   - name: code-analysis
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dronesonarplugin-dotnet6
