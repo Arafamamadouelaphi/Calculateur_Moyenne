@@ -12,18 +12,11 @@
          Padding="10"
          RowSpacing="10"
          ColumnSpacing="10">
-
-
-        <Image
-            Grid.ColumnSpan="2"
-            Source=""
-           BackgroundColor="Transparent" 
-        />
-        <Entry Placeholder="Ajout de BLOC DANS LA MAQUETTE"
-                  Grid.Row="1" BackgroundColor="AliceBlue"
+             <Entry Placeholder="Ajout de BLOC DANS LA MAQUETTE"
+               Grid.Row="1" BackgroundColor="AliceBlue"
                Text="{Binding blocModel.Nom }"
-                   TextColor="Black"
-            />
+               TextColor="Black"
+        />
             <Button
             Command="{Binding AddCommand}"
             Text="Add"
@@ -32,34 +25,40 @@
             </Button>
         <Label Text="Liste des blocs" Grid.Row="2" Grid.ColumnSpan="2" FontSize="Header" HorizontalOptions="Center" TextDecorations="Underline" TextColor="Black" FontAttributes="Bold, Italic" ></Label>
         <CollectionView Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding Items}" SelectionMode="None" >
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="{x:Type  model:BlocModel  }">
-                        <SwipeView>
-                            <SwipeView.RightItems>
-                                <SwipeItems>
-                                    <SwipeItem Text="Delete" 
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type  model:BlocModel  }">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete" 
                                     BackgroundColor="Red"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MaquetteViewModel}}, Path=DeleteCommand}"
                                     CommandParameter="{Binding .}"
-                                    />  
-                                </SwipeItems>
-                            </SwipeView.RightItems>
-                            <Grid Padding="0">
-                                <Frame>
+                                    />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Grid Padding="0">
+                            <Frame>
                                 <Frame.GestureRecognizers >
                                     <TapGestureRecognizer  
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type  viewmodel:MaquetteViewModel}}, Path=TapCommand}"
                                            CommandParameter="{Binding .}" />
                                 </Frame.GestureRecognizers>
-                                    <Label Text="{Binding Nom}" 
+                                <Label Text="{Binding Nom}" 
                                        FontSize="10" TextColor="Black"  />
-                                </Frame>
-                            </Grid>
-                        </SwipeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-
-            </CollectionView>
+                            </Frame>
+                            
+                        </Grid>
+                        
+                    </SwipeView>
+                    
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <CollectionView>
+            
+            
+        </CollectionView>
 
 
         </Grid>

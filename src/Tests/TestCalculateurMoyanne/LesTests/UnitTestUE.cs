@@ -11,14 +11,10 @@ namespace TestCalculateurMoyanne.LesTests
 {
     public class UnitTestUE
     {
-
-
         UE e = new UE("E2");
-
         private bool isEqual;
 
         [Fact]
-
         public void Test()
         {
             Assert.NotNull(e);

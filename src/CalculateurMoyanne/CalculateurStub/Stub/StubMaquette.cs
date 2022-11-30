@@ -12,9 +12,9 @@ namespace StubCalculateur.Stub
     {
         private List<BlocModel> listb = new List<BlocModel>();
         public List<UE> ues = new List<UE>();
-        private List<Maquette> lstmqt = new List<Maquette>();
+        private List<MaquetteModel> lstmqt = new List<MaquetteModel>();
 
-        public bool Delete(Maquette data)
+        public bool Delete(MaquetteModel data)
         {
             if (data != null)
             {
@@ -23,7 +23,7 @@ namespace StubCalculateur.Stub
             }
             return false;
         }
-        public bool Add(Maquette data)
+        public bool Add(MaquetteModel data)
         {
             if(data != null)
             {
@@ -33,11 +33,29 @@ namespace StubCalculateur.Stub
             
             return false;
         }
-       public IEnumerable<Maquette> GetAll()
+        public async Task<IEnumerable<MaquetteModel>> GetAll()
         {
             return lstmqt;
         }
-        public IEnumerable<Maquette> GetAllUeBloc(int n = 10)
+        public async Task<IEnumerable<MaquetteModel>> GetAllMaquette(int n = 10)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                Add(new MaquetteModel("Maquette " + i + 1));
+            }
+            return lstmqt;
+        }
+        public async Task<bool> Update(MaquetteModel data)
+        {
+            if (data != null)
+            {
+
+                int index = lstmqt.FindIndex(x => x.BLOCS == data.BLOCS);
+                lstmqt[index] = data;
+            }
+            return false;
+        }
+        public IEnumerable<MaquetteModel> GetAllUeBloc(int n = 10)
         {
             for (int i = 0; i < n; i++)
             {

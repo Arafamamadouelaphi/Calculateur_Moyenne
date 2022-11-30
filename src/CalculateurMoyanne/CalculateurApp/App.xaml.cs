@@ -1,5 +1,6 @@
 ﻿using CalculateurApp.View;
 using CalculateurApp.ViewModel;
+using ClassCalculateurMoyenne;
 
 namespace CalculateurApp
 {
@@ -9,9 +10,11 @@ namespace CalculateurApp
         {
             InitializeComponent();
 
-           MainPage = new NavigationPage(new HomePage());
+             MainPage = new NavigationPage(new HomePage());
             //MainPage = new AppShell(BlocViewModel c);
-           // MainPage = new Maquette();
+            // MainPage = new Maquette ();
+          //  MainPage = new UEPage1();
+           
         }
     }
 }

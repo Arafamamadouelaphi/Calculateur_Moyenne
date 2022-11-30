@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace CalculateurMapping
 {
-    public class MaquetteDbDataManager : IDataManager<Maquette>
+    public class MaquetteDbDataManager : IDataManager<MaquetteModel>
     {
-        public async Task<bool> Add(Maquette mqt)
+        public async Task<bool> Add(MaquetteModel mqt)
         {
             bool result = false;
             using (var context = new CalculContext())
@@ -41,7 +41,7 @@ namespace CalculateurMapping
 
         }
 
-        public async Task<bool> Delete(Maquette maquette)
+        public async Task<bool> Delete(MaquetteModel maquette)
         {
             bool result = false;
             using (var context = new CalculContext())
@@ -54,11 +54,11 @@ namespace CalculateurMapping
             return result;
         }
 
-        public async Task<IEnumerable<Maquette>> GetAll()
+        public async Task<IEnumerable<MaquetteModel>> GetAll()
         {
             using (var context = new CalculContext())
             {
-                return await  context.Maquettes.Select(e => new Maquette
+                return await  context.Maquettes.Select(e => new MaquetteModel
                 (  e.Id,
                     e.NomMaquette,
                     e.Bloc.Select(j => new BlocModel(j.Nom)).ToArray()
@@ -66,11 +66,11 @@ namespace CalculateurMapping
             }
         }
 
-        public async Task<Maquette> GetDataWithName(string name)
+        public async Task<MaquetteModel> GetDataWithName(string name)
         {
             using (var context = new CalculContext())
             {
-                return await  context.Maquettes.Where(e => e.NomMaquette == name).Select(e => new Maquette
+                return await  context.Maquettes.Where(e => e.NomMaquette == name).Select(e => new MaquetteModel
                 (
                      e.Id,
                     e.NomMaquette,
@@ -79,7 +79,7 @@ namespace CalculateurMapping
             }
         }
 
-        public async Task<bool> Update(Maquette data)
+        public async Task<bool> Update(MaquetteModel data)
         {
             bool result = false;
             using (var context = new CalculContext())

@@ -2,47 +2,76 @@
 <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:viewmodel="clr-namespace:CalculateurApp.ViewModel"
-            x:DataType="viewmodel:UeViewModel"
-            
             xmlns:model="clr-namespace:ClassCalculateurMoyenne;assembly=ClassCalculateurMoyenne"           
              x:Class="CalculateurApp.View.Start"
             Title="StartPage"
             BarTextColor="LightSalmon"
             SelectedTabColor="DarkRed"
             UnselectedTabColor="DarkKhaki">
-
-
-
-
     <ContentPage Title=" Blocs " IconImageSource="mamoyenne.png" x:DataType="viewmodel:BlocViewModel">
-        
         <Grid RowDefinitions="100 ,Auto,*"
          ColumnDefinitions=".75*,.25*"
          Padding="10"
          RowSpacing="10"
          ColumnSpacing="10">
-            <Image
-            Grid.ColumnSpan="2"
-            Source=""
-           BackgroundColor="Transparent" 
-            />
-            <Entry Placeholder="Entrer les UES"
-                  Grid.Row="1"
-               Text="{Binding  ue.Intitulé}"
+            <Entry Placeholder=" UES DU BLOC "
+                   Grid.Row="1"
+                   Text="{Binding  ue.Intitulé}"
                    TextColor="Black"
+                   WidthRequest="150"
+                   VerticalOptions="StartAndExpand"
+                   HorizontalOptions="Start"
             />
+            <Entry
+                Placeholder="coef"              
+                WidthRequest="60"
+                Grid.Row="1"
+               
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+               
+                BackgroundColor="AliceBlue"
+                Text="{Binding ue.Coefficient}">
+            </Entry>
             <!--<Label Text="{Binding Nom}"></Label>
             <Button Text="go" Command="{Binding GoBackCommand}"></Button>-->
             <Button
             Command="{Binding AddCommand}"
             Text="Add"
             Grid.Row="1"
-            Grid.Column="1">
+            Grid.Column="1"
+               >
             </Button>
             <CollectionView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding Items}" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type  model:UE   }">
                         <SwipeView>
+                            <Grid Padding="10" ColumnSpacing="40">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="1"
+                             Grid.Column="0"
+                             Text="{Binding Intitulé}"                            
+                             FontAttributes="None"
+                             VerticalOptions="End"
+                               />
+                                <Label Grid.Column="3"
+                             Grid.Row="1"      
+                             Text="{Binding Coefficient}"
+                             TextColor="Blue"
+                             FontAttributes="Bold" />
+                               <!--// <Button Text="DELETE"></Button>-->
+                            </Grid>
+                        </SwipeView>
+                        <!--<SwipeView>
                             <SwipeView.RightItems>
                                 <SwipeItems>
                                     <SwipeItem Text="Delete" 
@@ -52,8 +81,8 @@
                                     />
                                 </SwipeItems>
                             </SwipeView.RightItems>
-                            <Grid Padding="0">
-                                <Frame>
+                            <Grid Padding="0">-->
+                                <!--<Frame>
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer 
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BlocViewModel}}, Path=TapCommand}"
@@ -63,65 +92,62 @@
                                        FontSize="10" TextColor="Black"  />
                                 </Frame>
                             </Grid>
-                        </SwipeView>
+                        </SwipeView>-->
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-
             </CollectionView>
-
-
         </Grid>
-        
     </ContentPage>
-    <ContentPage Title="UE" IconImageSource="mamoyenne.png" >
-        <Frame Margin="10,0,10,0" VerticalOptions="Center">
-            <Grid RowDefinitions="100 ,Auto,*"
+    <!--<ContentPage Title="ue" IconImageSource="mamoyenne.png" x:DataType="viewmodel:UeViewModel" >    
+    <Frame Margin="10,0,10,0" VerticalOptions="center">
+            <Grid RowDefinitions="100 ,auto,*"
          ColumnDefinitions=".75*,.25*"
          Padding="10"
          RowSpacing="6"
          ColumnSpacing="6">
                 
                 <Entry 
-                Placeholder="Entrer MATIERE"
+                Placeholder="entrer matiere"
                 Grid.Row="1"
-                Text="{Binding  ue.Intitulé}"
+                Text="{Binding  ue.intitulé}"
                 TextColor="Black"
                 BackgroundColor="AliceBlue"
                 WidthRequest="250"
             />
-                <!--<Label Text="{Binding Nom}"></Label>
-            <Button Text="go" Command="{Binding GoBackCommand}"></Button>-->
+                <Label Text="{Binding Nom}"></Label>
+            <Button Text="go" Command="{Binding gobackcommand}"></Button>
                 <Entry
-                Placeholder="Coef"
-                VerticalOptions="Start"
-                HorizontalOptions="Start"
+                Placeholder="coef"
+                VerticalOptions="start"
+                HorizontalOptions="start"
                 WidthRequest="100"
                 Grid.Row="1"
                 Grid.Column="1"
                 BackgroundColor="AliceBlue">
                 </Entry>
-                <Button Grid.Column="10" Grid.Row="1" VerticalOptions="End" HorizontalOptions="End" Text="OK" WidthRequest="50"></Button>
-                <CollectionView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding Items}" >
+                <Button Grid.Column="10" Grid.Row="1" VerticalOptions="end" HorizontalOptions="end" Text="ok" WidthRequest="50"></Button>
+                <CollectionView Grid.Row="2" Grid.Column="2" ItemsSource="{Binding items}" >
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="{x:Type  model:UE   }">
+                        <DataTemplate x:DataType="{x:Type  model:ue   }">
                             <SwipeView>
                                 <SwipeView.RightItems>
                                     <SwipeItems>
-                                        <SwipeItem Text="Delete" 
+                                        <SwipeItem Text="delete" 
                                     BackgroundColor="Red"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BlocViewModel}}, Path=DeleteCommand}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:blocviewmodel}}, Path=deletecommand}"
                                     CommandParameter="{Binding .}"
                                     />
                                     </SwipeItems>
                                 </SwipeView.RightItems>
-                                <Grid Padding="0">
+                               <Grid Padding="0">
                                     <Frame>
                                         <Frame.GestureRecognizers>
                                             <TapGestureRecognizer 
-                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BlocViewModel}}, Path=TapCommand}"
+                                           Command="{Binding Source={RelativeSource AncestorLevel={x:Type viewmodel:blocviewmodel}}, Path=tapcommand}"
                                            CommandParameter="{Binding .}"/>
                                         </Frame.GestureRecognizers>
-                                        <Label Text="{Binding Intitulé}"
+                                        <Label Text="{Binding intitulé}"
                                        FontSize="10" TextColor="Black"  />
                                     </Frame>
                                 </Grid>
@@ -129,16 +155,9 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                     </CollectionView>
-
-
-
-
-
-
-
-            </Grid>
+      </Grid>
         </Frame>
-    </ContentPage>
+    </ContentPage>-->
 
 
     <ContentPage Title="Matiere" IconImageSource="img.png" >

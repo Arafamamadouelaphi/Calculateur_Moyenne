@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:CalculateurApp.ViewModel"
+             xmlns:model="clr-namespace:ClassCalculateurMoyenne;assembly=ClassCalculateurMoyenne" 
+              x:DataType="viewmodel:UeViewModel"
+             x:Class="CalculateurApp.View.UEPage1"
+             Title="UEPage1">
+    <Frame Margin="10,0,10,0" >
+        <Grid RowDefinitions="100 ,auto,*"
+         ColumnDefinitions=".75*,.25*"
+         Padding="10"
+         RowSpacing="6"
+         ColumnSpacing="6">
+
+            <Entry 
+                Placeholder="entrer matiere"
+                Grid.Row="1"
+                Text="{Binding  ma.Nommatiere}"
+                TextColor="Black"
+                BackgroundColor="AliceBlue"
+                WidthRequest="250"
+            />
+            <!--<Label Text="{Binding }"></Label>-->
+            <!--<Button Text="go" Command="{Binding AddCommand}"></Button>-->
+            <!--<Entry
+                Placeholder="coef"              
+                WidthRequest="100"
+                Grid.Row="1"
+                Grid.Column="1"
+                BackgroundColor="AliceBlue"
+                Text="{Binding u.Coefficient}">
+            </Entry>-->
+            <Button Command="{Binding AddCommand}"  Grid.Column="10" Grid.Row="1"   Text="ok" WidthRequest="50">
+          </Button>
+            <CollectionView Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Items}" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type  model:Matiere   }">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="delete" 
+                                    BackgroundColor="Red"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:UeViewModel}}, Path=deletecommand}"
+                                    CommandParameter="{Binding .}"
+                                    />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Grid Padding="0">
+                                <Frame>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                          
+                                           CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Label Text="{Binding Nommatiere}"
+                                       FontSize="10" TextColor="Black"  />
+                                </Frame>
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+             <CollectionView Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Items}" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type  model:Matiere   }">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="delete" 
+                                    BackgroundColor="Red"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:UeViewModel}}, Path=deletecommand}"
+                                    CommandParameter="{Binding .}"
+                                    />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Grid Padding="0">
+                                <Frame>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                          
+                                           CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Label Text="{Binding Nommatiere}"
+                                       FontSize="10" TextColor="Black"  />
+                                </Frame>
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Frame>
+</ContentPage>

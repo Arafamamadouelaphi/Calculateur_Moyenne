@@ -21,8 +21,6 @@ namespace CalculateurApp.ViewModel
             Items = new ObservableCollection<BlocModel>();
 
             blocModel = new BlocModel();
-           
-
         }
         [ObservableProperty]
         ObservableCollection<BlocModel> items;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ClassCalculateurMoyenne
 {
-    public  class Maquette
+    public  class MaquetteModel:IEquatable<MaquetteModel>
     {
         public int Id;
         public ReadOnlyCollection<UE> UES { get; set; }
@@ -21,18 +21,24 @@ namespace ClassCalculateurMoyenne
         private readonly List<BlocModel> blocs = new List<BlocModel>();
         private object value;
 
-        public Maquette(List<UE> u, List<BlocModel> blc)
+        public MaquetteModel(List<UE> u, List<BlocModel> blc)
         {
             UES = new ReadOnlyCollection<UE>(u);
             BLOCS = new ReadOnlyCollection<BlocModel>(blc);
 
         }
 
-        public Maquette(long id,string nomMaquette, object value)
+        public MaquetteModel(long id,string nomMaquette, object value)
         {
             Id = Id;
             NomMaquette = nomMaquette;
             this.value = value;
+        }
+        public MaquetteModel( string nomMaquette)
+        {
+            
+            NomMaquette = nomMaquette;
+            
         }
 
         public void supprimer(UE e)
@@ -84,7 +90,28 @@ namespace ClassCalculateurMoyenne
             return false;
         }
 
+        public bool Equals(MaquetteModel other)
+        {
+            return Equals(other.NomMaquette);
+        }
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null)) return false;
+            if (ReferenceEquals(obj, this)) return true;
+            if (GetType() != obj.GetType()) return false;
+            return Equals(obj as UE);
+        }
 
+        public MaquetteModel(string nomMaquette, int id)
+
+        {
+            NomMaquette = nomMaquette;
+            Id = id;
+        }
+        public void setNomMaquete(string nom)
+        {
+            NomMaquette =nom;
+        }
 
     }
 }

@@ -44,6 +44,10 @@ namespace ClassCalculateurMoyenne
             this.uEs = uEs;
         }
 
+        public BlocModel()
+        {
+        }
+
         private IEnumerable<UE> Ajouterue(params UE[] ues)
         {
             List<UE> result = new();

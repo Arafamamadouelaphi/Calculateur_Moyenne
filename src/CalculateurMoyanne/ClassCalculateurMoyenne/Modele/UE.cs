@@ -7,7 +7,8 @@ namespace ClassCalculateurMoyenne
     {   public long Id { get; set; }
         public ReadOnlyCollection<Matiere> Matieres { get; private set; }
         private readonly List<Matiere> matieres = new List<Matiere>();
-        public int Coefficient { get; set; }
+        [ObservableProperty]
+        private int coefficient;
         [ObservableProperty]
         private string intitulé;
 
@@ -36,8 +37,11 @@ namespace ClassCalculateurMoyenne
         }
         public UE() { }
 
-        public UE(string intitulé, int coefficient) : this(intitulé)
+        public UE(string intitulé, int coefficient) 
+            
         {
+            Intitulé = intitulé;
+            Coefficient = coefficient;
         }
 
         public override string ToString()

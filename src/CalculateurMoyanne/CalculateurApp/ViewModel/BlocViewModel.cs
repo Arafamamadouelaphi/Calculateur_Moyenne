@@ -10,11 +10,10 @@ using System.Threading.Tasks;
 
 namespace CalculateurApp.ViewModel
 {
-    [QueryProperty("Nom", "Nom")]
+   // [QueryProperty("Nom", "Nom")]
     public partial class BlocViewModel:ObservableObject
     {
-        [ObservableProperty]
-        string nom;
+        
         [RelayCommand]
         async Task GoBack()
         {
@@ -25,23 +24,26 @@ namespace CalculateurApp.ViewModel
         public BlocViewModel()
         {
             Items = new ObservableCollection<UE>();
-
             blocModel=new BlocModel();
             ue = new UE();
 
         }
         [ObservableProperty]
         ObservableCollection<UE> items;
+        [ObservableProperty]
+        string intitulé;
+
 
         [RelayCommand]
         void Add()
         {
-            if (string.IsNullOrEmpty(ue.Intitulé))
+            if (string.IsNullOrEmpty(ue.Intitulé)&& string.IsNullOrEmpty(ue.Coefficient.ToString()))
                 return;
-            UE u = new UE(ue.Intitulé);
+            UE u = new UE(ue.Intitulé,ue.Coefficient);
             //u.Intitulé = ue.Intitulé;
             Items.Add(u);
             ue.Intitulé = string.Empty;
+            ue.Coefficient = 0;
         }
         [RelayCommand]
         void Delete(UE bl)

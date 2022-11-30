@@ -63,9 +63,9 @@ namespace CalculateurMapping
             bool result = false;
             using (var context = new CalculContext())
             {
-                BlocEntity entity = context.Bloc.Find(data.id);
+                BlocEntity entity = context.Bloc.Find(data.Id);
                 entity.Nom = data.Nom ;
-                entity.UE = data.ue.Select(j => new UEentity
+                entity.ue = data.ue.Select(j => new UEentity
                 {
                     intitulé = j.Intitulé,
                 }).ToList();

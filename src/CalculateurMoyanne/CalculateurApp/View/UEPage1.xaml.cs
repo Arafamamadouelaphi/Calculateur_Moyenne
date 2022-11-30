@@ -2,12 +2,11 @@ using CalculateurApp.ViewModel;
 
 namespace CalculateurApp.View;
 
-public partial class UE : ContentPage
+public partial class UEPage1 : ContentPage
 {
-    
-    public UE(UeViewModel u)
+	public UEPage1()
 	{
 		InitializeComponent();
-		BindingContext = u;
+		BindingContext = new UeViewModel();
 	}
 }
