@@ -10,7 +10,7 @@ namespace BSN
 {
     public class Manager
     {
-        #region propriétés
+     #region propriétés
         public ReadOnlyCollection<MaquetteModel> maquette { get; private set; }
         private readonly List<MaquetteModel> maquettes = new();
         public ReadOnlyCollection<BlocModel> bloc { get; private set; }
@@ -28,16 +28,13 @@ namespace BSN
         private readonly IDataManager<BlocModel> blocDbDataManager;
         public IDataManager<UE> UeDbDataManager => ueDbDataManager;
         private readonly IDataManager<UE> ueDbDataManager;
-       // private IDataManager<Matiere> matiereDbDataManager;
-
         public IDataManager<Matiere> MatiereDbDataManager => matiereDbDataManager;
-       private readonly IDataManager<Matiere> matiereDbDataManager;
+        private readonly IDataManager<Matiere> matiereDbDataManager;
+       
+     #endregion
 
 
-        #endregion
-
-
-        #region Constructeurs
+     #region Constructeurs
 
         public Manager(IDataManager<MaquetteModel> maquettemanager)
         {
@@ -60,47 +57,56 @@ namespace BSN
             matiere = new ReadOnlyCollection<Matiere>(matieres);
         }
 
-        public Manager(IDataManager<Matiere> matiereManager,IDataManager<UE> UeManager, IDataManager<BlocModel> blocmanager, IDataManager<MaquetteModel> maquettemanager,)
+        public Manager(IDataManager<Matiere> matiereManager,IDataManager<UE> UeManager, IDataManager<BlocModel> blocmanager, IDataManager<MaquetteModel> maquettemanager)
         {
+        this.matiereDbDataManager = matiereManager;
+        matiere = new ReadOnlyCollection<Matiere>(matieres);
+        this.maquetteDbDataManager = maquettemanager;
+        maquette = new ReadOnlyCollection<MaquetteModel>(maquettes);
+        this.blocDbDataManager = blocmanager;
+        bloc = new ReadOnlyCollection<BlocModel>(blocs);
+        this.ueDbDataManager = UeManager;
+        ue = new ReadOnlyCollection<UE>(ues);
+        }
 
+     #endregion
 
-            this.matiereDbDataManager = matiereManager;
-            Matiere = new ReadOnlyCollection<Matiere>(matieres);
-        //    this.maquettemanager = maquettemanager;
-        //    MaquetteModel = new ReadOnlyCollection<MaquetteModel>(maquettes);
-        //    this.partieDataManager = partieDataManager;
-        //    Parties = new ReadOnlyCollection<Partie>(parties);
-        //    this.joueurDataManager = joueurManager;
-        //    Joueurs = new ReadOnlyCollection<Joueur>(joueurs);
+     #region Methodes
+    
+       public Task<bool> AddMaquette(MaquetteModel maqt)
+       {
+        if (maquetteDbDataManager == null)
+        {
+               return Task.FromResult(false);
+        }
+         
+            return maquetteDbDataManager.Add(maqt);
+
+       }
+
+        public async Task<bool> Deletemqt(MaquetteModel maqt)
+        {
+          if (maquetteDbDataManager == null)
+          {
+               return false;
+          }
+            return await maquetteDbDataManager.Delete(maqt);
+        }
+
+        public async Task<bool> UpdateMaquette(MaquetteModel maqt)
+        {
+            if (maquetteDbDataManager == null)
+            {
+                return false;
+            }
+            return await maquetteDbDataManager.Update(maqt);
+        }
+        public async Task<IEnumerable<MaquetteModel>> GetAllMaquette()
+        {
+            return await maquetteDbDataManager.GetAll();
         }
 
 
-
-        #endregion
-
-
-
-
-
-        //public Task<bool> AddMaquette(MaquetteModel maqt)
-        //{
-        //    if (MaquetteDbDataManager == null)
-        //    {
-        //        return Task.FromResult(false);
-        //    }
-        //    return MaquetteDbDataManager.Add(maqt);
-
-        //}
-
-        //public async Task<bool> Deletemqt(MaquetteModel maqt)
-        //{
-        //    if (MaquetteDbDataManager == null)
-        //    {
-        //        return false;
-        //    }
-        //    return await MaquetteDbDataManager.Delete(mqt);
-        //}
-
-
     }
+    #endregion
 }

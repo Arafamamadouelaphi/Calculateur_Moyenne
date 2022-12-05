@@ -6,7 +6,7 @@ Console.WriteLine("Hello, World!");
 namespace testpourEF
 { class Program
     {
-        static 
+       
     }
 }
 

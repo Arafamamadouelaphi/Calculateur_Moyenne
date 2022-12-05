@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BSN\BSN.csproj" />
+    <ProjectReference Include="..\BSN\Bussness.csproj" />
     <ProjectReference Include="..\CalculateurEF\CalculateurEF.csproj" />
     <ProjectReference Include="..\CalculateurMapping\CalculateurMapping.csproj" />
     <ProjectReference Include="..\ClassCalculateurMoyenne\ClassCalculateurMoyenne.csproj" />
