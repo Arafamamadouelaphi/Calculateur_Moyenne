@@ -1,8 +1,8 @@
 namespace CalculateurApp.View;
 
-public partial class Matiere1 : TabbedPage
+public partial class MatNote : ContentPage
 {
-	public Matiere1()
+	public MatNote()
 	{
 		InitializeComponent();
 	}

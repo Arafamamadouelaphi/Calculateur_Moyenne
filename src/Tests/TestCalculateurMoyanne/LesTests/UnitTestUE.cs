@@ -2,6 +2,7 @@
 using StubCalculateur.Stub;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,76 +12,142 @@ namespace TestCalculateurMoyanne.LesTests
 {
     public class UnitTestUE
     {
-        UE e = new UE("E2");
-        private bool isEqual;
 
-        [Fact]
-        public void Test()
+        public static IEnumerable<object[]> Data_AddMatiereToUE()
         {
-            Assert.NotNull(e);
-            Assert.Equal("E2", e.Intitulé);
-            Assert.NotEqual("E3", e.Intitulé);
-        }
-        [Fact]
-        public void TestInvalidUE()
-        {
-
-            Assert.Throws<ArgumentException>(() => new UE(null));
-
-        }
-      public class Artist_InlineData_UT
-        {
-            [Theory]
-            [InlineData(false, "Mathematique", 2, "MTH", 2)]
-            [InlineData(false, "", 0, "", 0)]
-            [InlineData(true, "Mathematique", 0, "Mathematique", 0)]
-
-
-            public void TestConstructor(bool isValid, string expectedMatiere, int expectedcoef,
-             string intitulé, int coefficient)
+            yield return new object[]
             {
-                if (!isValid)
+                true,
+                new Matiere[]
                 {
-                    Assert.Throws<ArgumentException>(
-                        () => new UE(intitulé, coefficient));
-                    return;
-                }
+                new Matiere( 1,20,"mat",2),
+                new Matiere(2,3,"histoire",4),
+                new Matiere(4,12,"geo",2)
+                },
+                new UE(1,2,"UE2",
+                new Matiere( 1,20,"mat",2),
+                new Matiere(2,3,"histoire",4)),
+                new Matiere(4,12,"geo",2)
 
-                UE e = new UE(intitulé, coefficient);
-                Assert.Equal(expectedMatiere,e.Intitulé);
-                Assert.Equal(expectedcoef, e.Coefficient);
-            }
+             };
+            yield return new object[]
+            {
+                false,
+                new Matiere[]
+                {
+                new Matiere( 1,20,"mat",2),
+                new Matiere(2,3,"histoire",4),
+                new Matiere(4,12,"geo",2)
+                },
+                new UE(1,2,"UE2",
+                new Matiere( 1,20,"mat",2),
+                new Matiere(2,3,"histoire",4)),
+                 new Matiere(4,12,"geo",2),
+                new Matiere(5,2,"arithmetique",3)
+            };
+        }
+        [Theory]
+        [MemberData(nameof(Data_AddMatiereToUE))]
+        public void Test_AddMatiereToUE(bool expectedResult,
+                                          IEnumerable<Matiere> expectedMatiere,
+                                          UE ue,
+                                          Matiere matiere) {
 
-           // test avec stub
+       //   true si l'ajout est réussi et false sinon
+            bool result = ue.AjouterMatiere(matiere);
 
-            [Fact]
-            public void TestUeStub()
-            {
-                stubUE stub = new stubUE();
-                Assert.Equal(10, stub.GetAllUE(10).Result.Count());
-            }
-            [Fact]
-            public void TestRemove()
-            {
-                stubUE stub = new stubUE();
-                UE e = new UE("E1");
-                stub.Add(e);
-                stub.Delete(e);
-                //Compter le nombre de UE dans un objet IEnumerable
-                Assert.Equal(0, stub.GetAll().Result.Count());
-            }
-            public void TestUpdate()
-            {
-                stubUE stub = new stubUE();
-                UE e = new UE("E1");
-                stub.Add(e);
-                e.setIntitulé("UE1");
-                stub.Update(e);
-                Assert.Equal("UE1", stub.GetAll().Result.First().Intitulé);
-            }
+            // comparaison avec le resultat qu'on espert avoir
+            Assert.Equal(expectedResult, result);
+
+            // 
+            Assert.Equal(expectedMatiere.Count(), ue.Matieres.Count());
+            Assert.All(expectedMatiere, j => ue.Matieres.Contains(j));
+
 
         }
 
     }
+
+                
+                
+              
+
 }
-    
+
+           
+                //true,
+                //new Artist[]
+                //{
+                //    new Artist("Miles", "Davis"),
+                //    new Artist("Wayne", "Shorter"),
+                //    new Artist("Herbie", "Hancock"),
+                //    new Artist("Ron", "Carter"),
+                //    new Artist("Tony", "Williams")
+                //},
+                //new Album("Miles Smiles", new DateTime(1967, 1, 1),
+                //    new Artist("Miles", "Davis"),
+                //    new Artist("Wayne", "Shorter"),
+                //    new Artist("Herbie", "Hancock"),
+                //    new Artist("Ron", "Carter")),
+                //new Artist("Tony", "Williams")
+           
+
+
+
+
+
+
+
+        //{
+        //    [Theory]
+        //    [InlineData(false, "Mathematique", 2, "MTH", 2)]
+        //    [InlineData(false, "", 0, "", 0)]
+        //    [InlineData(true, "Mathematique", 0, "Mathematique", 0)]
+
+
+        //    public void TestConstructor(bool isValid, string expectedMatiere, int expectedcoef,
+        //     string intitulé, int coefficient)
+        //    {
+        //        if (!isValid)
+        //        {
+        //            Assert.Throws<ArgumentException>(
+        //                () => new UE(intitulé, coefficient));
+        //            return;
+        //        }
+
+        //        UE e = new UE(intitulé, coefficient);
+        //        Assert.Equal(expectedMatiere,e.Intitulé);
+        //        Assert.Equal(expectedcoef, e.Coefficient);
+        //    }
+
+        //   // test avec stub
+
+        //    [Fact]
+        //    public void TestUeStub()
+        //    {
+        //        stubUE stub = new stubUE();
+        //        Assert.Equal(10, stub.GetAllUE(10).Result.Count());
+        //    }
+        //    [Fact]
+        //    public void TestRemove()
+        //    {
+        //        stubUE stub = new stubUE();
+        //        UE e = new UE("E1");
+        //        stub.Add(e);
+        //        stub.Delete(e);
+        //        //Compter le nombre de UE dans un objet IEnumerable
+        //        Assert.Equal(0, stub.GetAll().Result.Count());
+        //    }
+        //    public void TestUpdate()
+        //    {
+        //        stubUE stub = new stubUE();
+        //        UE e = new UE("E1");
+        //        stub.Add(e);
+        //        e.setIntitulé("UE1");
+        //        stub.Update(e);
+        //        Assert.Equal("UE1", stub.GetAll().Result.First().Intitulé);
+        //    }
+
+        //}
+
+   

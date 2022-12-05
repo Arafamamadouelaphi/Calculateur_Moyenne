@@ -11,14 +11,16 @@ namespace CalculateurEF.Entities
         #region Propriétés
         public int Id { get; set; }
         public string Nom { get; set; }
-      public  ICollection<UEentity> ue { get; set; }
-      
+
+        //public  ICollection<UEentity> ue { get; set; }
+
+
+        //#region Constructeurs
+        //public BlocEntity()
+        //{
+        //    ue = new List<UEentity>();
+        //}
         #endregion
-        #region Constructeurs
-        public BlocEntity()
-        {
-            ue = new List<UEentity>();
-        }
-        #endregion
+
     }
 }

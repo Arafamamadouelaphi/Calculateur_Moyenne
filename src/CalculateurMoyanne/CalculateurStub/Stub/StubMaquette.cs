@@ -49,7 +49,6 @@ namespace StubCalculateur.Stub
         {
             if (data != null)
             {
-
                 int index = lstmqt.FindIndex(x => x.BLOCS == data.BLOCS);
                 lstmqt[index] = data;
             }
@@ -67,7 +66,7 @@ namespace StubCalculateur.Stub
                 {
                     listb.Add(new BlocModel(""));
                 }
-             //   lstmqt.Add(new Maquette(ues,listb));
+                lstmqt.Add(new MaquetteModel(ues,listb));
                 ues.Clear();
             }
             return lstmqt;

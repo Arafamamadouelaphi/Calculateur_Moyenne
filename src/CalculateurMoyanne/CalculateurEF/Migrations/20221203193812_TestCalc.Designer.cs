@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CalculateurEF.Migrations
 {
     [DbContext(typeof(CalculContext))]
-    [Migration("20221128083948_clacul")]
-    partial class clacul
+    [Migration("20221203193812_TestCalc")]
+    partial class TestCalc
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,7 +26,7 @@ namespace CalculateurEF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("MaquetteEntityid")
+                    b.Property<int?>("MaquetteEntityId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nom")
@@ -35,14 +35,14 @@ namespace CalculateurEF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MaquetteEntityid");
+                    b.HasIndex("MaquetteEntityId");
 
                     b.ToTable("Bloc");
                 });
 
             modelBuilder.Entity("CalculateurEF.Entities.MaquetteEntity", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -50,7 +50,7 @@ namespace CalculateurEF.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Maquettes");
                 });
@@ -87,9 +87,6 @@ namespace CalculateurEF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("BlocEntityId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Coefficient")
                         .HasColumnType("INTEGER");
 
@@ -99,8 +96,6 @@ namespace CalculateurEF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BlocEntityId");
-
                     b.ToTable("Ue");
                 });
 
@@ -108,7 +103,7 @@ namespace CalculateurEF.Migrations
                 {
                     b.HasOne("CalculateurEF.Entities.MaquetteEntity", null)
                         .WithMany("Bloc")
-                        .HasForeignKey("MaquetteEntityid");
+                        .HasForeignKey("MaquetteEntityId");
                 });
 
             modelBuilder.Entity("CalculateurEF.Entities.MatiereEntity", b =>
@@ -116,18 +111,6 @@ namespace CalculateurEF.Migrations
                     b.HasOne("CalculateurEF.Entities.UEentity", null)
                         .WithMany("mat")
                         .HasForeignKey("UEentityId");
-                });
-
-            modelBuilder.Entity("CalculateurEF.Entities.UEentity", b =>
-                {
-                    b.HasOne("CalculateurEF.Entities.BlocEntity", null)
-                        .WithMany("ue")
-                        .HasForeignKey("BlocEntityId");
-                });
-
-            modelBuilder.Entity("CalculateurEF.Entities.BlocEntity", b =>
-                {
-                    b.Navigation("ue");
                 });
 
             modelBuilder.Entity("CalculateurEF.Entities.MaquetteEntity", b =>

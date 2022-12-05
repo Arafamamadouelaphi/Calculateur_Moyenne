@@ -16,9 +16,10 @@ namespace CalculateurEF.Context
         public DbSet<UEentity> Ue { get; set; }
         public DbSet<MatiereEntity> matier { get; set; }
 
+       
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=clacul.db");
+            optionsBuilder.UseSqlite("Data Source=calcul.db");
         }
     }
 }

@@ -222,6 +222,18 @@
              BackgroundColor="AliceBlue"
              VerticalOptions="Start"
              />
+
+                <CollectionView   Grid.ColumnSpan="2" ItemsSource="{Binding Items}" SelectionMode="None" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            
+                            
+                            
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>   
+                
+                
                 <Button Text="Annuler" HorizontalOptions="Start" VerticalOptions="Center"  WidthRequest="110" Grid.Column="0" ></Button>
                 <Button Text="Ajouter" HorizontalOptions="Start" VerticalOptions="Center"  Grid.Column="2" WidthRequest="110"></Button>
 

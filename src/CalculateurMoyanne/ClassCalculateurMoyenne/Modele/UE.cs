@@ -13,12 +13,13 @@ namespace ClassCalculateurMoyenne
         private string intitulé;
 
 
-        public UE (   long id,List<Matiere> _matieres, int coefficient, string intitulé)
+        public UE (   long id, int coefficient, string intitulé,params Matiere[] matieres)
         {
             Id = id;
-            Matieres = new ReadOnlyCollection<Matiere>(_matieres);
             Coefficient = coefficient;
             Intitulé = intitulé;
+            Matieres = new ReadOnlyCollection<Matiere>(matieres);
+
         }
         public void setIntitulé(string intitulé)
         {
@@ -52,7 +53,7 @@ namespace ClassCalculateurMoyenne
 
         public bool Equals(UE other)
         {
-            return Equals(other.Intitulé);
+            return matieres.Equals(other.matieres);
         }
         public override bool Equals(object obj)
         {

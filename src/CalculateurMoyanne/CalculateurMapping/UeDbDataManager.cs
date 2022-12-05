@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CalculateurMapping
 {
-    public class UeDataManager : IDataManager<UE>
+    public class UeDbDataManager : IDataManager<UE>
     {
         public Task<bool> Add(UE data)
         {

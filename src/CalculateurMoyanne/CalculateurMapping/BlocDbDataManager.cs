@@ -20,15 +20,15 @@ namespace CalculateurMapping
 
         public async Task<bool> Delete(BlocModel bloc)
         {
-            bool result = false;
-            using (var context = new CalculContext())
-            {
-                BlocEntity entity = context.Bloc.Find(bloc.Nom);
-                context.Bloc.Remove(entity);
-                result = await context.SaveChangesAsync() > 0;
+            //bool result = false;
+            //using (var context = new CalculContext())
+            //{
+            //    BlocEntity entity = context.Bloc.Find(bloc.Nom);
+            //    context.Bloc.Remove(entity);
+            //    result = await context.SaveChangesAsync() > 0;
 
-            }
-            return result;
+            //}
+            return true;
         }
 
         public async Task<IEnumerable<BlocModel>> GetAll()
@@ -51,8 +51,7 @@ namespace CalculateurMapping
                 return await context.Bloc.Where(e => e.Nom == name).Select(e => new BlocModel
                 (
 
-                    e.Nom,
-            
+                    e.Nom,            
                     e.ue.Select(j => new UE(j.intitulé)).ToArray()
                 )).FirstOrDefaultAsync();
             }

@@ -9,14 +9,14 @@
 
     <Grid RowDefinitions="100 ,Auto,*"
          ColumnDefinitions=".75*,.25*"
-         Padding="10"
-         RowSpacing="10"
-         ColumnSpacing="10">
+         Padding="2"
+         RowSpacing="4"
+         ColumnSpacing="4">
              <Entry Placeholder="Ajout de BLOC DANS LA MAQUETTE"
                Grid.Row="1" BackgroundColor="AliceBlue"
                Text="{Binding blocModel.Nom }"
                TextColor="Black"
-        />
+             />
             <Button
             Command="{Binding AddCommand}"
             Text="Add"
@@ -24,7 +24,7 @@
             Grid.Column="1">
             </Button>
         <Label Text="Liste des blocs" Grid.Row="2" Grid.ColumnSpan="2" FontSize="Header" HorizontalOptions="Center" TextDecorations="Underline" TextColor="Black" FontAttributes="Bold, Italic" ></Label>
-        <CollectionView Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding Items}" SelectionMode="None" >
+        <CollectionView Grid.Row="3" Grid.ColumnSpan="2" ItemsSource="{Binding Items}" SelectionMode="None" >
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type  model:BlocModel  }">
                     <SwipeView>
@@ -38,7 +38,7 @@
                             </SwipeItems>
                         </SwipeView.RightItems>
                         <Grid Padding="0">
-                            <Frame>
+                            <Frame Grid.Row="1">
                                 <Frame.GestureRecognizers >
                                     <TapGestureRecognizer  
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type  viewmodel:MaquetteViewModel}}, Path=TapCommand}"
@@ -47,20 +47,26 @@
                                 <Label Text="{Binding Nom}" 
                                        FontSize="10" TextColor="Black"  />
                             </Frame>
-                            
                         </Grid>
-                        
                     </SwipeView>
-                    
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
         <CollectionView>
-            
-            
         </CollectionView>
+        <!--//<Label Text="Liste des UE dans la Bloc X " Grid.Row="3" VerticalOptions="Center" HorizontalOptions="Start"></Label>-->
+        <CollectionView Grid.Row="3" VerticalOptions="Center" HorizontalOptions="Start" ItemsSource="{Binding Items}" SelectionMode="None" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type  model:BlocModel  }">
+
+                    <Label Text="{Binding Nom}"  Grid.Row="3" VerticalOptions="Center" HorizontalOptions="Start"
+                 
+                     FontSize="10" TextColor="Black"  />
 
 
-        </Grid>
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate></CollectionView>
+    </Grid>
 
 </ContentPage>

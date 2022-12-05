@@ -5,7 +5,7 @@
 namespace CalculateurEF.Migrations
 {
     /// <inheritdoc />
-    public partial class clacul : Migration
+    public partial class TestCalc : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,32 +14,13 @@ namespace CalculateurEF.Migrations
                 name: "Maquettes",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     NomMaquette = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Maquettes", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Bloc",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Nom = table.Column<string>(type: "TEXT", nullable: false),
-                    MaquetteEntityid = table.Column<int>(type: "INTEGER", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bloc", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Bloc_Maquettes_MaquetteEntityid",
-                        column: x => x.MaquetteEntityid,
-                        principalTable: "Maquettes",
-                        principalColumn: "id");
+                    table.PrimaryKey("PK_Maquettes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,16 +30,29 @@ namespace CalculateurEF.Migrations
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Coefficient = table.Column<int>(type: "INTEGER", nullable: false),
-                    intitulé = table.Column<string>(type: "TEXT", nullable: false),
-                    BlocEntityId = table.Column<int>(type: "INTEGER", nullable: true)
+                    intitulé = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ue", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Bloc",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Nom = table.Column<string>(type: "TEXT", nullable: false),
+                    MaquetteEntityId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bloc", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Ue_Bloc_BlocEntityId",
-                        column: x => x.BlocEntityId,
-                        principalTable: "Bloc",
+                        name: "FK_Bloc_Maquettes_MaquetteEntityId",
+                        column: x => x.MaquetteEntityId,
+                        principalTable: "Maquettes",
                         principalColumn: "Id");
                 });
 
@@ -84,35 +78,30 @@ namespace CalculateurEF.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bloc_MaquetteEntityid",
+                name: "IX_Bloc_MaquetteEntityId",
                 table: "Bloc",
-                column: "MaquetteEntityid");
+                column: "MaquetteEntityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_matier_UEentityId",
                 table: "matier",
                 column: "UEentityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Ue_BlocEntityId",
-                table: "Ue",
-                column: "BlocEntityId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "matier");
-
-            migrationBuilder.DropTable(
-                name: "Ue");
-
-            migrationBuilder.DropTable(
                 name: "Bloc");
 
             migrationBuilder.DropTable(
+                name: "matier");
+
+            migrationBuilder.DropTable(
                 name: "Maquettes");
+
+            migrationBuilder.DropTable(
+                name: "Ue");
         }
     }
 }

@@ -16,28 +16,49 @@ namespace ClassCalculateurMoyenne
         private readonly List<UE> ues = new List<UE>();
 
         public ReadOnlyCollection<BlocModel> BLOCS { get; private set; }
-        public string NomMaquette { get; set; }
-
         private readonly List<BlocModel> blocs = new List<BlocModel>();
-        private object value;
 
-        public MaquetteModel(List<UE> u, List<BlocModel> blc)
+        public string NomMaquette;
+        public string GetNomMaquette()
+        { 
+            return GetNomMaquette(); 
+        }
+        private void SetNomMaquette(string value)
+        {       
+            
+            if (string.IsNullOrWhiteSpace(GetNomMaquette()))
+
+            { 
+                throw new ArgumentException("Le Nom de la maquette est obligatoire");
+            }
+            
+        }
+    
+
+        public MaquetteModel(int id, string nomMaquette, List<UE> u, List<BlocModel> blc)
         {
-            UES = new ReadOnlyCollection<UE>(u);
-            BLOCS = new ReadOnlyCollection<BlocModel>(blc);
+            Id = id;
+            NomMaquette = nomMaquette;
+            UES = u.AsReadOnly();
+            BLOCS = blc.AsReadOnly();
 
         }
+        public MaquetteModel(List<UE> u, List<BlocModel> blc)
+        {
+            UES = u.AsReadOnly();
+            BLOCS = blc.AsReadOnly();
+        }
 
-        public MaquetteModel(long id,string nomMaquette, object value)
+        public MaquetteModel(long id,string nomMaquette)
         {
             Id = Id;
-            NomMaquette = nomMaquette;
-            this.value = value;
+            SetNomMaquette(nomMaquette);
+          
         }
         public MaquetteModel( string nomMaquette)
         {
-            
-            NomMaquette = nomMaquette;
+
+            SetNomMaquette(nomMaquette);
             
         }
 
@@ -92,26 +113,30 @@ namespace ClassCalculateurMoyenne
 
         public bool Equals(MaquetteModel other)
         {
-            return Equals(other.NomMaquette);
+            return Equals(other.GetNomMaquette());
         }
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(obj, null)) return false;
             if (ReferenceEquals(obj, this)) return true;
             if (GetType() != obj.GetType()) return false;
-            return Equals(obj as UE);
+            return Equals(obj as MaquetteModel);
         }
 
         public MaquetteModel(string nomMaquette, int id)
 
         {
-            NomMaquette = nomMaquette;
+            SetNomMaquette(nomMaquette);
             Id = id;
         }
         public void setNomMaquete(string nom)
         {
-            NomMaquette =nom;
+            SetNomMaquette(nom);
         }
+       
+
+
 
     }
+
 }

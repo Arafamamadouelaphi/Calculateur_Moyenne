@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:tool="https://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="CalculateurApp.View.EXE"
              Title="EXE">
   
@@ -9,9 +10,9 @@
     
     
     
-<Grid  
+<!--<Grid  
          Padding="10"
-         RowSpacing="600"
+         RowSpacing="60"
          ColumnSpacing="6">
         <Grid.RowDefinitions>
             <RowDefinition  />
@@ -21,9 +22,20 @@
             <ColumnDefinition />
             <ColumnDefinition/>
         </Grid.ColumnDefinitions >
-        <Grid  BackgroundColor="AliceBlue">
-            <Label Text=" Matiere"   VerticalOptions="Center" HorizontalOptions="Start"></Label>
-        <Label Text="Coef" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
-        </Grid>
-    </Grid>
+        <Frame Grid.Row="0" BackgroundColor="Black"></Frame>
+        <Frame Grid.Row="1" BackgroundColor="Yellow"></Frame>
+
+    </Grid>-->
+    <ScrollView >
+        <VerticalStackLayout Spacing="10" >
+            <Label Text="rouf"></Label>
+            <Frame>
+                
+                
+
+            </Frame>
+        </VerticalStackLayout>
+      
+    </ScrollView>
+   
 </ContentPage>

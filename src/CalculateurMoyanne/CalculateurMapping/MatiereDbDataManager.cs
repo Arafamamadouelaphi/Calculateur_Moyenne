@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CalculateurMapping
 {
-    public class MatiereDbManager : IDataManager<Matiere>
+    public class MatiereDbDataManager : IDataManager<Matiere>
     {   //Maping entre la classe Matier et MatiereEntity
         public Task<bool> Add(Matiere data)
         {

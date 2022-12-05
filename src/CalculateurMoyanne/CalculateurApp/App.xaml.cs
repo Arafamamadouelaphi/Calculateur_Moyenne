@@ -13,7 +13,7 @@ namespace CalculateurApp
              MainPage = new NavigationPage(new HomePage());
             //MainPage = new AppShell(BlocViewModel c);
             // MainPage = new Maquette ();
-          //  MainPage = new UEPage1();
+           // MainPage = new MatNote();
            
         }
     }

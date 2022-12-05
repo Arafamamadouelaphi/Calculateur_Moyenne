@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace ClassCalculateurMoyenne
 {
-    public partial class BlocModel : ObservableObject
+    public partial class BlocModel : ObservableObject,IEquatable<BlocModel>
     {
         [ObservableProperty]
         private string nom;
         public long Id;
+        [ObservableProperty]
         private UE[] uEs;
 
         public ReadOnlyCollection<UE> ue { get; private set; }
@@ -90,5 +91,17 @@ namespace ClassCalculateurMoyenne
             return false;
         }
 
+        public bool Equals(BlocModel  other)
+        {
+            return Equals(other.Nom);
+
+        }
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null)) return false;
+            if (ReferenceEquals(obj, this)) return true;
+            if (GetType() != obj.GetType()) return false;
+            return Equals(obj as BlocModel);
+        }
     }
 }

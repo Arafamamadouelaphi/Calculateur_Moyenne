@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace TestCalculateurMoyanne.LesTests
 {
@@ -15,37 +16,31 @@ namespace TestCalculateurMoyanne.LesTests
         public void Test()
         {
             Assert.NotNull(m);
-            Assert.Equal("L3", m.NomMaquette);
-            Assert.NotEqual("E3", m.NomMaquette);
+            Assert.Equal("L3", m.GetNomMaquette());
+            Assert.NotEqual("E3", m.GetNomMaquette());
         }
         [Fact]
         public void TestInvalidMaquette()
         {
-
             Assert.Throws<ArgumentException>(() => new MaquetteModel(null));
 
-        }
-        public class maquette_InlineData
-        {
+        }      
             [Theory]
-            [InlineData(false, "L6", 2, "L3", 2)]
-            [InlineData(false, "", 0, "", 0)]
-            [InlineData(true, "M1", 0, "M1", 0)]
-
-
-            public void TestConstructor(bool isValid, string expectedNomMaquette, int expectedId,
-             string NomMaquette, int id)
+            [InlineData(false, "L6" ,"L3")]
+            [InlineData(false, "",  "")]
+            [InlineData(true, "M1", "M1" )]            
+            public void TestConstructor(bool isValid, string expectedNomMaquette, 
+             string NomMaquette)
             {
                 if (!isValid)
                 {
-                    Assert.Throws<ArgumentException>(
-                        () => new UE(NomMaquette, id));
+                    Assert.Throws<ArgumentException>( () => new MaquetteModel(NomMaquette));
                     return;
                 }
 
-                MaquetteModel m = new MaquetteModel(NomMaquette, id);
-                Assert.Equal(expectedNomMaquette, m.NomMaquette);
-                Assert.Equal(expectedId, m.Id);
+                MaquetteModel m = new MaquetteModel(NomMaquette);
+                Assert.Equal(expectedNomMaquette, m.GetNomMaquette());
+              
             }
             // test avec stub
 
@@ -65,16 +60,17 @@ namespace TestCalculateurMoyanne.LesTests
                 //Compter le nombre de Maq dans un objet IEnumerable
                 Assert.Equal(0, stub.GetAll().Result.Count());
             }
+            [Fact]
             public void TestUpdate()
             {
                 StubMaquette stub = new StubMaquette();
                 MaquetteModel e = new MaquetteModel("E1");
                 stub.Add(e);
-                e.setNomMaquete ("L1");
+                e.setNomMaquete("L1");
                 stub.Update(e);
-                Assert.Equal("L1", stub.GetAll().Result.First().NomMaquette);
+                Assert.Equal("L1", stub.GetAll().Result.First().GetNomMaquette());
             }
 
         }
     }
-}
+
