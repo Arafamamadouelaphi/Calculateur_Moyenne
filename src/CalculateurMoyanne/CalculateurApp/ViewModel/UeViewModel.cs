@@ -10,17 +10,13 @@ using System.Threading.Tasks;
 
 namespace CalculateurApp.ViewModel
 {
-   // [QueryProperty("Nom", "Nom")]
+    [QueryProperty("Nom", "Nom")]
     public partial class UeViewModel:ObservableObject
     {
         //[ObservableProperty]
         //string nom;
 
-        //[RelayCommand]
-        //async Task GoBack()
-        //{
-        //    await Shell.Current.GoToAsync("..");
-        //}
+       
      public UE u { get; set; }
      public Matiere ma { get; set; }
 
@@ -66,6 +62,11 @@ namespace CalculateurApp.ViewModel
             {
                 Items.Remove(bl);
             }
+        }
+        [RelayCommand]
+        async Task GoBack()
+        {
+            await Shell.Current.GoToAsync("..");
         }
 
 

@@ -1,4 +1,6 @@
-﻿using CalculateurApp.View;
+﻿using BSN;
+using CalculateurApp.View;
+using CalculateurEF.Context;
 using ClassCalculateurMoyenne;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -24,8 +26,10 @@ namespace CalculateurApp.ViewModel
         }
         [ObservableProperty]
         ObservableCollection<BlocModel> items;
+       
         [ObservableProperty]
         string nom;
+       
         [RelayCommand]
         void Add()
         {
@@ -44,11 +48,19 @@ namespace CalculateurApp.ViewModel
                 Items.Remove(bl);
             }
         }
+
+
         [RelayCommand]
         async Task Tap(String s)
         {
             await Shell.Current.GoToAsync($"{nameof(BlocModel)}?Nom={s}");
 
+        }
+        [RelayCommand]
+        public void GetAllUE()
+        {
+
+           // var result=Manager
         }
     }
 }

@@ -10,10 +10,10 @@ namespace CalculateurApp
         {
             InitializeComponent();
 
-             MainPage = new NavigationPage(new HomePage());
+            MainPage = new NavigationPage(new HomePage());
             //MainPage = new AppShell(BlocViewModel c);
-            // MainPage = new Maquette ();
-           // MainPage = new MatNote();
+          //    MainPage = new Maquette ();
+       //  MainPage = new Start();
            
         }
     }

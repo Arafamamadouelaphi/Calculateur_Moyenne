@@ -9,8 +9,7 @@
     
     
     
-    
-<!--<Grid  
+<Grid  
          Padding="10"
          RowSpacing="60"
          ColumnSpacing="6">
@@ -24,9 +23,11 @@
         </Grid.ColumnDefinitions >
         <Frame Grid.Row="0" BackgroundColor="Black"></Frame>
         <Frame Grid.Row="1" BackgroundColor="Yellow"></Frame>
-
-    </Grid>-->
-    <ScrollView >
+        <Button Text=" afficher UE"></Button>
+        <BoxView Grid.Row="0" BackgroundColor="Red"></BoxView>
+        <BoxView Grid.Row="1"  BackgroundColor="AliceBlue"></BoxView>
+  </Grid>
+    <!--<ScrollView >
         <VerticalStackLayout Spacing="10" >
             <Label Text="rouf"></Label>
             <Frame>
@@ -36,6 +37,6 @@
             </Frame>
         </VerticalStackLayout>
       
-    </ScrollView>
+    </ScrollView>-->
    
 </ContentPage>

@@ -12,5 +12,6 @@ namespace CalculateurEF.Entities
         public long id { get; set; }
         public int Note { get; set; }
         public int Coef { get; set; }
+      
     }
 }

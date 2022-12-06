@@ -9,7 +9,7 @@ public partial class HomePage : TabbedPage
 
 	private void Button_Clicked(object sender, EventArgs e)
 	{
-		Navigation.PushAsync(new Start());
+		Navigation.PushAsync(new Maquette());
 
     }
 }

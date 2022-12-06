@@ -11,7 +11,10 @@ namespace ClassCalculateurMoyenne
         private int coefficient;
         [ObservableProperty]
         private string intitulé;
-
+        public string GetIntitulé()
+        {
+            return GetIntitulé();
+        }
 
         public UE (   long id, int coefficient, string intitulé,params Matiere[] matieres)
         {

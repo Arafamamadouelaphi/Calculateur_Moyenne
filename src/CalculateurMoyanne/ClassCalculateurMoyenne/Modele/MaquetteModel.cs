@@ -81,8 +81,9 @@ namespace ClassCalculateurMoyenne
             {
                 return false;
             }
+            
 
-        }
+    }
         public bool ajouteBloc(BlocModel b)
         {
             if (IsExiste(b))
@@ -95,6 +96,10 @@ namespace ClassCalculateurMoyenne
                 return false;
             }
 
+        }
+        public override int GetHashCode()
+        {
+            return NomMaquette.GetHashCode();
         }
 
         private bool IsExiste(BlocModel b)

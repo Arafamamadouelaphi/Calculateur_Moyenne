@@ -9,8 +9,9 @@ namespace CalculateurEF.Entities
     public class BlocEntity
     {
         #region Propriétés
+        public List<UEentity> ue;       
         public int Id { get; set; }
-        public string Nom { get; set; }
+        public string Nom;
 
         //public  ICollection<UEentity> ue { get; set; }
 

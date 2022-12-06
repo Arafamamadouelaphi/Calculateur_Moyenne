@@ -10,15 +10,23 @@ namespace ClassCalculateurMoyenne
     public   class Matiere
     {
         public long Id { get; set; }
-       
+
         public string Nommatiere { get; set; }
         public int Note { get; set; }
         public int Coef { get; set; }
-        public Matiere()
+        public string GetNommatiere()
         {
-
+            return GetNommatiere();
         }
-        public Matiere(long id ,int note, string nommatiere, int coef)
+
+        private void SetNomMaquette(string value)
+        {
+            this.Nommatiere = value;
+        
+        }
+
+
+            public Matiere(long id ,int note, string nommatiere, int coef)
         {
             Id = id;
             Coef = coef;
@@ -30,6 +38,11 @@ namespace ClassCalculateurMoyenne
         {
             Nommatiere = nommatiere;
         }
+
+        public Matiere()
+        {
+        }
+
         public override string ToString()
         {
             return $"{Nommatiere},{Note},{Coef}";

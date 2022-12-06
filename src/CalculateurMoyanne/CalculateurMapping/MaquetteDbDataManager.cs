@@ -54,39 +54,59 @@ namespace CalculateurMapping
             return result;
         }
 
+        //public async Task<IEnumerable<MaquetteModel>> GetAll()
+        //{
+        //    using (var context = new CalculContext())
+        //   {
+        //       return await context.Maquettes.Select(I => new MaquetteModel
+        //        (     
+        //               I.Id,
+        //              I.NomMaquette,
+        //              I.Bloc.Select(u =>
+        //              u.ue.Select(uee => new UE(uee.Id, uee.Coefficient, uee.intitulé,
+        //              uee.mat.Select(ma => new Matiere(ma.id, ma.Note,ma.Nommatiere,ma.Coef)).ToArray()
+        //              )).ToList()
+        //              ),
+        //           I.Bloc.Select(j => new BlocModel(j.Nom)).ToArray()
+        //       )).ToListAsync();
+        //   }
+        //    return null;
+        //  }
         public async Task<IEnumerable<MaquetteModel>> GetAll()
         {
-            //using (var context = new CalculContext())
-            //{
-            //    return await context.Maquettes.Select(e => new MaquetteModel
-            //    (e.Id,
-            //        e.NomMaquette,
-            //        e.Bloc.Select(u =>
-            //         u.ue.Select(uee => new UE(uee.Id, uee.Coefficient, uee.intitulé,
-            //            uee.mat.Select(ma => new Matiere(ma.id, ma.Note,ma.Nommatiere,ma.Coef)).ToArray()
-
-            //            )).ToList()
-            //            ),
-            //        e.Bloc.Select(j => new BlocModel(j.Nom)).ToArray()
-            //    )).ToListAsync();
-            //}
-            return null;
+            using (var context = new CalculContext())
+            {
+                List<MaquetteModel> maquettes = new List<MaquetteModel>();
+                foreach (var item in await context.Maquettes.ToListAsync())
+                    maquettes.Add(new MaquetteModel(item.Id, item.NomMaquette));
+                return maquettes;
+            }
         }
 
         public async Task<MaquetteModel> GetDataWithName(string name)
         {
+            
+              using (var context = new CalculContext())
+                {
+                    MaquetteModel _mqt = null;
+
+                    var query = await context.Maquettes.FirstOrDefaultAsync(n => n.NomMaquette == name);
+                    _mqt = new MaquetteModel(query.Id, query.NomMaquette);
+                    return _mqt;
+                }
+        }
             //using (var context = new CalculContext())
             //{
             //    return await context.Maquettes.Where(e => e.NomMaquette == name).Select(e => new MaquetteModel
             //    (
-            //        // e.Id,
-            //        //e.NomMaquette,
-            //        //e.Bloc.Select(u => u.ue).ToList(),
-            //        //e.Bloc.Select(j => new BlocModel(j.Nom)).ToArray()
+            //e.Id,
+            //e.NomMaquette,
+            //e.Bloc.Select(u => u.ue).ToList(),
+            //e.Bloc.Select(j => new BlocModel(j.Nom)).ToArray()
             //    )).FirstOrDefaultAsync();
             //}
-            return null;
-        }
+           
+        
 
         public async Task<bool> Update(MaquetteModel data)
         {

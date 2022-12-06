@@ -1,5 +1,6 @@
 ﻿using BSN;
 using CalculateurEF.Context;
+using CalculateurEF.Entities;
 using ClassCalculateurMoyenne;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,23 +13,43 @@ namespace CalculateurMapping
 {
     public class MatiereDbDataManager : IDataManager<Matiere>
     {   //Maping entre la classe Matier et MatiereEntity
-        public Task<bool> Add(Matiere data)
+        public async Task<bool> Add(Matiere data)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            using (var context = new CalculContext())
+            {
+                MatiereEntity entity = new MatiereEntity
+                {
+                    Nommatiere = data.GetNommatiere(),
+
+                };               
+                    context.matier.Add(entity);
+                    await context.SaveChangesAsync();
+                    result = true;                
+            return result;
+
+            }
         }
 
-        public Task<bool> Delete(Matiere data)
+        public async Task<bool> Delete(Matiere mat)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            using (var Context = new CalculContext())
+            {
+                MatiereEntity entity = Context.matier.Find(mat.GetNommatiere());
+                Context.matier.Remove(entity);
+                result = await Context.SaveChangesAsync() > 0;
+            }
+            return result;
         }
 
         public async Task<IEnumerable<Matiere>> GetAll()
         {
             using (var context = new CalculContext())
             {
-                return   await context.matier.Select(e => new Matiere
-                (  e.id,
-                   e.Note,                   
+                return await context.matier.Select(e => new Matiere
+                (e.id,
+                   e.Note,
                    e.Nommatiere,
                    e.Coef
                 )).ToListAsync();
@@ -40,9 +61,21 @@ namespace CalculateurMapping
             throw new NotImplementedException();
         }
 
-        public Task<bool> Update(Matiere data)
+        public async Task<bool> Update(Matiere mat)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            using (var context = new CalculContext())
+            {
+                MatiereEntity entity = context.matier?.Find(mat.Id);
+                if (entity != null)
+                {
+                    entity.Nommatiere = mat.Nommatiere;
+                    result = await context.SaveChangesAsync() > 0;
+                }
+                return result;
+            }
+
+
         }
     }
 }

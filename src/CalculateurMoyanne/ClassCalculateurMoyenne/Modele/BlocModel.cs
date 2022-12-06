@@ -49,6 +49,11 @@ namespace ClassCalculateurMoyenne
         {
         }
 
+        public string  Getnom()
+        {
+            return Getnom();
+        }
+
         private IEnumerable<UE> Ajouterue(params UE[] ues)
         {
             List<UE> result = new();
@@ -88,10 +93,9 @@ namespace ClassCalculateurMoyenne
         {
             if (ues.Contains(nouveauUE))
                 return true;
-            return false;
+                return false;
         }
-
-        public bool Equals(BlocModel  other)
+        public bool Equals(BlocModel other)
         {
             return Equals(other.Nom);
 
@@ -102,6 +106,10 @@ namespace ClassCalculateurMoyenne
             if (ReferenceEquals(obj, this)) return true;
             if (GetType() != obj.GetType()) return false;
             return Equals(obj as BlocModel);
+        }
+        public override int GetHashCode()
+        {
+            return Nom.GetHashCode();
         }
     }
 }

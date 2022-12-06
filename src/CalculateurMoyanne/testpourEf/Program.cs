@@ -4,10 +4,10 @@ using CalculateurEF.Entities;
 
 Console.WriteLine("Hello, World!");
 namespace testpourEF
-{ class Program
-    {
+{     class Program
+      {
        
-    }
+       }
 }
 
 
