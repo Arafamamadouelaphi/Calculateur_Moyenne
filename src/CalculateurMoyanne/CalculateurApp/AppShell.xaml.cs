@@ -7,7 +7,7 @@ namespace CalculateurApp
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(Maquette), typeof(Maquette));
+            Routing.RegisterRoute(nameof(Start), typeof(Start));
         }
     }
 }

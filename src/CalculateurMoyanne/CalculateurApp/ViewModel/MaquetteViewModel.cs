@@ -42,6 +42,7 @@ namespace CalculateurApp.ViewModel
         }
          [RelayCommand]
         void Delete(BlocModel bl)
+        
         {
             if (Items.Contains(bl))
             {

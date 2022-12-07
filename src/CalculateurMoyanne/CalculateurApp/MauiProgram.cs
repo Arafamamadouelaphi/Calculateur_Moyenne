@@ -15,12 +15,15 @@ namespace CalculateurApp
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-            builder.Services.AddTransient<Start>();
-            builder.Services.AddTransient<BlocViewModel>();
-            builder.Services.AddSingleton<UEPage1>();
-            builder.Services.AddSingleton<UeViewModel>();
+           
+
+           // builder.Services.AddSingleton<UEPage1>();
+           // builder.Services.AddSingleton<UeViewModel>();
+
             builder.Services.AddSingleton<Maquette>();
             builder.Services.AddSingleton<MaquetteViewModel>();
+            builder.Services.AddTransient<Start>();
+            builder.Services.AddTransient<BlocViewModel>();
 
             return builder.Build();
         }

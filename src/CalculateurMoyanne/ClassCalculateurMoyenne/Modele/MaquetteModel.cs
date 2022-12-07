@@ -118,7 +118,7 @@ namespace ClassCalculateurMoyenne
 
         public bool Equals(MaquetteModel other)
         {
-            return Equals(other.GetNomMaquette());
+            return NomMaquette. Equals(other.GetNomMaquette());
         }
         public override bool Equals(object obj)
         {

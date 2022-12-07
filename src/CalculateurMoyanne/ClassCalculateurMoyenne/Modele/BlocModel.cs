@@ -97,7 +97,7 @@ namespace ClassCalculateurMoyenne
         }
         public bool Equals(BlocModel other)
         {
-            return Equals(other.Nom);
+            return Nom. Equals(other.Nom);
 
         }
         public override bool Equals(object obj)

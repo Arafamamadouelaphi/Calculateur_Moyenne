@@ -13,8 +13,9 @@ namespace CalculateurApp.ViewModel
     [QueryProperty("Nom", "Nom")]
     public partial class BlocViewModel:ObservableObject
     {
-        
-       
+
+        [ObservableProperty]
+        string nom;
         public BlocModel blocModel { get; set; }
         public UE ue { get; set; }
         public BlocViewModel()
@@ -28,7 +29,7 @@ namespace CalculateurApp.ViewModel
         ObservableCollection<UE> items;
         [ObservableProperty]
         string intitulé;
-
+        
 
         [RelayCommand]
         void Add()
