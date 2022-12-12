@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:CalculateurApp.ViewModel"
@@ -16,7 +16,7 @@
             <Entry 
                 Placeholder="entrer matiere"
                 Grid.Row="1"
-                Text="{Binding  ma.Nommatiere}"
+                Text="y"
                 TextColor="Black"
                 BackgroundColor="AliceBlue"
                 WidthRequest="250"
@@ -24,6 +24,8 @@
             <!--<Label Text="{Binding }"></Label>-->
             <!--<Button Text="go" Command="{Binding AddCommand}"></Button>-->
             <!--<Entry
+
+            {Binding  ma.Nommatiere}
                 Placeholder="coef"              
                 WidthRequest="100"
                 Grid.Row="1"
@@ -53,7 +55,7 @@
                                           
                                            CommandParameter="{Binding .}"/>
                                     </Frame.GestureRecognizers>
-                                    <Label Text="{Binding Nommatiere}"
+                                    <Label Text="Binding Nommatiere"
                                        FontSize="10" TextColor="Black"  />
                                 </Frame>
                             </Grid>
@@ -61,7 +63,8 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-             <CollectionView Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Items}" >
+             <CollectionView Grid.Row="2" Grid.Column="0"  >
+                <!--ItemsSource="{Binding Items}"-->
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type  model:Matiere   }">
                         <SwipeView>
@@ -81,7 +84,7 @@
                                           
                                            CommandParameter="{Binding .}"/>
                                     </Frame.GestureRecognizers>
-                                    <Label Text="{Binding Nommatiere}"
+                                    <Label Text="Binding Nommatiere"
                                        FontSize="10" TextColor="Black"  />
                                 </Frame>
                             </Grid>

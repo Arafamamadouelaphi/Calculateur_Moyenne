@@ -1,42 +1,20 @@
 ﻿using ClassCalculateurMoyenne;
-using ClassCalculateurMoyenne;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bussness;
+
 
 namespace StubCalculateur.Stub
 {
-    public class StubMaquette
+    public class StubMaquette: IDataManager<MaquetteModel>
     {
         private List<BlocModel> listb = new List<BlocModel>();
         public List<UE> ues = new List<UE>();
         private List<MaquetteModel> lstmqt = new List<MaquetteModel>();
-
-        public bool Delete(MaquetteModel data)
-        {
-            if (data != null)
-            {
-                lstmqt.Remove(data);
-                return true;
-            }
-            return false;
-        }
-        public bool Add(MaquetteModel data)
-        {
-            if(data != null)
-            {
-                lstmqt.Add(data);
-                return true;
-            }
-            
-            return false;
-        }
-        public async Task<IEnumerable<MaquetteModel>> GetAll()
-        {
-            return lstmqt;
-        }
+       
         public async Task<IEnumerable<MaquetteModel>> GetAllMaquette(int n = 10)
         {
             for (int i = 0; i < n; i++)
@@ -64,7 +42,7 @@ namespace StubCalculateur.Stub
                 }
                 for(int v = 0; v < 10; v++)
                 {
-                    listb.Add(new BlocModel(""));
+                    listb.Add(new BlocModel("ghh"));
                 }
                 lstmqt.Add(new MaquetteModel(ues,listb));
                 ues.Clear();
@@ -72,9 +50,40 @@ namespace StubCalculateur.Stub
             return lstmqt;
         }
 
+       public Task<bool> Add(MaquetteModel data)
+        {
+            if (data != null)
+            {
+                lstmqt.Add(data);
+                return Task.FromResult(true);
+            }
 
+            return Task.FromResult(false);
+        }
 
+        public Task<bool> Delete (MaquetteModel data)
+        {
+            if (data != null)
+            {
+                lstmqt.Remove(data);
+                return Task.FromResult( true);
+            }
+            return Task.FromResult(false);
+        }
 
+        public Task<MaquetteModel> GetDataWithName(string name)
+        {
+            throw new NotImplementedException();
+        }
 
+        public async Task<List<MaquetteModel>> GetAll()
+        {
+            return lstmqt;
+        }
+
+        public Task<bool> AddUEBloc(UE data, int blocId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

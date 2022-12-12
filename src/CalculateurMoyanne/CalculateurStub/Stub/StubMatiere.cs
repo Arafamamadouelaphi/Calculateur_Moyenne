@@ -1,4 +1,5 @@
-﻿using ClassCalculateurMoyenne;
+﻿using Bussness;
+using ClassCalculateurMoyenne;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StubCalculateur.Stub
 {
-    public class StubMatiere
+    public class StubMatiere: IDataManager<Matiere>
     {
         private List<Matiere> listMatieres = new List<Matiere>();
 
@@ -31,12 +32,22 @@ namespace StubCalculateur.Stub
             }
             return false;
         }
-        public async Task<IEnumerable<Matiere>> GetAll()
+
+        public Task<bool> Delete(Matiere data)
         {
-            return listMatieres;
+            throw new NotImplementedException();
         }
 
-        public bool update(Matiere data)
+        
+
+        public Task<Matiere> GetDataWithName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+       
+
+        public async Task<bool> Update(Matiere data)
         {
             if (data != null)
             {
@@ -47,5 +58,14 @@ namespace StubCalculateur.Stub
             return false;
         }
 
+        public async Task<List<Matiere>> GetAll()
+        {
+            return listMatieres;
+        }
+
+        public Task<bool> AddUEBloc(UE data, int blocId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

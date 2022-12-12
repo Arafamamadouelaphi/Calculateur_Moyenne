@@ -38,10 +38,6 @@
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
 		<!-- Images -->
-		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
-
-		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
@@ -50,12 +46,20 @@
 
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0">
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	    <PrivateAssets>all</PrivateAssets>
+	  </PackageReference>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.0" />
+	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\BSN\Bussness.csproj" />
 	  <ProjectReference Include="..\CalculateurEF\CalculateurEF.csproj" />
 	  <ProjectReference Include="..\ClassCalculateurMoyenne\ClassCalculateurMoyenne.csproj" />
+	  <ProjectReference Include="..\CalculateurMapping\CalculateurMapping.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -64,6 +68,9 @@
 	  </Compile>
 	  <Compile Update="View\MaquettePage.xaml.cs">
 	    <DependentUpon>MaquettePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="View\mqt.xaml.cs">
+	    <DependentUpon>mqt.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -89,6 +96,24 @@
 	  <MauiXaml Update="View\UEPage1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\AjtMaquette.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="View\%28%24&quot;{nameof%28BlocModel%29}%3FNom={s}&quot;%29%3B.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\dotnet_bot.svg" />
+	</ItemGroup>
+	<ItemGroup>
+	  <BundleResource Include="Resources\Images\dotnet_bot.svg" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Microsoft.EntityFrameworkCore" />
+	  <None Remove="Microsoft.EntityFrameworkCore.Tools" />
+	  <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
+	  <None Remove="sqlite-net-pcl" />
+	</ItemGroup>
 </Project>

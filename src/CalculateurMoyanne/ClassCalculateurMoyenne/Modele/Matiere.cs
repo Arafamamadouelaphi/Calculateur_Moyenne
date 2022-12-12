@@ -11,12 +11,12 @@ namespace ClassCalculateurMoyenne
     {
         public long Id { get; set; }
 
-        public string Nommatiere { get; set; }
-        public int Note { get; set; }
-        public int Coef { get; set; }
+        public string Nommatiere;
+        public int Note { get; private set; }
+        public int Coef { get; private set; }
         public string GetNommatiere()
         {
-            return GetNommatiere();
+            return Nommatiere;
         }
 
         private void SetNomMaquette(string value)

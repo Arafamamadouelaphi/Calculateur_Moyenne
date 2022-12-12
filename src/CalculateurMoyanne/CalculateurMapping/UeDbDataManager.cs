@@ -1,4 +1,4 @@
-﻿using BSN;
+﻿using Bussness;
 using CalculateurEF.Context;
 using CalculateurEF.Entities;
 using ClassCalculateurMoyenne;
@@ -38,6 +38,11 @@ namespace CalculateurMapping
             }
         }
 
+        public Task<bool> AddUEBloc(UE data, int blocId)
+        {
+            throw new NotImplementedException();
+        }
+
         public  async Task<bool> Delete(UE data)
         {
             bool result = false;
@@ -51,7 +56,7 @@ namespace CalculateurMapping
             return true;
         }
 
-        public async Task<IEnumerable<UE>> GetAll()
+        public async Task<List<UE>> GetAll()
         {
             using (var context = new CalculContext())
             {
@@ -60,7 +65,7 @@ namespace CalculateurMapping
                    e.Id,
                    e.Coefficient,
                    e.intitulé,
-                   e.matiere.Select(j => new Matiere(j.Nommatiere)).ToArray()
+                   e.mat.Select(j => new Matiere(j.Nommatiere)).ToArray()
                 )).ToListAsync();
             }
         }
@@ -77,7 +82,7 @@ namespace CalculateurMapping
             {
                 UEentity entity = context.Ue.Find(data.Id);
                 entity.intitulé = data.Intitulé;
-                entity.matiere = data.Matieres.Select(j => new MatiereEntity
+                entity.mat = data.Matieres.Select(j => new MatiereEntity
                 {
                     Nommatiere = j.Nommatiere,
                 }).ToList();

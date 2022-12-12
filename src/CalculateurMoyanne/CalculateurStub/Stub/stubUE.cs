@@ -1,4 +1,5 @@
-﻿using ClassCalculateurMoyenne;
+﻿using Bussness;
+using ClassCalculateurMoyenne;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace StubCalculateur.Stub
 {
-    public class stubUE
+    public class stubUE : IDataManager<UE>
     {
         private List<UE> listUE = new List<UE>();
         private List<Matiere> mat = new List<Matiere>();
+
         public async Task<bool> Add(UE data)
         {
             if (data != null)
@@ -21,10 +23,6 @@ namespace StubCalculateur.Stub
             }
             return false;
         }
-
-
-
-
         public async Task<bool> Delete(UE data)
         {
             if (data != null)
@@ -42,11 +40,7 @@ namespace StubCalculateur.Stub
             }
             return listUE;
         }
-        public async Task<IEnumerable<UE>> GetAll()
-        {
-
-            return listUE;
-        }
+       
         public async Task<bool> Update(UE data)
         {
             if (data != null)
@@ -71,10 +65,21 @@ namespace StubCalculateur.Stub
                 mat.Clear();
             }
             return listUE;
+        }
 
+        public Task<UE> GetDataWithName(string name)
+        {
+            throw new NotImplementedException();
+        }
 
+        public async  Task<List<UE>> GetAll()
+        {
+             return   listUE;
+        }
 
-
+        public Task<bool> AddUEBloc(UE data, int blocId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace CalculateurApp
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(Start), typeof(Start));
+            Routing.RegisterRoute(nameof(BlockView), typeof(BlockView));
         }
     }
 }

@@ -5,28 +5,28 @@
              x:DataType="viewmodel:BlocViewModel"             
              x:Class="CalculateurApp.View.EXE"
              Title="Maquette">
-<Grid RowDefinitions="100 ,Auto,*"
+<!--<Grid RowDefinitions="100 ,Auto,*"
          ColumnDefinitions=".75*,.25*"
          Padding="2"
          RowSpacing="4"
          ColumnSpacing="4">
 
-        <Entry Placeholder="Ajout de BLOC DANS LA MAQUETTE"
+        <Entry Placeholder="Ajout de LA MAQUETTE"
                Grid.Row="1" BackgroundColor="AliceBlue"
                Text="{Binding blocModel.Nom }"
                TextColor="Black"
              />
-         <Button
+         --><!--<Button
             
-            Text="Modifier"
+            Text="AJOUTER"
             Grid.Row="1"
             Grid.Column="1"
             HorizontalOptions="Center"
             VerticalOptions="Center"
             WidthRequest="100"
             >
-            <!--Command="{Binding AddUEBlocCommand}"-->
-        </Button>
+            --><!--Command="{Binding AddUEBlocCommand}"--><!--
+        </Button>-->
          <!--<Label Text="Liste des blocs" Grid.Row="2" Grid.ColumnSpan="2" FontSize="Header" HorizontalOptions="Center" TextDecorations="Underline" TextColor="Black" FontAttributes="Bold, Italic" ></Label>
         <CollectionView Grid.Row="3" Grid.ColumnSpan="2" ItemsSource="{Binding Items}" SelectionMode="None" >
             <CollectionView.ItemTemplate>
@@ -59,8 +59,8 @@
                     </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView >-->
-    </Grid>
+        </CollectionView >--><!--
+    </Grid>-->
 </ContentPage>
 
 

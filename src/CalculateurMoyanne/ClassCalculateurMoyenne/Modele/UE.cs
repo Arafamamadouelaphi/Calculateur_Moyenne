@@ -10,13 +10,27 @@ namespace ClassCalculateurMoyenne
         [ObservableProperty]
         private int coefficient;
         [ObservableProperty]
+
         private string intitulé;
+
+        public int IDForeignKey { get;  set; }
+
         public string GetIntitulé()
         {
-            return GetIntitulé();
+            return intitulé;
+        }
+        public void setIntitulé(string value)
+        {
+            if(string.IsNullOrEmpty(value))
+
+            {
+                throw new ArgumentException("INTITULÉ est obligatoire");
+            }
+
+            intitulé = value;
         }
 
-        public UE (   long id, int coefficient, string intitulé,params Matiere[] matieres)
+        public UE ( long id, int coefficient, string intitulé,params Matiere[] matieres)
         {
             Id = id;
             Coefficient = coefficient;
@@ -24,20 +38,17 @@ namespace ClassCalculateurMoyenne
             Matieres = new ReadOnlyCollection<Matiere>(matieres);
 
         }
-        public void setIntitulé(string intitulé)
-        {
-            Intitulé = intitulé;
-        }
-        public UE( List<Matiere> _matieres, int coefficient)
+        
+        public UE( List<Matiere> matieres, int coefficient)
         {
             
-            Matieres = new ReadOnlyCollection<Matiere>(_matieres);
+            Matieres = new ReadOnlyCollection<Matiere>(matieres);
             Coefficient = coefficient;
             
         }
         public UE(string intitulé)
         {
-            this.intitulé = intitulé;
+            setIntitulé( intitulé);
         }
         public UE() { }
 

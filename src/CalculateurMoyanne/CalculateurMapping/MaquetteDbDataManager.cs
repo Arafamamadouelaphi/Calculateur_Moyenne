@@ -1,4 +1,4 @@
-﻿using BSN;
+﻿using Bussness;
 using CalculateurEF.Context;
 using CalculateurEF.Entities;
 using ClassCalculateurMoyenne;
@@ -11,42 +11,54 @@ using System.Threading.Tasks;
 
 namespace CalculateurMapping
 {
-    public class MaquetteDbDataManager : IDataManager<MaquetteModel>
+    public class MaquetteDbDataManager<TContext> : IDataManager<MaquetteModel> where TContext : CalculContext, new()
     {
-        public async Task<bool> Add(MaquetteModel mqt)
+        public MaquetteDbDataManager()
         {
-            bool result = false;
-            using (var context = new CalculContext())
+            using (var context = new TContext())
             {
+                context.Database.EnsureCreated();
+            }
+        }
+        public async Task<bool> Add(MaquetteModel mqt)
+        { //Add mqt
+            bool result = false;
+            using (var context = new TContext())
+            {
+                //context.Database.EnsureCreated();
                 MaquetteEntity entity = new MaquetteEntity
                 {
-                    NomMaquette = mqt.GetNomMaquette(),
+                    NomMaquette = mqt.NomMaquette,
                 };
-                for (int i = 0; i < mqt.BLOCS.Count; i++)
-                {                   
-                    BlocEntity blocentitie = new BlocEntity
-                    {
-                        Nom = mqt.BLOCS[i].Nom
-                    };
-                    context.Maquettes.Add(entity);
-                    await context.SaveChangesAsync();
-                    result = true;
-                }
+                context.Maquettes.Add(entity);
+                context.SaveChanges();
                 return result;
 
             }
-
-
-
-
+            
         }
-
+        //delete maquette
         public async Task<bool> Delete(MaquetteModel maquette)
         {
             bool result = false;
-            using (var context = new CalculContext())
+            using (var context = new TContext())
             {
-                MaquetteEntity entity = context.Maquettes.Find(maquette.GetNomMaquette());
+                MaquetteEntity entity = context.Maquettes.Find(maquette.Id);
+                context.Maquettes.Remove(entity);
+                result = await context.SaveChangesAsync() > 0;
+
+            }
+            return result;
+        }
+
+
+        //delete maquette
+        public async Task<bool> DeleteById(MaquetteModel maquette)
+        {
+            bool result = false;
+            using (var context = new TContext())
+            {
+                MaquetteEntity entity = context.Maquettes.Find(maquette.Id);
                 context.Maquettes.Remove(entity);
                 result = await context.SaveChangesAsync() > 0;
 
@@ -72,21 +84,12 @@ namespace CalculateurMapping
         //   }
         //    return null;
         //  }
-        public async Task<IEnumerable<MaquetteModel>> GetAll()
-        {
-            using (var context = new CalculContext())
-            {
-                List<MaquetteModel> maquettes = new List<MaquetteModel>();
-                foreach (var item in await context.Maquettes.ToListAsync())
-                    maquettes.Add(new MaquetteModel(item.Id, item.NomMaquette));
-                return maquettes;
-            }
-        }
+
 
         public async Task<MaquetteModel> GetDataWithName(string name)
         {
             
-              using (var context = new CalculContext())
+              using (var context = new TContext())
                 {
                     MaquetteModel _mqt = null;
 
@@ -95,26 +98,14 @@ namespace CalculateurMapping
                     return _mqt;
                 }
         }
-            //using (var context = new CalculContext())
-            //{
-            //    return await context.Maquettes.Where(e => e.NomMaquette == name).Select(e => new MaquetteModel
-            //    (
-            //e.Id,
-            //e.NomMaquette,
-            //e.Bloc.Select(u => u.ue).ToList(),
-            //e.Bloc.Select(j => new BlocModel(j.Nom)).ToArray()
-            //    )).FirstOrDefaultAsync();
-            //}
-           
-        
-
+            
         public async Task<bool> Update(MaquetteModel data)
-        {
+        {//update mqt
             bool result = false;
-            using (var context = new CalculContext())
+            using (var context = new TContext())
             {
                 MaquetteEntity entity = context.Maquettes.Find(data.Id);
-                entity.NomMaquette = data.GetNomMaquette();
+                entity.NomMaquette = data.NomMaquette;
                 entity.Bloc = data.BLOCS.Select(j => new BlocEntity
                 {                   
                    Nom=j.Nom,
@@ -122,6 +113,25 @@ namespace CalculateurMapping
                 result = await context.SaveChangesAsync() > 0;
             }
             return result;
+        }
+        //getAll mqt
+        public async Task<List<MaquetteModel>> GetAll()
+        {
+            using (var context = new TContext())
+            {
+                List<MaquetteModel> maquettes = new List<MaquetteModel>();
+                foreach (var item in await context.Maquettes.ToListAsync())
+                {
+                  //  Console.WriteLine(item);
+                    maquettes.Add(new MaquetteModel(item.Id, item.NomMaquette));
+                }
+                return maquettes;
+            }
+        }
+
+        public Task<bool> AddUEBloc(UE data, int blocId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

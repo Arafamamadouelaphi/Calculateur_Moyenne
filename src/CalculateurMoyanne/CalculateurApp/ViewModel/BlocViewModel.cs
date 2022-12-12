@@ -10,14 +10,15 @@ using System.Threading.Tasks;
 
 namespace CalculateurApp.ViewModel
 {
-    [QueryProperty("Nom", "Nom")]
-    public partial class BlocViewModel:ObservableObject
+    
+    public partial class BlocViewModel:ObservableObject,IQueryAttributable
     {
 
         [ObservableProperty]
         string nom;
         public BlocModel blocModel { get; set; }
         public UE ue { get; set; }
+        
         public BlocViewModel()
         {
             Items = new ObservableCollection<UE>();
@@ -50,11 +51,27 @@ namespace CalculateurApp.ViewModel
                 Items.Remove(bl);
             }
         }
+        [RelayCommand]
+        void GEtAllUE(UE bl)
+        {
+            if (Items.Contains(bl))
+            {
+                Items.Remove(bl);
+            }
+        }
+
 
         [RelayCommand]
         async Task GoBack()
         {
             await Shell.Current.GoToAsync("..");
+        }
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            var Maquette = query["maquette"]as MaquetteModel ;
+
+            blocModel.IDMaquetteFrk = Maquette.Id;
         }
     }
 

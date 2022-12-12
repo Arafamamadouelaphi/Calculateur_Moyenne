@@ -1,4 +1,4 @@
-﻿using BSN;
+﻿using Bussness;
 using CalculateurEF.Context;
 using CalculateurEF.Entities;
 using ClassCalculateurMoyenne;
@@ -31,6 +31,11 @@ namespace CalculateurMapping
             }
         }
 
+        public Task<bool> AddUEBloc(UE data, int blocId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> Delete(Matiere mat)
         {
             bool result = false;
@@ -43,7 +48,7 @@ namespace CalculateurMapping
             return result;
         }
 
-        public async Task<IEnumerable<Matiere>> GetAll()
+        public async Task<List<Matiere>> GetAll()
         {
             using (var context = new CalculContext())
             {

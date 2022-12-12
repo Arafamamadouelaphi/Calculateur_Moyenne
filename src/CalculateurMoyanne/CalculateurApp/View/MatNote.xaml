@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CalculateurApp.View.MatNote"
@@ -18,6 +18,7 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Entry                                
              BackgroundColor="AliceBlue"
@@ -31,45 +32,71 @@
              Text="/"
              HorizontalOptions="Center"
              />
-            <Entry          
+            <Entry
+             WidthRequest="100"
              Grid.Column="2"
              Placeholder="SUR"  
              BackgroundColor="AliceBlue"
              VerticalOptions="Start"
             />
-            <Label Text=" MATIERE" Grid.Row="1"  HorizontalOptions="Center" />
+            <Label Text=" MATIERE" Grid.Row="1"  HorizontalOptions="Start" FontSize="Header"/>
             <Entry   
-              WidthRequest="130"
+              WidthRequest="100"
              Grid.Row="2"
-             HorizontalOptions="Center"                        
+             HorizontalOptions="Start"                        
              Placeholder="nom de la matiére"  
              BackgroundColor="AliceBlue"
              VerticalOptions="Start"
             />
-            <Label Text=" coef" Grid.Row="1" Grid.Column="2" HorizontalOptions="Center"/>
+            <Label Text=" coefficient" Grid.Row="1" Grid.Column="2" HorizontalOptions="Center"  FontSize="Header"/>
             <Entry   
-             WidthRequest="150"
+             WidthRequest="100"
              Grid.Row="2"
              Grid.Column="2"
              Placeholder="COEFFICIENT"
              BackgroundColor="AliceBlue"
              VerticalOptions="Start"
-             />
+             
+             /> 
+             <Button Grid.Row="2" Text="Annuler" HorizontalOptions="Start" VerticalOptions="Start" Grid.Column="3" ></Button>
+             <Button  Grid.Row="2" Text="Ajouter" HorizontalOptions="Center" VerticalOptions="Start"  Grid.Column="4" WidthRequest="90"></Button>
+
+
             <CollectionView   Grid.ColumnSpan="2" ItemsSource="{Binding Items}" SelectionMode="None" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-
-
-
+                      <Grid Padding="5" ColumnSpacing="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="1"
+                                Grid.Column="0"
+                                Text="nom"                            
+                                FontAttributes="None"
+                                VerticalOptions="End"/>
+                                <Label Grid.Column="3"
+                               Grid.Row="1"      
+                               Text="coef"
+                               TextColor="Blue"
+                               FontAttributes="Bold" />
+                      </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
 
-            <Button Text="Annuler" HorizontalOptions="Start" VerticalOptions="Center"  WidthRequest="110" Grid.Column="0" ></Button>
-            <Button Text="Ajouter" HorizontalOptions="Start" VerticalOptions="Center"  Grid.Column="2" WidthRequest="110"></Button>
-
-
+           
 
 
 

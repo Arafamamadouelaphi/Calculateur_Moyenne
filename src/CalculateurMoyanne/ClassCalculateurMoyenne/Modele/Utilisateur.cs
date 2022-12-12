@@ -8,8 +8,10 @@ namespace ClassCalculateurMoyenne
 {
     public class Utilisateur
     {
-        public int id { get; set; }
-        public string Prenom { get; set; }
+        public int id { get;private  set; }
+        public string Prenom { get;private  set; }
+       
+
     }
 
 }
