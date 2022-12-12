@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:CalculateurApp.ViewModel"
+             x:DataType="viewmodel:BlocViewModel"             
+             x:Class="CalculateurApp.View.EXE"
+             Title="Maquette">
+<Grid RowDefinitions="100 ,Auto,*"
+         ColumnDefinitions=".75*,.25*"
+         Padding="2"
+         RowSpacing="4"
+         ColumnSpacing="4">
+
+        <Entry Placeholder="Ajout de BLOC DANS LA MAQUETTE"
+               Grid.Row="1" BackgroundColor="AliceBlue"
+               Text="{Binding blocModel.Nom }"
+               TextColor="Black"
+             />
+         <Button
+            
+            Text="Modifier"
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            WidthRequest="100"
+            >
+            <!--Command="{Binding AddUEBlocCommand}"-->
+        </Button>
+         <!--<Label Text="Liste des blocs" Grid.Row="2" Grid.ColumnSpan="2" FontSize="Header" HorizontalOptions="Center" TextDecorations="Underline" TextColor="Black" FontAttributes="Bold, Italic" ></Label>
+        <CollectionView Grid.Row="3" Grid.ColumnSpan="2" ItemsSource="{Binding Items}" SelectionMode="None" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type  model:BlocModel }">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete" 
+                                    BackgroundColor="Red"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MaquetteViewModel}}, Path=DeleteCommand}"
+                                    CommandParameter="{Binding .}"
+                                />
+                                <SwipeItem  Text="Update" BackgroundColor="AliceBlue">
+                                </SwipeItem>
+                                <SwipeItem Text="Ajout de UE" BackgroundColor="Beige"></SwipeItem>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Grid Padding="0">
+                            <Frame Grid.Row="1">
+                                <Frame.GestureRecognizers >
+                                    <TapGestureRecognizer  
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type  viewmodel:MaquetteViewModel}}, Path=TapCommand}"
+                                           CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                                <Label Text="{Binding Nom}" 
+                                       FontSize="10" TextColor="Black"
+                                />
+                            </Frame>
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView >-->
+    </Grid>
+</ContentPage>
+
+
+
