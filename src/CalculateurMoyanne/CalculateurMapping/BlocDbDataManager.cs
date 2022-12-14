@@ -57,6 +57,16 @@ namespace CalculateurMapping
             }
             return true;
         }
+        public async Task<bool>GetByMaquette(MaquetteModel maquette) {
+
+           
+            using (var context = new TContext())
+            {
+                // 
+            }
+            return true;
+        }
+
 
         public async Task<List<BlocModel>> GetAll()
         { //getAll

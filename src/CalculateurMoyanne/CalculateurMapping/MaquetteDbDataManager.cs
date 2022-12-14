@@ -51,6 +51,7 @@ namespace CalculateurMapping
                     BlocEntity entity = new BlocEntity
                     {
                         Id = blocModel.Id,
+                        Nom = blocModel.Nom,
                         MaquetteEntity = new MaquetteEntity
                         {
                             Id = mqt.Id,
@@ -62,10 +63,11 @@ namespace CalculateurMapping
                     if (!data.Bloc.Contains(entity))
                     {
                         data.Bloc.Add(entity);
-                        await context.Bloc.AddAsync(entity); 
-                    //    context.Maquettes.Update(data);
-                    
-                      await  context.SaveChangesAsync();
+                     // await context.Maquettes.AddAsync(data);
+                       // Console.WriteLine("jyij");
+                   context.Maquettes.Update(data);
+
+                        result = await  context.SaveChangesAsync() > 0;
                     }
                 }
                 //context.Database.EnsureCreated();

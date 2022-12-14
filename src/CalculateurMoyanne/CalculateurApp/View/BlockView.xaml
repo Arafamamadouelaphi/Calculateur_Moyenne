@@ -14,7 +14,7 @@
          ColumnSpacing="4">
         <Entry Placeholder="Ajout de BLOC DANS LA MAQUETTE"
                Grid.Row="1" BackgroundColor="AliceBlue"
-               Text="{Binding blocModel.Nom }"
+               Text=""
                TextColor="Black"
              />
         <Button x:Name="Afer" Text="Modifier"  Grid.Row="1" Grid.Column="1" HorizontalOptions="End" VerticalOptions="End" WidthRequest="80" Command="{Binding GetAllBlocCommand}">  </Button>
