@@ -5,6 +5,7 @@ using ClassCalculateurMoyenne;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,10 +22,13 @@ namespace CalculateurMapping
                 BlocEntity entity = new BlocEntity
                 {
                     Nom = blc.GetNom(),
-                    IDMaquetteFrk=blc.IDMaquetteFrk
+                   // IDMaquetteFrk=blc.IDMaquetteFrk
                 };              
                     context.Bloc.Add(entity);
-                    context.SaveChanges();
+
+                try { await context.SaveChangesAsync(); }
+                catch (Exception e) { Debug.WriteLine("ex"); }
+                    //context.SaveChanges();
                     resultat = true;
             }
             return resultat;

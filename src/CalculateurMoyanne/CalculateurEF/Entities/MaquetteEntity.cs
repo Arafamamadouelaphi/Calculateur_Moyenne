@@ -13,6 +13,7 @@ namespace CalculateurEF.Entities
         #region Propriétés
         public int Id { get; set; }
         public string NomMaquette { get; set; }
+
         public ICollection<BlocEntity> Bloc { get; set; }= new List<BlocEntity>();
        // public ICollection<UEentity> UeEntityId { get; set; } = new List<UEentity>();
 

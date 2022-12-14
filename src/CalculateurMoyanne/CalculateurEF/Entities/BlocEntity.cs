@@ -13,7 +13,7 @@ namespace CalculateurEF.Entities
         public int Id { get; set; }
         public string Nom { get; set; }
         public ICollection<UEentity> UeEntityId { get; set; } = new List<UEentity>();
-
+       
         public int IDMaquetteFrk
         {
             get; set;
@@ -23,6 +23,8 @@ namespace CalculateurEF.Entities
         {
             get; set;
         }
+
+       
 
         
 

@@ -8,11 +8,16 @@ namespace CalculateurApp.View;
 
 public partial class BlockView : ContentPage
 {
-    
-	public BlockView()
+    public Manager Manager => (Application.Current as App).manager;
+
+
+    public BlockView()
 	{
 		InitializeComponent();
-        BindingContext = new MaquetteViewModel ();
+        var mvm = new MaquetteViewModel();
+        mvm.manager = Manager;
+        mvm.init1();
+        BindingContext = mvm;
     }
     private async void Aer(object sender, EventArgs e)
     {

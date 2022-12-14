@@ -1,6 +1,7 @@
 ﻿using Bussness;
 using CalculateurApp.View;
 using CalculateurEF.Context;
+using CalculateurEF;
 using CalculateurMapping;
 using ClassCalculateurMoyenne;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -8,6 +9,7 @@ using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -20,42 +22,84 @@ namespace CalculateurApp.ViewModel
        
         public BlocModel blocModel { get; set; }
        // public ReadOnlyObservableCollection<BlocModel>lst { get; set; }
-        public Manager manager;
+        public Manager manager { get; set; }
+
 
         public MaquetteViewModel()
         {
+            //Items = new ObservableCollection<BlocModel>();
+
+            //try
+            //{
+            //    foreach (var BB in manager.GetAllBloc().Result)
+            //        Items.Add(BB);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Debug.WriteLine(ex);
+            //}
+           
+
+            //blocModel = new BlocModel();
+        }
+        public void init1()
+        {
             Items = new ObservableCollection<BlocModel>();
-            //foreach (var BB in manager.GetAllBloc().Result)
-            //    Items.Add(BB);
+
+            try
+            {
+                foreach (var BB in manager.GetAllBloc().Result)
+                    Items.Add(BB);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+
             blocModel = new BlocModel();
         }
         [ObservableProperty]
         ObservableCollection<BlocModel> items;
         [ObservableProperty]
         ObservableCollection<BlocModel> lstblc=new ObservableCollection<BlocModel>();
-
         [ObservableProperty]
         string nom;
-       
-        [RelayCommand]
-        void Add()
+
+    [RelayCommand]
+        async void Add()
         {
-            Manager blocDbDataManager = new Manager(new BlocDbDataManager<CalculDbMaui>());
+           // Manager blocDbDataManager = new Manager(new BlocDbDataManager<CalculDbMaui>());
+         
             if (string.IsNullOrEmpty(blocModel.Nom))
                 return;
-            BlocModel u = new BlocModel(blocModel.Nom);        
-            Items.Add(u);
-            blocDbDataManager.AddBloc(blocModel);
-            blocModel.Nom = string.Empty; 
+            //BlocModel u = blocModel;
+            //MaquetteModel u = new MaquetteModel();
+            Items.Add(blocModel);
+          await  manager.AddBlocmaquette(manager.SelectedMaquetteModel, blocModel);
+
         }
          [RelayCommand]
-        void Delete(BlocModel bl)
+        async void Delete(BlocModel bl)
         
         {
             if (Items.Contains(bl))
             {
                 Items.Remove(bl);
+                await manager.DeleteBloc(bl);
+                var o = await manager.GetAllBloc();
             }
+
+           
+            //if (Items.Contains(model))
+            //{
+            //    Items.Remove(model);
+            //    await manager.Deletemqt(model);
+
+            //    var v = await manager.GetAllMaquette();
+            //    Console.WriteLine(v);
+
+            //}
         }
         
         [RelayCommand]
@@ -73,7 +117,7 @@ namespace CalculateurApp.ViewModel
         [RelayCommand]
         async Task Tap(String s)
         {
-            await Shell.Current.GoToAsync($"{nameof(BlocModel)}?Nom={s}");
+            await Shell.Current.GoToAsync($"{nameof(UE)}?Nom={s}");
 
         }
         [RelayCommand]

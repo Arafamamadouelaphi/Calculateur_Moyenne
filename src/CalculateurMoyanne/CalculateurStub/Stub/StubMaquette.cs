@@ -9,7 +9,7 @@ using Bussness;
 
 namespace StubCalculateur.Stub
 {
-    public class StubMaquette: IDataManager<MaquetteModel>
+    public class StubMaquette: IMaquetteDbManager
     {
         private List<BlocModel> listb = new List<BlocModel>();
         public List<UE> ues = new List<UE>();
@@ -82,6 +82,11 @@ namespace StubCalculateur.Stub
         }
 
         public Task<bool> AddUEBloc(UE data, int blocId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> AddBlocmaquette(MaquetteModel mqt, BlocModel blocModel)
         {
             throw new NotImplementedException();
         }

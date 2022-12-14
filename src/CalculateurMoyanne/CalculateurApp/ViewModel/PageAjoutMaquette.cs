@@ -13,18 +13,23 @@ namespace CalculateurApp.ViewModel
     public partial class PageAjoutMaquette : ObservableObject
     {
         public MaquetteModel maquette { get; set; }
-        public Manager manager;
+        public Manager manager { get; set; }
 
 
         public PageAjoutMaquette()
         {
-            manager = new Manager(new MaquetteDbDataManager<CalculDbMaui>());
+            //manager = new Manager(new MaquetteDbDataManager<CalculDbMaui>());
 
+            
+
+        }
+
+        public void Init()
+        {
             Items = new ObservableCollection<MaquetteModel>();
-            foreach(var mm in manager.GetAllMaquette().Result)
-           Items.Add( mm);
+            foreach (var mm in manager.GetAllMaquette().Result)
+                Items.Add(mm);
             maquette = new MaquetteModel();
-
         }
 
         [ObservableProperty]
@@ -38,13 +43,13 @@ namespace CalculateurApp.ViewModel
         [RelayCommand]
         async void Add()
         {
-            Manager maquetteDbDataManager = new Manager(new MaquetteDbDataManager<CalculDbMaui>());
+            //Manager maquetteDbDataManager = new Manager(new MaquetteDbDataManager<CalculDbMaui>());
 
             if (string.IsNullOrEmpty(NomMaquette))
                 return;
             MaquetteModel u = maquette;
             Items.Add(u);
-            await maquetteDbDataManager.AddMaquette(maquette);
+            await manager.AddMaquette(maquette);
             //maquette.NomMaquette = string.Empty;
            
         }
@@ -69,18 +74,19 @@ namespace CalculateurApp.ViewModel
         [RelayCommand]
         async void GetAllMaquette()
         {
-            Manager maquetteDbDataManager = new Manager(new MaquetteDbDataManager<CalculDbMaui>());
+            //Manager maquetteDbDataManager = new Manager(new MaquetteDbDataManager<CalculDbMaui>());
 
-            await maquetteDbDataManager.GetAllMaquette();
+            await manager.GetAllMaquette();
         }
         [RelayCommand]
-        async Task GoBack(string maquetteName)
+        async Task Tap(MaquetteModel maquetteName)
         {
-            var maquette = manager.GetMaquetteByName(maquetteName);
+            manager.SelectedMaquetteModel = maquetteName;
+            var maquette = manager.GetMaquetteByName(maquetteName.NomMaquette);
 
             var parametre = new Dictionary<string, Object>
             {
-                {"maquette",maquette }
+                {"maquette",maquette}
             };
 
             await Shell.Current.GoToAsync($"{nameof(BlockView)}",parametre);

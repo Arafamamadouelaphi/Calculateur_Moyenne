@@ -34,9 +34,8 @@
             Grid.Column="2"
             HorizontalOptions="End"
             VerticalOptions="End"
-            BackgroundColor="AliceBlue"
             WidthRequest="85"></Button>
-        <Button
+        <!--<Button
             Command=" {Binding GetAllMaquetteCommand}"
             Text="afficher"
              Grid.Row="2"
@@ -46,7 +45,7 @@
             WidthRequest="100">
       
 
-        </Button>
+        </Button>-->
         <CollectionView Grid.Row="3" Grid.ColumnSpan="1" ItemsSource="{Binding Items}" SelectionMode="Multiple" BackgroundColor="White">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type  model:MaquetteModel }">
@@ -70,7 +69,7 @@
                             <Frame Grid.Row="1">
                                 <Frame.GestureRecognizers >
                                     <TapGestureRecognizer  
-                                           Command="{Binding Source={RelativeSource AncestorType={x:Type  viewmodel:MaquetteViewModel}}, Path=GoBackCommand}"
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type  viewmodel:PageAjoutMaquette}}, Path=TapCommand}"
                                            CommandParameter="{Binding .}" />
                                 </Frame.GestureRecognizers>
                                 <Label Text="{Binding NomMaquette}" 

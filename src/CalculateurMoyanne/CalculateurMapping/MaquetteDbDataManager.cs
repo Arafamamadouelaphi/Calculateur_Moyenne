@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CalculateurMapping
 {
-    public class MaquetteDbDataManager<TContext> : IDataManager<MaquetteModel> where TContext : CalculContext, new()
+    public class MaquetteDbDataManager<TContext> : IMaquetteDbManager where TContext : CalculContext, new()
     {
         public MaquetteDbDataManager()
         {
@@ -37,6 +37,52 @@ namespace CalculateurMapping
             }
             
         }
+        //ajt de bloc
+
+        public async Task<bool> AddBlocmaquette(MaquetteModel mqt,BlocModel blocModel)
+        { //Add mqt
+
+            bool result = false;
+            using (var context = new TContext())
+            {
+                MaquetteEntity data = await context.Maquettes.FindAsync(mqt.Id);
+                if (data != null)
+                {
+                    BlocEntity entity = new BlocEntity
+                    {
+                        Id = blocModel.Id,
+                        MaquetteEntity = new MaquetteEntity
+                        {
+                            Id = mqt.Id,
+                            NomMaquette = mqt.NomMaquette
+                        },
+
+                    };
+
+                    if (!data.Bloc.Contains(entity))
+                    {
+                        data.Bloc.Add(entity);
+                        await context.Bloc.AddAsync(entity); 
+                    //    context.Maquettes.Update(data);
+                    
+                      await  context.SaveChangesAsync();
+                    }
+                }
+                //context.Database.EnsureCreated();
+               
+                return result;
+
+            }
+
+
+
+        }
+
+
+
+
+
+
         //delete maquette
         public async Task<bool> Delete(MaquetteModel maquette)
         {
@@ -120,10 +166,10 @@ namespace CalculateurMapping
             using (var context = new TContext())
             {
                 List<MaquetteModel> maquettes = new List<MaquetteModel>();
-                foreach (var item in await context.Maquettes.ToListAsync())
+                foreach (var item in context.Maquettes.Include(m => m.Bloc)) 
                 {
                   //  Console.WriteLine(item);
-                    maquettes.Add(new MaquetteModel(item.Id, item.NomMaquette));
+                    maquettes.Add(new MaquetteModel(item.Id, item.NomMaquette,new List<UE>(),item.Bloc.Select(b=>new BlocModel(b.Nom)).ToList()));
                 }
                 return maquettes;
             }

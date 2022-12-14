@@ -16,5 +16,6 @@ namespace Bussness
         Task<Data> GetDataWithName(string name);
         Task<List<Data>> GetAll();
         Task<bool> AddUEBloc(UE data, int blocId);
+
     }
 }

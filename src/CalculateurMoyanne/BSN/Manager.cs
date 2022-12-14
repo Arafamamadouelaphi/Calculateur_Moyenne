@@ -20,10 +20,12 @@ namespace Bussness
         public ReadOnlyCollection<Matiere> matiere { get; private set; }
         private readonly List<Matiere> matieres = new();
 
+        public MaquetteModel SelectedMaquetteModel { get; set; }
+
 
 
         public IDataManager<MaquetteModel> MaquetteDbDataManager => maquetteDbDataManager;
-        private readonly IDataManager<MaquetteModel> maquetteDbDataManager;
+        private readonly IMaquetteDbManager maquetteDbDataManager;
         public IDataManager<BlocModel> BlocDbDataManager => blocDbDataManager;
         private readonly IDataManager<BlocModel> blocDbDataManager;
         public IDataManager<UE> UeDbDataManager => ueDbDataManager;
@@ -36,7 +38,7 @@ namespace Bussness
 
      #region Constructeurs
 
-        public Manager(IDataManager<MaquetteModel> maquettemanager)
+        public Manager(IMaquetteDbManager maquettemanager)
         {
            this.maquetteDbDataManager = maquettemanager;
             maquette = new ReadOnlyCollection<MaquetteModel>(maquettes);
@@ -58,7 +60,7 @@ namespace Bussness
             matiere = new ReadOnlyCollection<Matiere>(matieres);
         }
 
-        public Manager(IDataManager<Matiere> matiereManager,IDataManager<UE> UeManager, IDataManager<BlocModel> blocmanager, IDataManager<MaquetteModel> maquettemanager)
+        public Manager(IDataManager<Matiere> matiereManager,IDataManager<UE> UeManager, IDataManager<BlocModel> blocmanager, IMaquetteDbManager maquettemanager)
         {
         this.matiereDbDataManager = matiereManager;
         matiere = new ReadOnlyCollection<Matiere>(matieres);
@@ -125,6 +127,17 @@ namespace Bussness
 
             return blocDbDataManager.Add(bloc);
         }
+        public async Task<bool> AddBlocmaquette(MaquetteModel mqt, BlocModel blocModel)
+        {
+            var response = maquetteDbDataManager == null;
+            if (response)
+            {
+                return false;
+            }
+
+            return await maquetteDbDataManager.AddBlocmaquette(mqt, blocModel);
+        }
+
         //public Task<bool> Adddansbloc(BlocModel bloc)
         //{
         //    if (blocDbDataManager == null)
