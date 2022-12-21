@@ -84,22 +84,19 @@
 	  <MauiXaml Update="View\MaquettePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\MatNote.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\PageUe.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="View\Start.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\UEPage1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\AjtMaquette.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>
 	  <MauiXaml Update="View\%28%24&quot;{nameof%28BlocModel%29}%3FNom={s}&quot;%29%3B.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="View\UeView.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="View\MatiereView.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>
 	</ItemGroup>
@@ -109,11 +106,13 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\dotnet_bot.svg" />
+	  <BundleResource Include="Resources\Images\mamoyene.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Microsoft.EntityFrameworkCore" />
 	  <None Remove="Microsoft.EntityFrameworkCore.Tools" />
 	  <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
 	  <None Remove="sqlite-net-pcl" />
+	  <None Remove="Resources\Images\mamoyene.png" />
 	</ItemGroup>
 </Project>

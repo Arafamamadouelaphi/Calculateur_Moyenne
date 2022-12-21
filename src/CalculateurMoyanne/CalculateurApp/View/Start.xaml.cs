@@ -8,7 +8,7 @@ public partial class Start : TabbedPage
 	public Start()
 	{
 		InitializeComponent();
-        BindingContext = new BlocViewModel();
+        //BindingContext = new BlocViewModel();
     }
     public async void ok(object sender, EventArgs e)
     {

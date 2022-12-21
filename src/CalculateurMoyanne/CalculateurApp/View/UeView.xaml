@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:CalculateurApp.ViewModel"
+             x:DataType="viewmodel:BlocViewModel"
+             x:Class="CalculateurApp.View.UeView"
+             xmlns:model="clr-namespace:ClassCalculateurMoyenne;assembly=ClassCalculateurMoyenne" 
+             Title="UeView"
+             Loaded="ContentPage_Loaded">
+    <Grid RowDefinitions="100 ,Auto,*"
+         ColumnDefinitions=".75*,.25*"
+         Padding="10"
+         RowSpacing="10"
+         ColumnSpacing="4"
+       
+         >
+
+        <Entry Placeholder="Ajout de UE "
+               Grid.Row="1"
+               BackgroundColor="AliceBlue"
+               Text="{Binding Intitulé}"
+               TextColor="Black"
+               WidthRequest="150"
+               HorizontalOptions="Start"
+               VerticalOptions="StartAndExpand"
+             />
+       <Entry
+                Placeholder="coef"              
+               WidthRequest="60"
+                Grid.Row="1"
+             
+                HorizontalOptions="Center"
+                VerticalOptions="Center"               
+                BackgroundColor="AliceBlue"
+                Text="{Binding ue.Coefficient}">
+            </Entry>
+      <Button
+            Command="{Binding AddCommand}"
+            Text="Ajouter"
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalOptions="End"
+            VerticalOptions="Center"
+            >
+        </Button>
+
+        <CollectionView Grid.Row="3" Grid.ColumnSpan="2" ItemsSource="{Binding Items}" SelectionMode="None" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type  model:UE }">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete" 
+                                    BackgroundColor="Red"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BlocViewModel}}, Path=DeleteCommand}"
+                                    CommandParameter="{Binding .}"
+                                />
+                                <SwipeItem Text="AFFICHER" BackgroundColor="BlueViolet"></SwipeItem>                                
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Grid Padding="0">
+                            <Frame Grid.Row="1">
+                                <Frame.GestureRecognizers >
+                                    <TapGestureRecognizer  
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type  viewmodel:BlocViewModel}}, Path=TappCommand}"
+                                           CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                        <Grid Padding="10" ColumnSpacing="40">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="1"
+                             Grid.Column="0"
+                             Text="{Binding Intitulé}"                            
+                             FontAttributes="None"
+                             VerticalOptions="End"/>
+                                <Label Grid.Column="3"
+                             Grid.Row="1"      
+                             Text="{Binding Coefficient}"
+                             TextColor="Blue"
+                             FontAttributes="Bold" />
+
+                        </Grid>
+                        </Frame>
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView >
+    </Grid>
+</ContentPage>

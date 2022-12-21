@@ -46,7 +46,7 @@
       
 
         </Button>-->
-        <CollectionView Grid.Row="3" Grid.ColumnSpan="1" ItemsSource="{Binding Items}" SelectionMode="Multiple" BackgroundColor="White">
+        <CollectionView Grid.Row="3" Grid.ColumnSpan="1" ItemsSource="{Binding Items}" SelectionMode="None" BackgroundColor="White">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type  model:MaquetteModel }">
                     <SwipeView>

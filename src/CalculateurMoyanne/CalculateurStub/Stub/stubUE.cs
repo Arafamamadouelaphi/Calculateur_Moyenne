@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StubCalculateur.Stub
 {
-    public class stubUE : IDataManager<UE>
+    public class stubUE : IUeDbDataManager
     {
         private List<UE> listUE = new List<UE>();
         private List<Matiere> mat = new List<Matiere>();
@@ -78,6 +78,16 @@ namespace StubCalculateur.Stub
         }
 
         public Task<bool> AddUEBloc(UE data, int blocId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<UE>> GetAllUEBloc(BlocModel bloc)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> AddMatiereUe(UE uE, Matiere matiere)
         {
             throw new NotImplementedException();
         }

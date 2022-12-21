@@ -17,7 +17,7 @@ namespace TestCalculateurMoyanne.LesTests
         [Fact]
         public void Test()
         {
-            Assert.NotNull(u);
+             Assert.NotNull(u);
             Assert.Equal("f", u.Intitulé);
             Assert.NotEqual("oo", u.Intitulé);
         }

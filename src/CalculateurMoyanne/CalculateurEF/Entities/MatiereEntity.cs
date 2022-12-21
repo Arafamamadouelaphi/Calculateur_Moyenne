@@ -10,9 +10,10 @@ namespace CalculateurEF.Entities
     public class MatiereEntity
     {
         public string Nommatiere { get; set; }
-        public long id { get; set; }
+        public long Id { get; set; }
         public int Note { get; set; }
         public int Coef { get; set; }
+        
         public long IDUEForeignKey
         {
             get; set;
@@ -22,6 +23,8 @@ namespace CalculateurEF.Entities
         {
             get; set;
         }
+
+
 
     }
 }

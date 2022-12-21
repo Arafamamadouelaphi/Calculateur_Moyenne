@@ -4,6 +4,7 @@ using CalculateurEF.Entities;
 using ClassCalculateurMoyenne;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CalculateurMapping
 {
-    public class BlocDbDataManager<TContext>: IDataManager<BlocModel> where TContext :CalculContext,new()
+    public class BlocDbDataManager<TContext>: IBlocDbManager  where TContext :CalculContext,new()
     {//ajout de bloc 
         public async Task<bool> Add(BlocModel blc)
         {
@@ -57,14 +58,28 @@ namespace CalculateurMapping
             }
             return true;
         }
-        public async Task<bool>GetByMaquette(MaquetteModel maquette) {
+        public async Task<IEnumerable<BlocModel>>GetByMaquette(MaquetteModel maquetteModel) {
 
-           
+            List<BlocModel> blocModels = new List<BlocModel>();
             using (var context = new TContext())
             {
-                // 
+
+                var maq = await context.Maquettes.Include(m => m.Bloc)
+                                       .SingleOrDefaultAsync(x => x.Id == maquetteModel.Id);
+                if (maq == null) return new List<BlocModel>();
+
+                foreach (var e in maq.Bloc)
+                {
+                    blocModels.Add(new BlocModel
+                    {
+                        Id = e.Id,
+                        Nom = e.Nom,
+                        IDMaquetteFrk = e.IDMaquetteFrk,
+                    });
+                }
+                return blocModels.AsEnumerable<BlocModel>();
             }
-            return true;
+           
         }
 
 
@@ -81,24 +96,25 @@ namespace CalculateurMapping
                 return temp;
             }
         }//getUEdansblc
-        public async Task<List<UE>> GetAllUEBloc(int id)
-        {
-            List<UE> ls=new List<UE>();
-            using (var context = new TContext())
-            {
-                var temp =  context.Bloc.Where(x=>x.Id==id).Select(e => e.UeEntityId).ToList();
-                foreach (var item in temp)
-                {
-                    foreach (var i in item)
-                    {
-                        UE ue = new UE(i.Id, i.Coefficient, i.intitulé, i.mat.Select(m => new Matiere(m.id, m.Note, m.Nommatiere, m.Coef)).ToArray());
-                        ls.Add(ue);
-                    }
-                }
+        //public async Task<List<UE>> GetAllUEBloc(int id)
+        //{
+        //    List<UE> ls=new List<UE>();
+        //    using (var context = new TContext())
+        //    {
+        //        var temp =  context.Bloc.Where(x=>x.Id==id).Select(e => e.UeEntityId).ToList();
+        //        foreach (var item in temp)
+        //        {
+        //            foreach (var i in item)
+        //            {
+        //                UE ue = new UE(i.Id, i.Coefficient, i.intitulé, i.mat.Select(m => new Matiere(m.id, m.Note, m.Nommatiere, m.Coef)).ToArray());
+        //                ls.Add(ue);
+        //            }
+        //        }
 
-                return ls;
-            }
-        }
+        //        return ls;
+        //    }
+
+        //}
 
         public async Task<BlocModel> GetDataWithName(string name)
         {
@@ -129,21 +145,53 @@ namespace CalculateurMapping
             return result;
         }
 
-        public async Task<bool> AddUEBloc(UE data,int blocId)
-        {//addUedansbloc
-            bool resultat = false;
+        //public async Task<bool> AddUEBloc(UE data,int blocId)
+        //{//addUedansbloc
+        //    bool resultat = false;
+        //    using (var context = new TContext())
+        //    {
+        //        UEentity entity = new UEentity
+        //        {
+        //            intitulé = data.Intitulé,
+        //            IDForeignKey = blocId,
+        //        };
+        //        context.Ue.Add(entity);
+        //        await context.SaveChangesAsync();
+        //        resultat = true;
+        //        return resultat;
+        //    }
+        //}
+        public async Task<bool> AddUeBloc(BlocModel bloc, UE uE)
+        {
+            bool result = false;
             using (var context = new TContext())
             {
-                UEentity entity = new UEentity
+                BlocEntity data = await context.Bloc.FindAsync(bloc.Id);
+                if (data != null)
                 {
-                    intitulé = data.Intitulé,
-                    IDForeignKey = blocId,
-                };
-                context.Ue.Add(entity);
-                await context.SaveChangesAsync();
-                resultat = true;
-                return resultat;
+                    UEentity entity = new UEentity
+                    {
+                        Id=uE.Id,
+                        intitulé = uE.Intitulé,
+                        Coefficient=uE.Coefficient,
+                        BlocEntity = new BlocEntity
+                        {
+                            Id = bloc.Id,
+                            Nom = bloc.Nom
+                        },
+                    };
+                    if (!data.UeEntityId.Contains(entity))
+                    {
+                        data.UeEntityId.Add(entity);
+                        context.Bloc.Update(data);
+                        result = await context.SaveChangesAsync() > 0;
+                    }
+                }
+                return result;
             }
+
         }
+
+       
     }
 }

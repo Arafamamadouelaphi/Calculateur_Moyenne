@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace StubCalculateur.Stub
 {
-    public class StubBloc: IDataManager<BlocModel>
+    public class StubBloc: IBlocDbManager
     {
         private List<BlocModel> listb = new List<BlocModel>();
         public List<UE> ue = new List<UE>();
@@ -83,6 +83,16 @@ namespace StubCalculateur.Stub
         }
 
         public Task<bool> AddUEBloc(UE data, int blocId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<BlocModel>> GetByMaquette(MaquetteModel maquetteModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> AddUeBloc(BlocModel bloc, UE uE)
         {
             throw new NotImplementedException();
         }

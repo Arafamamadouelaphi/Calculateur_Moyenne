@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CalculateurApp.View.MatiereView"
+              xmlns:viewmodel="clr-namespace:CalculateurApp.ViewModel"
+             x:DataType="viewmodel:UeViewModel"
+              xmlns:model="clr-namespace:ClassCalculateurMoyenne;assembly=ClassCalculateurMoyenne" 
+             Title="MatiereView"
+             Loaded="ContentPage_Loaded">
+    <Grid RowDefinitions="100 ,Auto,*"
+         ColumnDefinitions=".225*,.225*"
+         Padding="10"
+         RowSpacing="10"
+         ColumnSpacing="4"
+       
+         >
+
+      <Label Text=" Note:" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="150" ></Label>
+        <Entry  Text="{Binding ma.Note}"  Placeholder="note"  HorizontalOptions="End"
+                VerticalOptions="Center"  WidthRequest="60"  ></Entry>
+        <Label Grid.Column="2" Text="/" HorizontalOptions="Center"
+                VerticalOptions="Center"  WidthRequest="60"></Label>
+        <Label Grid.Column="3" Text="20"  HorizontalOptions="End"
+            VerticalOptions="Center"></Label>
+        <Label Text="coefficent" Grid.Row="1" 
+                VerticalOptions="Center"  HorizontalOptions="Center" WidthRequest="150"></Label>
+        <Entry Grid.Row="1" Text="{Binding ma.Coef}" 
+                VerticalOptions="Center" HorizontalOptions="End" WidthRequest="60" ></Entry>
+       
+        <Label Text="Nom de la Matiere" Grid.Row="1" Grid.Column="2" HorizontalOptions="Center"></Label>
+           <Entry Grid.Column="3" Placeholder="nom" Grid.Row="1" Text="{Binding Nommatiere}" HorizontalOptions="End">
+           </Entry>
+            <Button
+            Command="{Binding AddCommand}"
+            Text="ajouter"
+            Grid.Row="2"
+            Grid.Column="4"
+            HorizontalOptions="End"
+            VerticalOptions="Start"
+            WidthRequest="100"
+            >
+        </Button> 
+        <CollectionView Grid.Row="2"   ItemsSource="{Binding Items}" SelectionMode="None" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type  model:Matiere }">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete" 
+                                    BackgroundColor="Red"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:UeViewModel}}, Path=DeleteCommand}"
+                                    CommandParameter="{Binding .}"
+                                />
+                                <SwipeItem Text="AFFICHER" BackgroundColor="BlueViolet"></SwipeItem>                                
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Grid Padding="0">
+                            <Frame Grid.Row="1">
+                        <Grid Padding="10" ColumnSpacing="40">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                             <Label Grid.Row="1"
+                             Grid.Column="0"
+                             Text="{Binding Nommatiere}"                            
+                             FontAttributes="None"
+                             VerticalOptions="End"/>
+                             <Label Grid.Column="2"
+                             Grid.Row="1"      
+                             Text="{Binding Note}"
+                             TextColor="Blue"
+                             FontAttributes="Bold" />
+                             <Label Grid.Column="3"
+                             Grid.Row="1"      
+                             Text="20"
+                             TextColor="Blue"
+                             FontAttributes="Bold" />
+                             <Label Grid.Column="4"
+                             Grid.Row="1"      
+                             Text="{Binding Coef}"
+                             TextColor="Blue"
+                             FontAttributes="Bold" />
+                        </Grid>
+                        </Frame>
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView >
+        </Grid>
+</ContentPage>

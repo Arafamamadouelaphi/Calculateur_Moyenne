@@ -10,7 +10,6 @@ namespace ClassCalculateurMoyenne
         [ObservableProperty]
         private int coefficient;
         [ObservableProperty]
-
         private string intitulé;
 
         public int IDForeignKey { get;  set; }
@@ -67,7 +66,7 @@ namespace ClassCalculateurMoyenne
 
         public bool Equals(UE other)
         {
-            return matieres.Equals(other.matieres);
+            return Intitulé.Equals(other.GetIntitulé());
         }
         public override bool Equals(object obj)
         {
@@ -78,7 +77,7 @@ namespace ClassCalculateurMoyenne
         }
         public override int GetHashCode()
         {
-            return Matieres.GetHashCode();
+            return intitulé.GetHashCode();
         }
         public IEnumerable<Matiere> AjouterMatiere(params Matiere[] matieres)
         {
@@ -108,11 +107,8 @@ namespace ClassCalculateurMoyenne
         {
             matieres.Remove(matiere);
         }
-        //public void ajtCoef(int Coefficient)
-        //{
-        //    UE.Add(Coefficient);
-        //}
+        
 
-
+       
     }
 }

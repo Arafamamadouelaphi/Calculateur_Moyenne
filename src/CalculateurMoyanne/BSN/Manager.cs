@@ -21,17 +21,19 @@ namespace Bussness
         private readonly List<Matiere> matieres = new();
 
         public MaquetteModel SelectedMaquetteModel { get; set; }
+        public BlocModel SelecteBlocModel { get; set; }
+        public UE SelectedUe { get; set; }
 
 
 
         public IDataManager<MaquetteModel> MaquetteDbDataManager => maquetteDbDataManager;
         private readonly IMaquetteDbManager maquetteDbDataManager;
-        public IDataManager<BlocModel> BlocDbDataManager => blocDbDataManager;
-        private readonly IDataManager<BlocModel> blocDbDataManager;
-        public IDataManager<UE> UeDbDataManager => ueDbDataManager;
-        private readonly IDataManager<UE> ueDbDataManager;
-        public IDataManager<Matiere> MatiereDbDataManager => matiereDbDataManager;
-        private readonly IDataManager<Matiere> matiereDbDataManager;
+        public IBlocDbManager BlocDbDataManager => blocDbDataManager;
+        private readonly IBlocDbManager blocDbDataManager;
+        public IUeDbDataManager UeDbDataManager => ueDbDataManager;
+        private readonly IUeDbDataManager ueDbDataManager;
+        public IMatiereDbManager MatiereDbDataManager => matiereDbDataManager;
+        private readonly IMatiereDbManager matiereDbDataManager;
        
      #endregion
 
@@ -44,23 +46,23 @@ namespace Bussness
             maquette = new ReadOnlyCollection<MaquetteModel>(maquettes);
         }
 
-        public Manager(IDataManager<BlocModel>blocmanager)
+        public Manager( IBlocDbManager  blocmanager)
         {
             this.blocDbDataManager = blocmanager;
               bloc = new ReadOnlyCollection<BlocModel>(blocs);
         }
-        public Manager(IDataManager<UE> UeManager)
+        public Manager(IUeDbDataManager UeManager)
         {
             this.ueDbDataManager = UeManager;
             ue = new ReadOnlyCollection<UE>(ues);
         }
-        public Manager(IDataManager<Matiere> matiereDbDataManager)
+        public Manager(IMatiereDbManager matiereDbDataManager)
         {
             this.matiereDbDataManager = matiereDbDataManager;
             matiere = new ReadOnlyCollection<Matiere>(matieres);
         }
 
-        public Manager(IDataManager<Matiere> matiereManager,IDataManager<UE> UeManager, IDataManager<BlocModel> blocmanager, IMaquetteDbManager maquettemanager)
+        public Manager(IMatiereDbManager matiereManager, IUeDbDataManager UeManager, IBlocDbManager blocmanager, IMaquetteDbManager maquettemanager)
         {
         this.matiereDbDataManager = matiereManager;
         matiere = new ReadOnlyCollection<Matiere>(matieres);
@@ -127,28 +129,60 @@ namespace Bussness
 
             return blocDbDataManager.Add(bloc);
         }
-        public async Task<bool> AddBlocmaquette(MaquetteModel mqt, BlocModel blocModel)
+        public async Task <IEnumerable<BlocModel>> GetByMaquette(MaquetteModel maquetteModel)
         {
-            var response = maquetteDbDataManager == null;
-            if (response)
+            //if (BlocDbDataManager==null)
+            //{
+            //    return false;  GetAllUEBloc
+
+            //}
+            return await blocDbDataManager.GetByMaquette(maquetteModel);
+        }
+        public async Task<IEnumerable<UE>> GetAllUEBloc(BlocModel bloc)
+        {
+            
+            return await ueDbDataManager.GetAllUEBloc(bloc);
+        }
+        public async Task<IEnumerable<Matiere>> GetAllMatiereUE(UE ue)
+        {
+
+            return await matiereDbDataManager.GetAllMatiereUE(ue);
+        }
+        public async Task<bool> AddBlocmaquette(MaquetteModel mqt, BlocModel blocModel)
+            {
+           
+            if (maquetteDbDataManager == null)
             {
                 return false;
             }
 
             return await maquetteDbDataManager.AddBlocmaquette(mqt, blocModel);
         }
+        public async Task<bool> AddUeBloc(BlocModel bloc, UE uE)
+        {
 
-        //public Task<bool> Adddansbloc(BlocModel bloc)
-        //{
-        //    if (blocDbDataManager == null)
-        //    {
-        //        return Task.FromResult(false);
-        //    }
+            if (BlocDbDataManager == null)
+            {
+                return false;
+            }
 
-        //    return blocDbDataManager.Add(bloc);
-        //}
+            return await blocDbDataManager.AddUeBloc(bloc, uE);
+        }
 
-        //Delete bloc 
+
+        public async Task<bool> AddMatiereUe(UE uE, Matiere matiere)
+        {
+
+            if (UeDbDataManager == null)
+            {
+                return false;
+            }
+
+            return await ueDbDataManager.AddMatiereUe(uE, matiere);
+        }
+
+
+
         public async Task<bool> DeleteBloc(BlocModel bl)
         {
             if (BlocDbDataManager == null)
@@ -157,12 +191,24 @@ namespace Bussness
             }
             return await BlocDbDataManager.Delete(bl);
         }
-        //public async Task<bool> DeleteBlocById(int id)
-        //{
-              
-        //}
+        public async Task<bool> Deletee(Matiere bl)
+        {
+            if (MatiereDbDataManager == null)
+            {
+                return false;
+            }
+            return await MatiereDbDataManager.Delete(bl);
+        }
 
-        //Update bloc
+        public async Task<bool> DeleteUe(UE data)
+        {
+            if (UeDbDataManager == null)
+            {
+                return false;
+            }
+            return await UeDbDataManager.Delete(data);
+        }
+
         public async Task<bool> UpdateBloc(BlocModel bl)
         {
             if (BlocDbDataManager == null)
@@ -176,6 +222,19 @@ namespace Bussness
         {
             return await BlocDbDataManager.GetAll();
         }
+        //getAllue
+        public async Task<IEnumerable<UE>> GetAllue()
+        {
+            return await ueDbDataManager.GetAll();
+        }
+        //getallmatieredansue
+        public async Task<IEnumerable<Matiere>> GetAllMatUE()
+        {
+
+            return await matiereDbDataManager.GetAll();
+        }
+
+
         #endregion
     }
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CalculateurApp.View.HomePage"
@@ -6,14 +6,17 @@
              android:TabbedPage.ToolbarPlacement="Bottom"
              BarTextColor="LightSalmon"
             SelectedTabColor="DarkRed"
-            UnselectedTabColor="DarkKhaki" 
+            UnselectedTabColor="DarkKhaki"
+            BackgroundImageSource="mamoyene.png"
 >
 
-    <ContentPage Title="CalculApp" IconImageSource="mamoyenne.png">
+    <ContentPage Title="CalculApp" IconImageSource="mamoyene.png">
         <Grid RowDefinitions=".9*, .1*"  >
             <Button Text=" + " Clicked="Button_Clicked" HorizontalOptions="End" VerticalOptions="Start" />
-            <Label  Text="Clique sur le Boutton + pour commencers "
-                HorizontalOptions="CenterAndExpand"  VerticalOptions="CenterAndExpand" />
+
+            <Label  Text="Clique sur le Boutton + pour commencers  "
+                HorizontalOptions="Center"  VerticalOptions="CenterAndExpand" />
+            <!--<Label Grid.Row="1" Text="Echec OU REUSSITE ,CE que l'on tente est mieux que le sommeil" HorizontalOptions="End"  VerticalOptions="End"></Label>-->
         </Grid>
     </ContentPage>
     <ContentPage Title="parametre"  IconImageSource="png.png">

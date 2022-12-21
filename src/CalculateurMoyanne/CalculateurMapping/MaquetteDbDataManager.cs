@@ -40,8 +40,7 @@ namespace CalculateurMapping
         //ajt de bloc
 
         public async Task<bool> AddBlocmaquette(MaquetteModel mqt,BlocModel blocModel)
-        { //Add mqt
-
+        { 
             bool result = false;
             using (var context = new TContext())
             {
@@ -57,21 +56,15 @@ namespace CalculateurMapping
                             Id = mqt.Id,
                             NomMaquette = mqt.NomMaquette
                         },
-
                     };
-
                     if (!data.Bloc.Contains(entity))
                     {
-                        data.Bloc.Add(entity);
-                     // await context.Maquettes.AddAsync(data);
-                       // Console.WriteLine("jyij");
-                   context.Maquettes.Update(data);
-
-                        result = await  context.SaveChangesAsync() > 0;
+                     data.Bloc.Add(entity);
+                     context.Maquettes.Update(data);
+                     result = await  context.SaveChangesAsync() > 0;
                     }
                 }
-                //context.Database.EnsureCreated();
-               
+                
                 return result;
 
             }
@@ -114,25 +107,7 @@ namespace CalculateurMapping
             return result;
         }
 
-        //public async Task<IEnumerable<MaquetteModel>> GetAll()
-        //{
-        //    using (var context = new CalculContext())
-        //   {
-        //       return await context.Maquettes.Select(I => new MaquetteModel
-        //        (     
-        //               I.Id,
-        //              I.NomMaquette,
-        //              I.Bloc.Select(u =>
-        //              u.ue.Select(uee => new UE(uee.Id, uee.Coefficient, uee.intitulé,
-        //              uee.mat.Select(ma => new Matiere(ma.id, ma.Note,ma.Nommatiere,ma.Coef)).ToArray()
-        //              )).ToList()
-        //              ),
-        //           I.Bloc.Select(j => new BlocModel(j.Nom)).ToArray()
-        //       )).ToListAsync();
-        //   }
-        //    return null;
-        //  }
-
+      
 
         public async Task<MaquetteModel> GetDataWithName(string name)
         {
@@ -177,9 +152,6 @@ namespace CalculateurMapping
             }
         }
 
-        public Task<bool> AddUEBloc(UE data, int blocId)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

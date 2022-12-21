@@ -21,7 +21,7 @@ namespace ClassCalculateurMoyenne
         public int Id
         {
             get;
-            private set;
+             set;
         }
         public void  setNom(string value)
         {
@@ -73,19 +73,7 @@ namespace ClassCalculateurMoyenne
             Id = id;
             this.uEs = uEs;
         }
-        //public int ueForeignKey
-        //{
-        //    get; set;
-        //}
-        //[ForeignKey("ueForeignKey")]
-        //public UE UE
-        //{
-        //    get; set;
-        //}
-        
-        //public BlocModel(string v)
-        //{
-        //}
+      
 
         public BlocModel()
         {

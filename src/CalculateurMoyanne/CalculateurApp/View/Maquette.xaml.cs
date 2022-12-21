@@ -16,4 +16,9 @@ public partial class AjtMaquette : ContentPage
 		BindingContext = vm;
 		Routing.RegisterRoute(nameof(BlockView), typeof(BlockView));
     }
+
+	private void affichagedesbloks(object sender, EventArgs e)
+	{
+		Navigation.PushAsync(new BlockView());
+	}
 }

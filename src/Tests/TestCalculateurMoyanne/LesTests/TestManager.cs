@@ -4,8 +4,6 @@ using ClassCalculateurMoyenne;
 using Bussness;
 using Xunit;
 
-
-
 namespace TestCalculateurMoyanne.LesTests
 {
 	public class TestManager

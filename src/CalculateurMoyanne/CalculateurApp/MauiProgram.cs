@@ -26,8 +26,9 @@ namespace CalculateurApp
             builder.Services.AddSingleton<PageAjoutMaquette>();
             builder.Services.AddTransient<Start>();
             builder.Services.AddTransient<BlocViewModel>();
+            builder.Services.AddTransient<UeView>();
 
-            return builder.Build();
+             return builder.Build();
         }
     }
 }

@@ -12,12 +12,49 @@ using System.Threading.Tasks;
 
 namespace CalculateurMapping
 {
-    public class UeDbDataManager : IDataManager<UE>
+    public class UeDbDataManager<TContext> : IUeDbDataManager where TContext:CalculContext,new ()
     {
+
+        public async Task<bool> AddMatiereUe( UE uE,Matiere matiere)
+        {
+            bool result = false;
+            using (var context = new TContext())
+            {
+                UEentity data = await context.Ue.FindAsync(uE.Id);
+                if (data != null)
+                {
+                    MatiereEntity entity = new MatiereEntity
+                    {
+                        Id = matiere.Id,
+                        Note=matiere.Note,
+                        Nommatiere = matiere.Nommatiere,
+                        Coef = matiere.Coef,
+                        UEentity = new UEentity
+                        {
+                            Id = uE.Id,
+                            intitulé = uE.Intitulé
+                        },
+                    };
+                    if (!data.mat.Contains(entity))
+                    {
+                        data.mat.Add(entity);
+                        context.Ue.Update(data);
+                        result = await context.SaveChangesAsync() > 0;
+                    }
+                }
+                return result;
+            }
+
+        }
+
+
+
+
+
         public async Task<bool> Add(UE data)
         {
             bool resultat = false;
-            using (var context = new CalculContext())
+            using (var context = new TContext())
             {
                 UEentity entity = new UEentity
                 {
@@ -36,29 +73,22 @@ namespace CalculateurMapping
                 }
                 return resultat;
             }
-        }
-
-        public Task<bool> AddUEBloc(UE data, int blocId)
-        {
-            throw new NotImplementedException();
-        }
-
+        }     
         public  async Task<bool> Delete(UE data)
         {
             bool result = false;
-            using (var context = new CalculContext())
+            using (var context = new TContext())
             {
-                UEentity entity = context.Ue.Find(data.Intitulé);
+                UEentity entity = context.Ue.Find(data.Id);
                 context.Ue.Remove(entity);
                 result = await context.SaveChangesAsync() > 0;
 
             }
             return true;
         }
-
         public async Task<List<UE>> GetAll()
         {
-            using (var context = new CalculContext())
+            using (var context = new TContext())
             {
                 return await context.Ue.Select(e => new UE
                 (
@@ -69,7 +99,6 @@ namespace CalculateurMapping
                 )).ToListAsync();
             }
         }
-
         public Task<UE> GetDataWithName(string name)
         {
             throw new NotImplementedException();
@@ -78,7 +107,7 @@ namespace CalculateurMapping
         public async Task<bool> Update(UE data)
         {
             bool result = false;
-            using (var context = new CalculContext())
+            using (var context = new TContext())
             {
                 UEentity entity = context.Ue.Find(data.Id);
                 entity.intitulé = data.Intitulé;
@@ -90,5 +119,30 @@ namespace CalculateurMapping
             }
             return result;
         }
+        
+        public async Task<IEnumerable<UE>> GetAllUEBloc(BlocModel bloc)
+        {
+            List<UE> ls=new List<UE>();
+            using (var context = new TContext())
+            {
+                var BLC = await context.Bloc.Include(m => m.UeEntityId)
+                                      .SingleOrDefaultAsync(x => x.Id == bloc.Id);
+                   
+                if (BLC == null) return new List<UE>();
+                foreach (var e in BLC.UeEntityId)
+                {
+                    ls.Add(new UE
+                    {
+                        Id = e.Id,
+                        Intitulé = e.intitulé,
+                        Coefficient=e.Coefficient,
+                        IDForeignKey = e.IDForeignKey,
+                    });
+                   
+                }
+            }
+            return ls;
+           
+        }       
     }
 }

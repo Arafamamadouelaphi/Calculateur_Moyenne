@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CalculateurMapping
 {
-    public class MatiereDbDataManager : IDataManager<Matiere>
+    public class MatiereDbDataManager<TContext> :IMatiereDbManager where TContext : CalculContext, new()
     {   //Maping entre la classe Matier et MatiereEntity
         public async Task<bool> Add(Matiere data)
         {
@@ -20,7 +20,7 @@ namespace CalculateurMapping
             {
                 MatiereEntity entity = new MatiereEntity
                 {
-                    Nommatiere = data.GetNommatiere(),
+                    Nommatiere = data.Nommatiere,
 
                 };               
                     context.matier.Add(entity);
@@ -39,27 +39,30 @@ namespace CalculateurMapping
         public async Task<bool> Delete(Matiere mat)
         {
             bool result = false;
-            using (var Context = new CalculContext())
+            using (var Context = new TContext())
             {
-                MatiereEntity entity = Context.matier.Find(mat.GetNommatiere());
+                MatiereEntity entity = Context.matier.Find(mat.Id);
                 Context.matier.Remove(entity);
                 result = await Context.SaveChangesAsync() > 0;
             }
             return result;
         }
 
+        
+
         public async Task<List<Matiere>> GetAll()
         {
-            using (var context = new CalculContext())
+            using (var context = new TContext())
             {
                 return await context.matier.Select(e => new Matiere
-                (e.id,
+                (e.Id,
                    e.Note,
                    e.Nommatiere,
                    e.Coef
                 )).ToListAsync();
             }
         }
+        
 
         public Task<Matiere> GetDataWithName(string name)
         {
@@ -82,5 +85,32 @@ namespace CalculateurMapping
 
 
         }
+        public async Task<IEnumerable<Matiere>> GetAllMatiereUE(UE ue)
+        {
+            List<Matiere> ls = new List<Matiere>();
+            using (var context = new TContext())
+            {
+                var BLC = await context.Ue.Include(m => m.mat)
+                                      .SingleOrDefaultAsync(x => x.Id == ue.Id);
+               
+                if (BLC == null) return new List<Matiere>();
+                foreach (var e in BLC.mat)
+                {
+                    ls.Add(new Matiere
+                    {
+                        Id=e.Id,
+                        Note=e.Note,
+                        Nommatiere=e.Nommatiere,
+                        Coef=e.Coef
+
+                        
+                    });
+
+                }
+            }
+            return ls;
+
+        }
+
     }
 }

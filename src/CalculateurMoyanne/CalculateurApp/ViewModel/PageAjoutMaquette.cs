@@ -14,16 +14,11 @@ namespace CalculateurApp.ViewModel
     {
         public MaquetteModel maquette { get; set; }
         public Manager manager { get; set; }
-
-
         public PageAjoutMaquette()
         {
-            //manager = new Manager(new MaquetteDbDataManager<CalculDbMaui>());
-
-            
+                      
 
         }
-
         public void Init()
         {
             Items = new ObservableCollection<MaquetteModel>();
@@ -43,14 +38,12 @@ namespace CalculateurApp.ViewModel
         [RelayCommand]
         async void Add()
         {
-            //Manager maquetteDbDataManager = new Manager(new MaquetteDbDataManager<CalculDbMaui>());
-
             if (string.IsNullOrEmpty(NomMaquette))
                 return;
             MaquetteModel u = maquette;
             Items.Add(u);
             await manager.AddMaquette(maquette);
-            //maquette.NomMaquette = string.Empty;
+         
            
         }
    [RelayCommand]
@@ -75,21 +68,17 @@ namespace CalculateurApp.ViewModel
         async void GetAllMaquette()
         {
             //Manager maquetteDbDataManager = new Manager(new MaquetteDbDataManager<CalculDbMaui>());
-
             await manager.GetAllMaquette();
         }
         [RelayCommand]
-        async Task Tap(MaquetteModel maquetteName)
-        {
-            manager.SelectedMaquetteModel = maquetteName;
-            var maquette = manager.GetMaquetteByName(maquetteName.NomMaquette);
-
+        async Task Tap(MaquetteModel maquette)
+        {  
+            manager.SelectedMaquetteModel = maquette;
             var parametre = new Dictionary<string, Object>
             {
-                {"maquette",maquette}
+                {"blocs",maquette.BLOCS}
             };
-
-            await Shell.Current.GoToAsync($"{nameof(BlockView)}",parametre);
+              await Shell.Current.GoToAsync($"{nameof(BlockView)}",parametre);
         }
 
     }
