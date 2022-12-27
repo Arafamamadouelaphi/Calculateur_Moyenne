@@ -17,6 +17,7 @@ namespace ClassCalculateurMoyenne
         }
 
         private string nomMaquette;
+        public double moyenneMaquuete { get; set; }
 
         public string NomMaquette
         {
@@ -55,13 +56,21 @@ namespace ClassCalculateurMoyenne
 
 
 
-        public MaquetteModel(int id, string nomMaquette, List<UE> u, List<BlocModel> blc)
+        public MaquetteModel(int id, string nomMaquette, double moyennemkt, List<BlocModel> blc)
         {
             Id = id;
             NomMaquette = nomMaquette;
-            UES = u.AsReadOnly();
+            moyenneMaquuete = moyennemkt;
             BLOCS = new ReadOnlyCollection<BlocModel>(blocs);
             blocs.AddRange(blc);
+
+        }
+        public MaquetteModel(int id, string nomMaquette, double moyennemkt)
+        {
+            Id = id;
+            NomMaquette = nomMaquette;
+            moyenneMaquuete = moyennemkt;
+           
 
         }
         public MaquetteModel(List<UE> u, List<BlocModel> blocs)

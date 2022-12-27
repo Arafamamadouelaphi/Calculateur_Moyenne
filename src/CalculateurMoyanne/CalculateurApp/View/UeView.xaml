@@ -28,7 +28,6 @@
                 Placeholder="coef"              
                WidthRequest="60"
                 Grid.Row="1"
-             
                 HorizontalOptions="Center"
                 VerticalOptions="Center"               
                 BackgroundColor="AliceBlue"
@@ -88,8 +87,13 @@
                                 <Label Grid.Column="3"
                              Grid.Row="1"      
                              Text="{Binding Coefficient}"
-                             TextColor="Blue"
+                             TextColor="Red"
                              FontAttributes="Bold" />
+                                     <Label Text="{Binding MoyenneUe}"
+                                            Grid.Row="1"
+                                            Grid.Column="4"
+                                       FontSize="10" TextColor="Blue"
+                                />
 
                         </Grid>
                         </Frame>

@@ -112,7 +112,7 @@ namespace Bussness
         {
             return await maquetteDbDataManager.GetAll();
         }
-        // Get maquetteByName
+        // Get maquetteByName 
        public MaquetteModel  GetMaquetteByName(string maquetteName)
         {
              return maquetteDbDataManager.GetDataWithName(maquetteName).Result;

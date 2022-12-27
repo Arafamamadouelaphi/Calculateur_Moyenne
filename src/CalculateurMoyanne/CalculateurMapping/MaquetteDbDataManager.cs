@@ -69,14 +69,7 @@ namespace CalculateurMapping
 
             }
 
-
-
         }
-
-
-
-
-
 
         //delete maquette
         public async Task<bool> Delete(MaquetteModel maquette)
@@ -143,14 +136,98 @@ namespace CalculateurMapping
             using (var context = new TContext())
             {
                 List<MaquetteModel> maquettes = new List<MaquetteModel>();
-                foreach (var item in context.Maquettes.Include(m => m.Bloc)) 
+                foreach (var item in context.Maquettes.
+                    Include(m => m.Bloc).
+                    ThenInclude(x=>x.UeEntityId).
+                    ThenInclude(y => y.mat).ToList()) 
                 {
-                  //  Console.WriteLine(item);
-                    maquettes.Add(new MaquetteModel(item.Id, item.NomMaquette,new List<UE>(),item.Bloc.Select(b=>new BlocModel(b.Nom)).ToList()));
+                    maquettes.Add(new MaquetteModel
+
+                    (
+                     item.Id,
+                     item.NomMaquette,
+                     MoyenneMaquette(
+                         item.Bloc.Select
+                          (
+                                     m => new BlocModel
+                                 (
+                                     m.Nom,
+                                     m.Id,
+                                     m.UeEntityId.Select
+                                 (
+                                        u =>
+                                        new UE
+
+                                         (
+                                             u.Id,
+                                             u.Coefficient,
+                                             u.intitulé,
+                                             0,
+                                             u.mat.Select
+                                             (m => new Matiere
+                                                (
+                                                 m.Note,
+                                                 m.Nommatiere,
+                                                 m.Coef
+                                                 )
+                                             )
+                                             .ToArray()
+                                  )
+                             ).ToArray()
+
+                           )
+                         ).ToList()
+                        )
+                    
+                     ));
                 }
                 return maquettes;
             }
         }
+
+
+public double MoyenneMaquette(List<BlocModel> blocModels)
+        {
+
+            double Moyennetotal = 0;
+            double MoyenneMaquette = 0;
+            int nbrbloc = 0;
+
+            if (blocModels.Count > 0)
+            {
+
+             for(int i = 0; i < blocModels.Count; i++)
+             {
+                    blocModels[i].MoyenneBloc = BlocDbDataManager<CalculContext>.moyenneBloc(blocModels[i].UEs.ToList());
+
+
+                    MoyenneMaquette += blocModels[i].MoyenneBloc;
+                         
+
+             }
+
+                Moyennetotal = MoyenneMaquette / blocModels.Count;
+
+
+
+
+            }return Moyennetotal;
+
+
+
+
+
+
+
+
+        } 
+
+
+
+
+
+
+
 
        
     }

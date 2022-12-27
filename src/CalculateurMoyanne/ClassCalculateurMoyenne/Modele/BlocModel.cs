@@ -13,6 +13,8 @@ namespace ClassCalculateurMoyenne
     {
         [ObservableProperty]
         private string nom;
+
+        public double MoyenneBloc { get; set; }
         public int IDMaquetteFrk { get;  set; }
         public string GetNom()
         {
@@ -55,6 +57,16 @@ namespace ClassCalculateurMoyenne
             ue = new ReadOnlyCollection<UE>(ues);
 
         }
+
+        //public BlocModel(string nombloc, int id, List<UE> Ux,)
+        //{
+        //    Id = id;
+        //    nom = nombloc;
+        //    ues.AddRange(Ux);
+        //    ue = new ReadOnlyCollection<UE>(ues);
+
+        //}
+       
         public BlocModel( List<UE> Ux)
         {
            
@@ -67,6 +79,7 @@ namespace ClassCalculateurMoyenne
             nom = nombloc;
 
         }
+      
         public BlocModel(string nombloc, int id, UE[] uEs) 
         {
             nom = nombloc;

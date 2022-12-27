@@ -33,8 +33,10 @@ namespace CalculateurApp.ViewModel
 
             try
             {
+               
                 GEtAllMatiere();
-                ma = new Matiere();
+
+               
             }
             catch (Exception ex)
             {
@@ -49,24 +51,22 @@ namespace CalculateurApp.ViewModel
             set => SetProperty(ma.Nommatiere, value, ma, (u, v) => u.Nommatiere=v);
 
         }
+
         [ObservableProperty]
         ObservableCollection<Matiere> items;
-        
         [ObservableProperty]
-        int coefficient;
+         private string coef;
         [ObservableProperty]
-        int note;
+         private string note;
 
         [RelayCommand]
       async  void Add()
-        {
-           
-            Matiere m = new Matiere(ma.Note, ma.Nommatiere, ma.Coef);
+      {
+
+            Matiere m = new Matiere( int.Parse(  Note), Nommatiere, int.Parse(Coef));
             Items.Add(m);
             await manager.AddMatiereUe(manager.SelectedUe, m);
-
-
-        }
+       }
         [RelayCommand]
         async void Delete(Matiere bl)
         {
@@ -92,19 +92,11 @@ namespace CalculateurApp.ViewModel
 
         }
 
-       
-
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             var Ue = query["matiere"] as UE;
             var MATList = Ue.Matieres;
             ma.IDUEForeignKey = Ue.Id;
-
-
-            //var bloc = query["ue"] as BlocModel;
-            //var ueList = bloc.ue;
-            //ue.IDForeignKey = bloc.Id;
-
 
         }
     }

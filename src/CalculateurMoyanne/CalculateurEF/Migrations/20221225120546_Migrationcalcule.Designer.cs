@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CalculateurEF.Migrations
 {
     [DbContext(typeof(CalculContext))]
-    [Migration("20221211125750_Migrations")]
-    partial class Migrations
+    [Migration("20221225120546_Migrationcalcule")]
+    partial class Migrationcalcule
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,10 @@ namespace CalculateurEF.Migrations
 
                     b.Property<int>("IDMaquetteFrk")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("MoyenneBloc")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -56,7 +60,7 @@ namespace CalculateurEF.Migrations
 
             modelBuilder.Entity("CalculateurEF.Entities.MatiereEntity", b =>
                 {
-                    b.Property<long>("id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -73,7 +77,7 @@ namespace CalculateurEF.Migrations
                     b.Property<int>("Note")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("IDUEForeignKey");
 
@@ -95,6 +99,9 @@ namespace CalculateurEF.Migrations
                     b.Property<string>("intitulé")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<double>("moyenneUe")
+                        .HasColumnType("REAL");
 
                     b.HasKey("Id");
 

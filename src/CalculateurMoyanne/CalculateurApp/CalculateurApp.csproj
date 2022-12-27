@@ -69,9 +69,6 @@
 	  <Compile Update="View\MaquettePage.xaml.cs">
 	    <DependentUpon>MaquettePage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="View\mqt.xaml.cs">
-	    <DependentUpon>mqt.xaml</DependentUpon>
-	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>

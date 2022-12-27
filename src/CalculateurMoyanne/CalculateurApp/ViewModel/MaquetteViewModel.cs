@@ -23,7 +23,7 @@ namespace CalculateurApp.ViewModel
         public BlocModel blocModel { get; set; }
        //public ReadOnlyObservableCollection<BlocModel>lst { get; set; }
         public Manager manager { get; set; }
-
+        
 
         public MaquetteViewModel()
         { //route
@@ -75,7 +75,6 @@ namespace CalculateurApp.ViewModel
                 await manager.DeleteBloc(bl);
                 var o = await manager.GetAllBloc();
             }
-
     
         }
         

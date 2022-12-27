@@ -12,10 +12,12 @@
          RowSpacing="4"
          ColumnSpacing="4">
 
-        <Entry Placeholder="Ajout de LA MAQUETTE"
+        <Entry Placeholder="veuillez saisir le nom de la maquette"
                Grid.Row="1" BackgroundColor="AliceBlue"
                Text="{Binding NomMaquette }"
                TextColor="Black"
+              PlaceholderColor="Gray"
+             
              />
         <Button
             Command="{Binding AddCommand}"
@@ -28,25 +30,9 @@
 
             >
         </Button>
-        <Button Command="{Binding AddCommand}"
-            Text="Modifier"
-            Grid.Row="1"
-            Grid.Column="2"
-            HorizontalOptions="End"
-            VerticalOptions="End"
-            WidthRequest="85"></Button>
-        <!--<Button
-            Command=" {Binding GetAllMaquetteCommand}"
-            Text="afficher"
-             Grid.Row="2"
-            Grid.Column="1"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            WidthRequest="100">
-      
-
-        </Button>-->
-        <CollectionView Grid.Row="3" Grid.ColumnSpan="1" ItemsSource="{Binding Items}" SelectionMode="None" BackgroundColor="White">
+        
+        
+        <CollectionView Grid.Row="3" Grid.ColumnSpan="1" ItemsSource="{Binding Items}" SelectionMode="None" BackgroundColor="AliceBlue" >
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type  model:MaquetteModel }">
                     <SwipeView>
@@ -57,12 +43,7 @@
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:PageAjoutMaquette}}, Path=DeleteCommand}"
                                     CommandParameter="{Binding .}"
                                 />
-                                <SwipeItem Text="AFFICHER"
-                                           BackgroundColor="BlueViolet"
-                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:PageAjoutMaquette}},Path=GetAllMaquetteCommand}"
-                                           CommandParameter="{Binding .}"
-                                           ></SwipeItem>
-                                <SwipeItem Text="MODIFIER Bloc" BackgroundColor="Beige"></SwipeItem>
+                               
                             </SwipeItems>
                         </SwipeView.RightItems>
                         <Grid Padding="0">
@@ -72,9 +53,30 @@
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type  viewmodel:PageAjoutMaquette}}, Path=TapCommand}"
                                            CommandParameter="{Binding .}" />
                                 </Frame.GestureRecognizers>
+                                 <Grid Padding="10" ColumnSpacing="40">
+                   
+                                  <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                   
+                                </Grid.ColumnDefinitions>
+
+
                                 <Label Text="{Binding NomMaquette}" 
-                                       FontSize="10" TextColor="Black"
+                                       FontSize="Header" TextColor="Black"
+                                     
                                 />
+                                   <Label Text="{Binding moyenneMaquuete}"
+                                            Grid.Row="1"
+                                            Grid.Column="2"
+                                       FontSize="Header" TextColor="Red"
+                                />
+</Grid>
+                               
                             </Frame>
                         </Grid>
                     </SwipeView>

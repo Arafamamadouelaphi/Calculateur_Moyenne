@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -63,9 +64,10 @@ namespace CalculateurMapping
             List<BlocModel> blocModels = new List<BlocModel>();
             using (var context = new TContext())
             {
-
-                var maq = await context.Maquettes.Include(m => m.Bloc)
-                                       .SingleOrDefaultAsync(x => x.Id == maquetteModel.Id);
+                var maq = await context.Maquettes.Include(m => m.Bloc).ThenInclude(
+                   x => x.UeEntityId).ThenInclude(y => y.mat)
+                  .SingleOrDefaultAsync(x => x.Id == maquetteModel.Id);
+      
                 if (maq == null) return new List<BlocModel>();
 
                 foreach (var e in maq.Bloc)
@@ -75,13 +77,37 @@ namespace CalculateurMapping
                         Id = e.Id,
                         Nom = e.Nom,
                         IDMaquetteFrk = e.IDMaquetteFrk,
+                        MoyenneBloc = moyenneBloc(e.UeEntityId.Select(
+                          u => new UE(u.Id, u.Coefficient, u.intitulé, 0, u.mat.Select(m => new Matiere(m.Note, m.Nommatiere, m.Coef)).ToArray())
+                    ).ToList())
                     });
                 }
                 return blocModels.AsEnumerable<BlocModel>();
             }
            
         }
+        
 
+        public static double moyenneBloc(List<UE> ues)
+        {
+            double moyennebolcs = 0;
+            int Coefs = 0;
+            double moyennecoefficier=0;
+            if (ues.Count > 0)
+            {
+                for(int u = 0; u < ues.Count; u++)
+                {
+                    ues[u].MoyenneUe = UeDbDataManager<CalculContext>.moyennneUE(ues[u].Matieres.ToList());
+                    Coefs += ues[u].Coefficient;
+                    moyennecoefficier += ues[u].MoyenneUe * ues[u].Coefficient;
+                }
+
+                moyennebolcs = moyennecoefficier / Coefs;
+
+            }
+            return moyennebolcs;
+        }
+          
 
         public async Task<List<BlocModel>> GetAll()
         { //getAll
@@ -95,26 +121,7 @@ namespace CalculateurMapping
                 )).ToListAsync();
                 return temp;
             }
-        }//getUEdansblc
-        //public async Task<List<UE>> GetAllUEBloc(int id)
-        //{
-        //    List<UE> ls=new List<UE>();
-        //    using (var context = new TContext())
-        //    {
-        //        var temp =  context.Bloc.Where(x=>x.Id==id).Select(e => e.UeEntityId).ToList();
-        //        foreach (var item in temp)
-        //        {
-        //            foreach (var i in item)
-        //            {
-        //                UE ue = new UE(i.Id, i.Coefficient, i.intitulé, i.mat.Select(m => new Matiere(m.id, m.Note, m.Nommatiere, m.Coef)).ToArray());
-        //                ls.Add(ue);
-        //            }
-        //        }
-
-        //        return ls;
-        //    }
-
-        //}
+        }
 
         public async Task<BlocModel> GetDataWithName(string name)
         {
@@ -145,22 +152,7 @@ namespace CalculateurMapping
             return result;
         }
 
-        //public async Task<bool> AddUEBloc(UE data,int blocId)
-        //{//addUedansbloc
-        //    bool resultat = false;
-        //    using (var context = new TContext())
-        //    {
-        //        UEentity entity = new UEentity
-        //        {
-        //            intitulé = data.Intitulé,
-        //            IDForeignKey = blocId,
-        //        };
-        //        context.Ue.Add(entity);
-        //        await context.SaveChangesAsync();
-        //        resultat = true;
-        //        return resultat;
-        //    }
-        //}
+       
         public async Task<bool> AddUeBloc(BlocModel bloc, UE uE)
         {
             bool result = false;

@@ -43,6 +43,10 @@ public partial class BlocViewModel:ObservableObject,IQueryAttributable
 
         ue = new UE();
     }
+   
+    
+    [ObservableProperty]
+    double moyenneUE;
     [ObservableProperty]
     ObservableCollection<UE> items;
     [ObservableProperty]
@@ -73,15 +77,7 @@ public partial class BlocViewModel:ObservableObject,IQueryAttributable
      [RelayCommand]
         async Task Tapp(UE ue)
         {
-        // await Shell.Current.GoToAsync($"{nameof(UE)}?Nom={s}");
-        //manager.SelecteBlocModel =blocModel;
-        //var parametre = new Dictionary<string, Object>
-        //{
-        //    {"ue",blocModel}
-        //};
-        //await Shell.Current.GoToAsync($"{nameof(UeView)}",parametre);
-
-
+      
         manager.SelectedUe = ue;
         var parametre = new Dictionary<string, Object>
             {

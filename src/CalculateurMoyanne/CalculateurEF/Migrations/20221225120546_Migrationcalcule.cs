@@ -5,7 +5,7 @@
 namespace CalculateurEF.Migrations
 {
     /// <inheritdoc />
-    public partial class Migrations : Migration
+    public partial class Migrationcalcule : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +30,7 @@ namespace CalculateurEF.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Nom = table.Column<string>(type: "TEXT", nullable: false),
+                    MoyenneBloc = table.Column<string>(type: "TEXT", nullable: false),
                     IDMaquetteFrk = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -50,6 +51,7 @@ namespace CalculateurEF.Migrations
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Coefficient = table.Column<int>(type: "INTEGER", nullable: false),
+                    moyenneUe = table.Column<double>(type: "REAL", nullable: false),
                     intitulé = table.Column<string>(type: "TEXT", nullable: false),
                     IDForeignKey = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -68,7 +70,7 @@ namespace CalculateurEF.Migrations
                 name: "matier",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "INTEGER", nullable: false)
+                    Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Nommatiere = table.Column<string>(type: "TEXT", nullable: false),
                     Note = table.Column<int>(type: "INTEGER", nullable: false),
@@ -77,7 +79,7 @@ namespace CalculateurEF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_matier", x => x.id);
+                    table.PrimaryKey("PK_matier", x => x.Id);
                     table.ForeignKey(
                         name: "FK_matier_Ue_IDUEForeignKey",
                         column: x => x.IDUEForeignKey,

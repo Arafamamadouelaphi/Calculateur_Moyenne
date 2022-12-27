@@ -12,6 +12,7 @@ namespace CalculateurEF.Entities
     {
         public long Id { get; set; }
         public int Coefficient { get; set; }
+
         public string intitulé { get; set; }
         public  ICollection<MatiereEntity> mat { get; set; }=
         new List<MatiereEntity> ();

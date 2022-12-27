@@ -13,13 +13,13 @@
          Padding="2"
          RowSpacing="4"
          ColumnSpacing="4">
-        <Entry Placeholder="Ajout de BLOC DANS LA MAQUETTE"
+        <Entry Placeholder="AJOUT DE BLOC DANS LA MAQUETTE"
                Grid.Row="1" BackgroundColor="AliceBlue"
                Text="{Binding Nom}"
                x:Name="ajt"
                TextColor="Black"
              />
-        <Button x:Name="Afer" Text="Modifier"  Grid.Row="1" Grid.Column="1" HorizontalOptions="End" VerticalOptions="End" WidthRequest="80" Command="{Binding GetAllBlocCommand}" >  </Button>
+       
          <Button
             Command="{Binding AddCommand}"
             Text="ajouter"
@@ -42,7 +42,7 @@
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MaquetteViewModel}}, Path=DeleteCommand}"
                                     CommandParameter="{Binding .}"
                                 />
-                                <SwipeItem Text="AFFICHER" BackgroundColor="BlueViolet"></SwipeItem>                                
+                                                            
                             </SwipeItems>
                         </SwipeView.RightItems>
                         <Grid Padding="0">
@@ -52,9 +52,31 @@
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type  viewmodel:MaquetteViewModel}}, Path=TapCommand}"
                                            CommandParameter="{Binding .}" />
                                 </Frame.GestureRecognizers>
+
+                                  <Grid Padding="10" ColumnSpacing="40">
+                   
+                                  <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                   
+                                </Grid.ColumnDefinitions>
+
+
                                 <Label Text="{Binding Nom}" 
-                                       FontSize="10" TextColor="Black"
+                                       FontSize="Header" TextColor="Black"
                                 />
+                                   <Label Text="{Binding MoyenneBloc}"
+                                            Grid.Row="1"
+                                            Grid.Column="2"
+                                      TextColor="Blue"
+                                       TextDecorations="Underline"
+                                      FontSize="Header"
+                                />
+</Grid>
                             </Frame>
                         </Grid>
                     </SwipeView>

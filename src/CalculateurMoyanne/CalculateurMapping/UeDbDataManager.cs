@@ -95,8 +95,11 @@ namespace CalculateurMapping
                    e.Id,
                    e.Coefficient,
                    e.intitulé,
-                   e.mat.Select(j => new Matiere(j.Nommatiere)).ToArray()
+                    moyennneUE(e.mat.Select(m => new Matiere(m.Note, m.Nommatiere, m.Coef)).ToList()),
+                   e.mat.Select(j => new Matiere(j.Note,j.Nommatiere,j.Coef)).ToArray()
+                   
                 )).ToListAsync();
+
             }
         }
         public Task<UE> GetDataWithName(string name)
@@ -125,9 +128,12 @@ namespace CalculateurMapping
             List<UE> ls=new List<UE>();
             using (var context = new TContext())
             {
-                var BLC = await context.Bloc.Include(m => m.UeEntityId)
-                                      .SingleOrDefaultAsync(x => x.Id == bloc.Id);
-                   
+              
+                var BLC = await context.Bloc.Include(
+                    x => x.UeEntityId).ThenInclude(y => y.mat)
+                  .SingleOrDefaultAsync(x => x.Id == bloc.Id);
+                    
+
                 if (BLC == null) return new List<UE>();
                 foreach (var e in BLC.UeEntityId)
                 {
@@ -137,12 +143,34 @@ namespace CalculateurMapping
                         Intitulé = e.intitulé,
                         Coefficient=e.Coefficient,
                         IDForeignKey = e.IDForeignKey,
+                      MoyenneUe=  moyennneUE(e.mat.Select(m => new Matiere(m.Note, m.Nommatiere, m.Coef)).ToList()),
+                //   Matieres =  e.mat.Select(j => new Matiere(j.Note, j.Nommatiere, j.Coef)).ToArray()
                     });
                    
                 }
             }
             return ls;
            
-        }       
+        }
+        public static double moyennneUE(List<Matiere> matieres )
+        {   
+            //(note *coef)+()+......./sum coef
+            double moyenne = 0;
+            int coefs=0;//sum de coef
+            double notecoefficiees = 0;//somme des notes *coefs
+           
+            if (matieres.Count > 0)
+            {
+                for(int m=0; m< matieres.Count; m++)
+                {
+                    coefs += matieres[m].Coef;
+                    notecoefficiees += matieres[m].Note * matieres[m].Coef;
+
+                }
+                moyenne = notecoefficiees / coefs;
+
+            }
+            return moyenne;
+        }
     }
 }

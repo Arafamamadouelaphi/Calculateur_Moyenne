@@ -11,6 +11,12 @@ namespace ClassCalculateurMoyenne
         private int coefficient;
         [ObservableProperty]
         private string intitulé;
+        [ObservableProperty]
+        private double moyenneUe;
+        public  void setMoyenne(double value)
+        {
+            moyenneUe = value;
+        }
 
         public int IDForeignKey { get;  set; }
 
@@ -29,13 +35,14 @@ namespace ClassCalculateurMoyenne
             intitulé = value;
         }
 
-        public UE ( long id, int coefficient, string intitulé,params Matiere[] matieres)
+        public UE ( long id, int coefficient, string intitulé,double moyennege,params Matiere[] matieres)
         {
             Id = id;
             Coefficient = coefficient;
             Intitulé = intitulé;
+            moyenneUe = moyennege;
             Matieres = new ReadOnlyCollection<Matiere>(matieres);
-
+           
         }
         
         public UE( List<Matiere> matieres, int coefficient)
@@ -50,6 +57,11 @@ namespace ClassCalculateurMoyenne
             setIntitulé( intitulé);
         }
         public UE() { }
+        public UE(int coefficient, string intitulé,double moyennege) {
+
+            Coefficient = coefficient;
+            Intitulé = intitulé;
+            moyenneUe = moyennege; }
 
         public UE(string intitulé, int coefficient) 
             

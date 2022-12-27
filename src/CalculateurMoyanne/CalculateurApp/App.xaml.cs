@@ -16,14 +16,15 @@ namespace CalculateurApp
 
             // MainPage = new NavigationPage(new HomePage());
             //MainPage = new AppShell(BlocViewModel c);
-           // MainPage = new MatiereView ();
+            // MainPage = new MatiereView ();
 
 
 
-      // MainPage = new AppShell();
+           MainPage = new AppShell();
 
 
-             MainPage = new HomePage();
+            // MainPage = new HomePage();
+           
 
 
         }
