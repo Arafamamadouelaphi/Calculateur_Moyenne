@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <StartWorkingDirectory>$(MSBuildProjectDirectory)/../CalculateurEF/</StartWorkingDirectory>
+    <AssemblyName>testpourEf</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

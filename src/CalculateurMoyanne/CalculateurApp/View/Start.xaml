@@ -9,7 +9,7 @@
             BarTextColor="LightSalmon"
             SelectedTabColor="DarkRed"
             UnselectedTabColor="DarkKhaki">
-    <ContentPage Title=" Blocs " IconImageSource="mamoyenne.png" >
+    <ContentPage Title=" Blocs " IconImageSource="mamoyenne.png" BackgroundColor="AliceBlue">
         <Grid RowDefinitions="100 ,Auto,*"
          ColumnDefinitions=".75*,.25*"
          Padding="10"

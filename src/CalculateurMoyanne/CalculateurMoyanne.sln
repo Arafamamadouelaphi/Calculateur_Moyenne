@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestCalculateurMoyanne", "..\Tests\TestCalculateurMoyanne\TestCalculateurMoyanne.csproj", "{707F316F-3141-4201-82FA-76E8B1E6A16C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculateurAppUnitTest", "..\Tests\TestCalculateurMoyanne\CalculateurAppUnitTest.csproj", "{707F316F-3141-4201-82FA-76E8B1E6A16C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassCalculateurMoyenne", "ClassCalculateurMoyenne\ClassCalculateurMoyenne.csproj", "{546A7EF0-BA4F-44A5-A4C3-2B173703A417}"
 EndProject
@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculateurMapping", "Calcu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bussness", "BSN\Bussness.csproj", "{EE834623-6D68-4016-94B9-FF3AC58C0E15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testpourEf", "testpourEf\testpourEf.csproj", "{48B8C47A-AC35-473C-A9A9-CE9C8D5F6344}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCalculateurMoyanne", "testpourEf\TestCalculateurMoyanne.csproj", "{48B8C47A-AC35-473C-A9A9-CE9C8D5F6344}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

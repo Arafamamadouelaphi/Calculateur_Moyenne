@@ -20,10 +20,10 @@ namespace CalculateurApp
 
 
 
-           MainPage = new AppShell();
+            MainPage = new AppShell();
 
 
-            // MainPage = new HomePage();
+            //MainPage = new HomePage();
            
 
 

@@ -16,9 +16,10 @@
                Grid.Row="1" BackgroundColor="AliceBlue"
                Text="{Binding NomMaquette }"
                TextColor="Black"
-              PlaceholderColor="Gray"
-             
-             />
+              PlaceholderColor="Gray"><Entry.Shadow  >
+                <Shadow Brush="AliceBlue" Offset="15,15"> </Shadow>
+            </Entry.Shadow></Entry>
+           
         <Button
             Command="{Binding AddCommand}"
             Text="Ajouter"
@@ -26,13 +27,19 @@
             Grid.Column="1"
             HorizontalOptions="Start"
             VerticalOptions="Center"
-            WidthRequest="85"
+            
 
             >
+            <Button.Shadow>
+                <Shadow Brush="Grey"
+                        Offset="20,20"
+                        />
+
+            </Button.Shadow>
         </Button>
         
         
-        <CollectionView Grid.Row="3" Grid.ColumnSpan="1" ItemsSource="{Binding Items}" SelectionMode="None" BackgroundColor="AliceBlue" >
+        <CollectionView Grid.Row="3" Grid.ColumnSpan="1" ItemsSource="{Binding Items}" SelectionMode="None"  >
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type  model:MaquetteModel }">
                     <SwipeView>

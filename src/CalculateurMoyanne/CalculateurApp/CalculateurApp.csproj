@@ -103,7 +103,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\dotnet_bot.svg" />
-	  <BundleResource Include="Resources\Images\mamoyene.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Microsoft.EntityFrameworkCore" />
@@ -111,5 +110,8 @@
 	  <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
 	  <None Remove="sqlite-net-pcl" />
 	  <None Remove="Resources\Images\mamoyene.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiImage Include="Resources\Images\mamoyene.png" />
 	</ItemGroup>
 </Project>

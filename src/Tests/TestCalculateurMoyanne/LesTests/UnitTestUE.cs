@@ -52,58 +52,6 @@ namespace TestCalculateurMoyanne.LesTests
 }
 
 
-//public static IEnumerable<object[]> Data_AddMatiereToUE()
-//{
-//    yield return new object[]
-//    {
-//        true,
-//        new Matiere[]
-//        {
-//        new Matiere( 1,20,"mat",2),
-//        new Matiere(2,3,"histoire",4),
-//        new Matiere(4,12,"geo",2)
-//        },
-//        new UE(1,2,"UE2",
-//        new Matiere( 1,20,"mat",2),
-//        new Matiere(2,3,"histoire",4)),
-//        new Matiere(4,12,"geo",2)
-
-//     };
-//    yield return new object[]
-//    {
-//        false,
-//        new Matiere[]
-//        {
-//        new Matiere( 1,20,"mat",2),
-//        new Matiere(2,3,"histoire",4),
-//        new Matiere(4,12,"geo",2)
-//        },
-//        new UE(1,2,"UE2",
-//        new Matiere( 1,20,"mat",2),
-//        new Matiere(2,3,"histoire",4)),
-//         new Matiere(4,12,"geo",2),
-//        new Matiere(5,2,"arithmetique",3)
-//    };
-
-//[Theory]
-// [MemberData(nameof(Data_AddMatiereToUE))]
-// public void Test_AddMatiereToUE(bool expectedResult,
-//                                   IEnumerable<Matiere> expectedMatiere,
-//                                   UE ue,
-//                                   Matiere matiere) {
-
-////   true si l'ajout est réussi et false sinon
-//     bool result = ue.AjouterMatiere(matiere);
-
-//     // comparaison avec le resultat qu'on espert avoir
-//     Assert.Equal(expectedResult, result);
-
-//     // 
-//     Assert.Equal(expectedMatiere.Count(), ue.Matieres.Count());
-//     Assert.All(expectedMatiere, j => ue.Matieres.Contains(j));
-
-
-// }
 
 
 

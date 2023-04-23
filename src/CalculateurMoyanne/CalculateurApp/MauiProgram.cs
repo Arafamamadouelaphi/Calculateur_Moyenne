@@ -22,6 +22,7 @@ namespace CalculateurApp
 
             builder.Services.AddSingleton<BlockView>();
             builder.Services.AddSingleton<MaquetteViewModel>();
+            builder.Services.AddSingleton<HomePage>();
             builder.Services.AddSingleton<AjtMaquette>();
             builder.Services.AddSingleton<PageAjoutMaquette>();
             builder.Services.AddTransient<Start>();
